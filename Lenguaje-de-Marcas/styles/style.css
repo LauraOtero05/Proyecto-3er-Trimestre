@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +14,7 @@
     --primary-color:#1B416C;
     --secondary-color:#6CA6C1;
     --tertiary-color:#CECECE;
-    --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --font: Roboto, Arial, sans-serif;
 }
 
 body{
@@ -21,7 +23,35 @@ body{
     margin: 0 auto;
     font-family: var(--font);
     overflow-x: hidden;
+    color: var(--white);
 }
+
+.layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* #region TEXTS*/
+
+.title{
+    color: var(--white);
+    margin: 0;
+}
+
+.text{
+    color: var(--tertiary-color);
+    margin-bottom: 5px;
+}
+
+.text--white{
+    color: var(--white);
+    margin-bottom: 5px;
+}
+
+/* #endregion*/
+
+/* #region LOG IN */
 
 .scene {
     position: fixed;
@@ -30,7 +60,6 @@ body{
     overflow: hidden;
 }
 
-/* Aurora: varios gradientes animados moviéndose */
 .scene__aurora {
     position: absolute;
     inset: -30%;
@@ -61,28 +90,11 @@ body{
     align-items:flex-start;
     width: 28%;
     padding: 20px;
-
-/* From https://css.glass */
-background: rgba(181, 181, 181, 0.1);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(3.9px);
--webkit-backdrop-filter: blur(3.9px);
-}
-
-.title{
-    color: var(--white);
-    margin: 0;
-}
-
-.text{
-    color: var(--tertiary-color);
-    margin-bottom: 5px;
-}
-
-.text--white{
-    color: var(--white);
-    margin-bottom: 5px;
+    background: rgba(181, 181, 181, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
 }
 
 .box__input{
@@ -110,3 +122,147 @@ backdrop-filter: blur(3.9px);
     border-radius: 10px;
     font-weight: bold;
 }
+
+/* #endregion */
+
+/* #region SIDEBAR*/
+
+.sidebar{
+    width: 60px;
+    background: rgba(181, 181, 181, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 0;
+    gap: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border-right: 0.5px solid var(--clr-border);
+    transition: width var(--transition), box-shadow var(--transition);
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.sidebar:hover{
+    width: 220px;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.07);
+}
+
+.sidebar__logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px 16px;
+    border-bottom: 0.5px solid color-mix(var(--black), 0,1);
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo img{
+    width: 25px;
+}
+
+.logo__text{
+    height: 25px;
+    opacity: 0;
+    transition: opacity 0.15s ease 0.06s;
+}
+
+.sidebar:hover .logo__text {
+    opacity: 1;
+}
+
+/* NAV SECTIONS */
+
+.nav__section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+}
+
+.nav__divider {
+    height: 0.5px;
+    background: var(--tertiary-color);
+    margin: 8px 16px;
+    width: calc(100% - 32px);
+}
+
+.nav__spacer {
+    flex: 1;
+}
+
+/* NAV ITEMS */
+
+.nav__item{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    width: 100%;
+    cursor: pointer;
+    border-left: 2.5px solid transparent;
+    color: var(--white);
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+}
+
+.nav__item:hover {
+    background: var(--primary-color);
+}
+
+.nav__item.active {
+    border-left-color: var(--primary-color);
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.nav__item img{
+    width: 25px;
+}
+
+.nav__item p{
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.nav__label {
+    font-size: 13.5px;
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.15s ease 0.06s;
+}
+
+.nav__label.active{
+    font-weight: 700;
+}
+
+.sidebar:hover .nav__label {
+    opacity: 1;
+}
+
+
+/* #endregion*/
+
+/* #regon DASHBOARD */
+
+
+
+
+
+/* #endregion*/
