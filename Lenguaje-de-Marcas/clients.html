@@ -150,6 +150,52 @@
 
         </section>
     </main>
+    <div class="c-modal" id="modal">
+
+        <div class="c-modal__content">
+
+            <div class="c-modal__top">
+
+                <h2>Nuevo Cliente</h2>
+
+                <button id="cerrarModal">✕</button>
+
+            </div>
+
+            <div id="clienteForm" class="c-form">
+
+                <div class="c-form__group">
+                    <label>Nombre</label>
+                    <input type="text" id="nombre">
+                </div>
+
+                <div class="c-form__group">
+                    <label>Email</label>
+                    <input type="email" id="email">
+                </div>
+
+                <div class="c-form__group">
+                    <label>Empresa</label>
+                    <input type="text" id="empresa">
+                </div>
+
+                <div class="c-form__group">
+                    <label>Estado</label>
+                    <select id="estado">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <button id="guardarCliente" class="c-form__button">
+                    Guardar cliente
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
     <script src="script/script.js"></script>
 </body>
 

@@ -384,6 +384,73 @@ body{
     border-radius:10px;
     cursor:pointer;
 }
+.c-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
 
+.c-modal__content{
+    width:450px;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:28px;
+}
+
+.c-modal__top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.c-modal__top button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.c-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.c-form__group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.c-form__group label{
+    font-size:13px;
+    color:var(--tertiary-color);
+}
+
+.c-form input,
+.c-form select{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    padding:14px;
+    border-radius:14px;
+    color:white;
+}
+
+.c-form__button{
+    border:none;
+    background:var(--secondary-color);
+    color:var(--bg-color);
+    padding:14px;
+    border-radius:14px;
+    font-weight:700;
+    cursor:pointer;
+}
 
 /* #endregion*/
