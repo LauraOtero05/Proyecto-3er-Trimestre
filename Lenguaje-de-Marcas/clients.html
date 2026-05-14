@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -36,7 +38,8 @@
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="resources/icons/cd-white.svg" data-default="resources/icons/cd-white.svg" data-active="resources/icons/cd-dark.svg" alt="Products">
+                    <img src="resources/icons/cd-white.svg" data-default="resources/icons/cd-white.svg"
+                        data-active="resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
                 <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
@@ -58,7 +61,73 @@
                 </div>
             </div>
         </nav>
+        <section class="c-dashboard">
+
+            <header class="c-header">
+
+                <div>
+
+                    <p class="c-header__subtitle">
+                        CRM
+                    </p>
+
+                    <h1 class="c-header__title">
+                        Gestión de Clientes
+                    </h1>
+
+                </div>
+
+                <button class="c-header__button" id="abrirModal">
+
+                    + Nuevo Cliente
+
+                </button>
+
+            </header>
+
+            <section class="c-stats">
+
+                <article class="c-stats__card">
+
+                    <span class="c-stats__label">
+                        Total clientes
+                    </span>
+
+                    <h2 id="totalClientes">
+                        0
+                    </h2>
+
+                </article>
+
+                <article class="c-stats__card">
+
+                    <span class="c-stats__label">
+                        Activos
+                    </span>
+
+                    <h2 id="clientesActivos">
+                        0
+                    </h2>
+
+                </article>
+
+                <article class="c-stats__card">
+
+                    <span class="c-stats__label">
+                        Inactivos
+                    </span>
+
+                    <h2 id="clientesInactivos">
+                        0
+                    </h2>
+
+                </article>
+
+            </section>
+
+        </section>
     </main>
     <script src="script/script.js"></script>
 </body>
+
 </html>
