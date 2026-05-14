@@ -452,5 +452,27 @@ body{
     font-weight:700;
     cursor:pointer;
 }
+@media(max-width:900px){
 
+    .c-stats{
+        grid-template-columns:1fr;
+    }
+
+    .c-table__head,
+    .c-table__row{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .c-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .c-modal__content{
+        width:90%;
+    }
+
+}
 /* #endregion*/
