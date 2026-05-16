@@ -280,7 +280,7 @@ INSERT INTO generos_musicales (genero) VALUES ('Pop');
 INSERT INTO generos_musicales (genero) VALUES ('Hip-Hop');
 INSERT INTO generos_musicales (genero) VALUES ('Jazz');
 INSERT INTO generos_musicales (genero) VALUES ('Electronica');
-INSERT INTO generos_musicales (genero) VALUES ('R&B');
+INSERT INTO generos_musicales (genero) VALUES ('R and B');
 INSERT INTO generos_musicales (genero) VALUES ('Flamenco');
 
 INSERT INTO albumes (titulo, artista, formato, precio, stock, id_proveedor, id_genero) VALUES ('Wake Up',           'BTS',             'CD',     32.99, 186, 1,  1);
