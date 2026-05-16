@@ -1,18 +1,51 @@
-USE 74_minutes;
+USE `74_minutes`;
 
-INSERT INTO Cliente(nombre, apellido, calle, codigo_postal, email, password_hash) VALUES
-('Carlos',    'Garcia',     'Calle Mayor, 12',           28001, 'carlos.garcia@gmail.com',     'hash001'),
-('Laura',     'Martinez',   'Calle Gran Via, 34',        28013, 'laura.martinez@gmail.com',    'hash002'),
-('Pedro',     'Fernandez',  'Calle del Carmen, 27',      30204, 'pedro.fernandez@hotmail.com', 'hash003'),
-('Lorena',    'Lopez',      'Calle nueva, 1',            28462, 'lorena.lopez@hotmail.com',    'hash004'),
-('Miguel',    'Sanchez',    'Avenida de la Paz, 5',      41001, 'miguel.sanchez@yahoo.com',    'hash005'),
-('Sofia',     'Ruiz',       'Calle Serrano, 8',          28006, 'sofia.ruiz@gmail.com',        'hash006'),
-('Andres',    'Torres',     'Calle Alcala, 45',          28009, 'andres.torres@gmail.com',     'hash007'),
-('Maria',     'Diaz',       'Paseo de la Castellana, 3', 28046, 'maria.diaz@hotmail.com',      'hash008'),
-('Pablo',     'Moreno',     'Calle Fuencarral, 22',      28004, 'pablo.moreno@yahoo.com',      'hash009'),
-('Elena',     'Jimenez',    'Calle Goya, 17',            28001, 'elena.jimenez@gmail.com',     'hash010');
+INSERT INTO paises(codigo_pais, nombre) VALUES
+('ES','España'),
+('US','Estados Unidos'),
+('FR','Francia'),
+('DE','Alemania'),
+('IT','Italia'),
+('PT','Portugal'),
+('GB','Reino Unido'),
+('JP','Japón'),
+('KR','Corea del Sur'),
+('MX','México');
 
-INSERT INTO TELEFONO_CLIENTE(id_cliente, Telefono) VALUES
+INSERT INTO codigos_postales(codigo_postal, ciudad, provincia, codigo_pais) VALUES
+('28001', 'Madrid', 'Madrid', 'ES'),
+('28006', 'Madrid', 'Madrid', 'ES'),
+('28009', 'Madrid', 'Madrid', 'ES'),
+('28013', 'Madrid', 'Madrid', 'ES'),
+('28004', 'Madrid', 'Madrid', 'ES'),
+('28046', 'Madrid', 'Madrid', 'ES'),
+('41001', 'Sevilla', 'Sevilla', 'ES'),
+('30204', 'Cartagena', 'Murcia', 'ES'),
+('28462', 'Villaviciosa de Odón', 'Madrid', 'ES'),
+('10001', 'New York', 'New York', 'US'),
+('90210', 'Beverly Hills', 'California', 'US'),
+('90028', 'Los Angeles', 'California', 'US'),
+('94105', 'San Francisco', 'California', 'US'),
+('04536', 'Seoul', 'Sudogwon', 'KR'),
+('150-0001', 'Tokyo', 'Kanto', 'JP'),
+('75008', 'Paris', 'Île-de-France', 'FR'),
+('10115', 'Berlin', 'Berlin', 'DE'),
+('00184', 'Rome', 'Lazio', 'IT'),
+('SW1A 1AA', 'London', 'Greater London', 'GB');
+
+INSERT INTO clientes(nombre, apellido, direccion, id_codigo_postal, email, password_hash) VALUES
+('Carlos', 'Garcia', 'Calle Mayor, 12', 1, 'carlos.garcia@gmail.com', 'hash001'),
+('Laura', 'Martinez', 'Calle Gran Via, 34', 2, 'laura.martinez@gmail.com', 'hash002'),
+('Pedro', 'Fernandez', 'Calle del Carmen, 27', 9, 'pedro.fernandez@hotmail.com', 'hash003'),
+('Lorena', 'Lopez', 'Calle nueva, 1', 3, 'lorena.lopez@hotmail.com', 'hash004'),
+('Miguel', 'Sanchez', 'Avenida de la Paz, 5', 7, 'miguel.sanchez@yahoo.com', 'hash005'),
+('Sofia', 'Ruiz', 'Calle Serrano, 8', 4, 'sofia.ruiz@gmail.com', 'hash006'),
+('Andres', 'Torres', 'Calle Alcala, 45', 6, 'andres.torres@gmail.com', 'hash007'),
+('Maria', 'Diaz', 'Paseo de la Castellana, 3', 8, 'maria.diaz@hotmail.com', 'hash008'),
+('Pablo', 'Moreno', 'Calle Fuencarral, 22', 5, 'pablo.moreno@yahoo.com', 'hash009'),
+('Elena', 'Jimenez', 'Calle Goya, 17', 1, 'elena.jimenez@gmail.com', 'hash010');
+
+INSERT INTO telefonos_cliente(id_cliente, Telefono) VALUES
 (1,  '612345678'),
 (2,  '623456789'),
 (3,  '634567890'),
@@ -24,19 +57,19 @@ INSERT INTO TELEFONO_CLIENTE(id_cliente, Telefono) VALUES
 (9,  '690123456'),
 (10, '601234567');
 
-INSERT INTO Trabajador(DNI, nombre, apellido, rol, email, password_hash) VALUES
-('11111111A', 'Maria',   'Rodriguez', 'Almacen',  'maria.rodriguez@tienda.com',  'whash001'),
-('22222222B', 'Cesar',   'Martin',    'Ventas',   'cesar.martin@tienda.com',     'whash002'),
-('33333333C', 'Ana',     'Gomez',     'Almacen',  'ana.gomez@tienda.com',        'whash003'),
-('44444444D', 'Luis',    'Perez',     'Ventas',   'luis.perez@tienda.com',       'whash004'),
-('55555555E', 'Isabel',  'Navarro',   'Gerencia', 'isabel.navarro@tienda.com',   'whash005'),
-('66666666F', 'Jorge',   'Castillo',  'Almacen',  'jorge.castillo@tienda.com',   'whash006'),
-('77777777G', 'Marta',   'Gil',       'Ventas',   'marta.gil@tienda.com',        'whash007'),
-('88888888H', 'Raul',    'Herrera',   'Almacen',  'raul.herrera@tienda.com',     'whash008'),
-('99999999I', 'Carmen',  'Santos',    'Ventas',   'carmen.santos@tienda.com',    'whash009'),
-('10101010J', 'Antonio', 'Flores',    'Gerencia', 'antonio.flores@tienda.com',   'whash010');
+INSERT INTO trabajadores(DNI, nombre, apellido, rol, email, password_hash) VALUES
+('11111111A','Maria','Rodriguez','Almacen','maria.rodriguez@tienda.com','whash001'),
+('22222222B','Cesar','Martin','Ventas','cesar.martin@tienda.com','whash002'),
+('33333333C','Ana','Gomez','Almacen','ana.gomez@tienda.com','whash003'),
+('44444444D','Luis','Perez','Ventas','luis.perez@tienda.com','whash004'),
+('55555555E','Isabel','Navarro','Gerente','isabel.navarro@tienda.com','whash005'),
+('66666666F','Jorge','Castillo','Almacen','jorge.castillo@tienda.com','whash006'),
+('77777777G','Marta','Gil','Ventas','marta.gil@tienda.com','whash007'),
+('88888888H','Raul','Herrera','Almacen','raul.herrera@tienda.com','whash008'),
+('99999999I','Carmen','Santos','Ventas','carmen.santos@tienda.com','whash009'),
+('10101010J','Antonio','Flores','Gerente','antonio.flores@tienda.com','whash010');
 
-INSERT INTO TELEFONO_TRABAJADOR(DNI, Telefono) VALUES
+INSERT INTO telefonos_trabajador(DNI, Telefono) VALUES
 ('11111111A', '611000001'),
 ('22222222B', '622000002'),
 ('33333333C', '633000003'),
@@ -48,19 +81,19 @@ INSERT INTO TELEFONO_TRABAJADOR(DNI, Telefono) VALUES
 ('99999999I', '699000009'),
 ('10101010J', '610000010');
 
-INSERT INTO Proveedor(nombre, calle, codigo_postal) VALUES
-('HYBE Labels',         'Calle del Prado, 5',           28904),
-('Columbia Records',    'Calle Alcala, 17',             28740),
-('Rimas Entertainment', 'Calle Bravo Murillo, 200',     28936),
-('Universal Music',     'Calle Velazquez, 50',          28001),
-('Sony Music',          'Avenida de Europa, 12',        28108),
-('Warner Music',        'Calle Orense, 4',              28020),
-('EMI Records',         'Paseo de Recoletos, 7',        28004),
-('Atlantic Records',    'Calle Jorge Juan, 30',         28001),
-('Interscope Records',  'Avenida del Mediterraneo, 3',  46010),
-('Republic Records',    'Calle Colon, 15',              46004);
+INSERT INTO proveedores(nombre, direccion, id_codigo_postal) VALUES
+('HYBE Labels',         '42, Hangang-daero, Yongsan-gu', 14), 
+('Columbia Records',    '25 Madison Avenue',             10), 
+('Rimas Entertainment', '644 Ave. Fernández Juncos, Ste. 501', 11), 
+('Universal Music',     '2220 Colorado Avenue',          12), 
+('Sony Music Japan',    '9-6-35 Akasaka, Minato-ku',     15), 
+('Warner Music',        '1633 Broadway',                 10), 
+('EMI Records',         '4 Pancras Square, Kings Cross', 19), 
+('Atlantic Records',    '1633 Broadway',                 10), 
+('Interscope Records',  '2220 Colorado Avenue',          12), 
+('Republic Records',    '1755 Broadway',                 10);
 
-INSERT INTO TELEFONO_PROVEEDOR(id_proveedor, Telefono) VALUES
+INSERT INTO telefonos_proveedor(id_proveedor, Telefono) VALUES
 (1,  '910000001'),
 (2,  '910000002'),
 (3,  '910000003'),
@@ -72,7 +105,7 @@ INSERT INTO TELEFONO_PROVEEDOR(id_proveedor, Telefono) VALUES
 (9,  '910000009'),
 (10, '910000010');
 
-INSERT INTO EMAIL_PROVEEDOR(id_proveedor, email) VALUES
+INSERT INTO emails_proveedor(id_proveedor, email) VALUES
 (1,  'contacto@hybelabels.com'),
 (2,  'info@columbiarecords.com'),
 (3,  'hola@rimasentertainment.com'),
@@ -84,7 +117,7 @@ INSERT INTO EMAIL_PROVEEDOR(id_proveedor, email) VALUES
 (9,  'info@interscope.com'),
 (10, 'contacto@republicrecords.com');
 
-INSERT INTO genero_musical(genero) VALUES
+INSERT INTO generos_musicales(genero) VALUES
 ('K-Pop'),
 ('Rock'),
 ('Classic'),
@@ -96,7 +129,7 @@ INSERT INTO genero_musical(genero) VALUES
 ('R&B'),
 ('Flamenco');
 
-INSERT INTO Album(titulo, artista, formato, precio, stock, id_proveedor, id_genero) VALUES
+INSERT INTO albumes(titulo, artista, formato, precio, stock, id_proveedor, id_genero) VALUES
 ('Wake Up',           'BTS',             'CD',     32.99, 186, 1,  1),
 ('Buenas Noches',     'Quevedo',         'CD',     20.99, 128, 3,  4),
 ('Thriller',          'Michael Jackson', 'Vinilo', 24.99,  75, 4,  5),
@@ -108,7 +141,7 @@ INSERT INTO Album(titulo, artista, formato, precio, stock, id_proveedor, id_gene
 ('Besos en Guerra',   'Morat',           'CD',     17.99, 200, 2,  5),
 ('Motomami',          'Rosalia',         'CD',     23.99, 160, 3, 10);
 
-INSERT INTO Pedidos(fecha, estado, importe_total, id_cliente, DNI_trabajador) VALUES
+INSERT INTO pedidos(fecha, estado, importe_total, id_cliente, DNI_trabajador) VALUES
 ('2025-01-10', 'Entregado', 65.98, 1,  '11111111A'),
 ('2025-01-15', 'Entregado', 20.99, 2,  '22222222B'),
 ('2025-01-20', 'Enviado',   54.98, 3,  '33333333C'),
@@ -120,7 +153,7 @@ INSERT INTO Pedidos(fecha, estado, importe_total, id_cliente, DNI_trabajador) VA
 ('2025-03-01', 'Enviado',   19.99, 9,  '99999999I'),
 ('2025-03-05', 'Pendiente', 46.98, 10, '10101010J');
 
-INSERT INTO DETALLE_PEDIDO(id_pedido, id_producto, cantidad) VALUES
+INSERT INTO detalles_pedido(id_pedido, id_album, cantidad) VALUES
 (1,  1,  2),
 (2,  2,  1),
 (3,  3,  2),
