@@ -36,8 +36,8 @@ INSERT INTO codigos_postales(codigo_postal, ciudad, provincia, codigo_pais) VALU
 INSERT INTO clientes(nombre, apellido, direccion, id_codigo_postal, email, password_hash) VALUES
 ('Carlos', 'Garcia', 'Calle Mayor, 12', 1, 'carlos.garcia@gmail.com', 'hash001'),
 ('Laura', 'Martinez', 'Calle Gran Via, 34', 2, 'laura.martinez@gmail.com', 'hash002'),
-('Pedro', 'Fernandez', 'Calle del Carmen, 27', 9, 'pedro.fernandez@hotmail.com', 'hash003'),
-('Lorena', 'Lopez', 'Calle nueva, 1', 3, 'lorena.lopez@hotmail.com', 'hash004'),
+('Pedro', 'Fernandez', 'Calle del Carmen, 27', 8, 'pedro.fernandez@hotmail.com', 'hash003'),
+('Lorena', 'Lopez', 'Calle nueva, 1', 9, 'lorena.lopez@hotmail.com', 'hash004'),
 ('Miguel', 'Sanchez', 'Avenida de la Paz, 5', 7, 'miguel.sanchez@yahoo.com', 'hash005'),
 ('Sofia', 'Ruiz', 'Calle Serrano, 8', 4, 'sofia.ruiz@gmail.com', 'hash006'),
 ('Andres', 'Torres', 'Calle Alcala, 45', 6, 'andres.torres@gmail.com', 'hash007'),
