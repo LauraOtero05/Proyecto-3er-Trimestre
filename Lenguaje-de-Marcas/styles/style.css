@@ -476,3 +476,54 @@ body{
 
 }
 /* #endregion*/
+
+
+/* #region -----------------PRODUCTS----------------- */
+
+.content{
+    display: flex;
+    flex-direction: column;
+    background: rgba(181, 181, 181, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    margin: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.outerbox{
+    background: rgba(181, 181, 181, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    margin-bottom: 30px;
+    padding: 20px;
+
+}
+
+.tag{
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.p-header{
+    width: 100%;
+}
+
+.p-filter{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.p-filter__box{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 80px;
+}
+
+/* #endregion */

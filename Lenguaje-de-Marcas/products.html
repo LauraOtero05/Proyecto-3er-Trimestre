@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -36,7 +38,8 @@
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
                 <div class="nav__item active" data-page="products" data-href="products.html">
-                    <img src="resources/icons/cd-white.svg" data-default="resources/icons/cd-white.svg" data-active="resources/icons/cd-dark.svg" alt="Products">
+                    <img src="resources/icons/cd-white.svg" data-default="resources/icons/cd-white.svg"
+                        data-active="resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
                 <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
@@ -58,7 +61,44 @@
                 </div>
             </div>
         </nav>
+
+
+        <section class="content">
+            <header class="p-header outerbox">
+                <div>
+                    <p class="tag">CATÁLOGO DE PRODUCTOS</p>
+                    <h1>Gestión de CDs y Vinilos</h1>
+                </div>
+
+                <div class="p-filter">
+                    <p>Filtrar por: </p>
+                    <p class="outerbox p-filter__box">ID</p>
+                    <p class="outerbox p-filter__box">Artista</p>
+                    <p class="outerbox p-filter__box"> Album</p>
+                    <p class="outerbox p-filter__box">Tipo</p>
+                </div>
+
+            </header>
+
+            <section class="outerbox">
+                <p>Productos</p>
+
+                <div class="p-disc__grid" id="discContainer"></div>
+
+            </section>
+
+        </section>
+
+
+
+
     </main>
+
+
+
     <script src="script/script.js"></script>
+    <script src="script/script.js"></script>
+
 </body>
+
 </html>
