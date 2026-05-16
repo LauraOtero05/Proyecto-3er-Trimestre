@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/styles/style.css">
+</head>
+
+<body>
+    <div class="scene" aria-hidden="true">
+        <div class="scene__aurora"></div>
+    </div>
+    <main class="layout">
+        <nav class="sidebar">
+            <div class="sidebar__logo">
+                <div class="logo">
+                    <img src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
+                </div>
+                <img src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt=""
+                    class="logo__text">
+            </div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
+                    <span class="material-symbols-rounded">dashboard</span>
+                    <span class="nav__label">Dashboard</span>
+                </div>
+                <div class="nav__item" data-page="clients" data-href="clients.html">
+                    <span class="material-symbols-rounded">headphones</span>
+                    <span class="nav__label">Clientes</span>
+                </div>
+                <div class="nav__item" data-page="workers" data-href="workers.html">
+                    <span class="material-symbols-rounded">support_agent</span>
+                    <span class="nav__label">Trabajadores</span>
+                </div>
+                <div class="nav__item" data-page="orders" data-href="orders.html">
+                    <span class="material-symbols-rounded">shopping_bag</span>
+                    <span class="nav__label">Pedidos (Detalles del Pedido)</span>
+                </div>
+                <div class="nav__item active" data-page="products" data-href="products.html">
+                    <img src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-active="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
+                    <span class="nav__label">Productos</span>
+                </div>
+                <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
+                    <span class="material-symbols-rounded">adaptive_audio_mic</span>
+                    <span class="nav__label">Proveedores</span>
+                </div>
+            </div>
+            <div class="nav__divider"></div>
+            <div class="nav__spacer"></div>
+            <div class="nav__divider"></div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="settings">
+                    <span class="material-symbols-rounded">account_circle</span>
+                    <span class="nav__label">Perfil</span>
+                </div>
+                <div class="nav__item" data-page="profile">
+                    <span class="material-symbols-rounded">logout</span>
+                    <span class="nav__label">Cerrar Sesión</span>
+                </div>
+            </div>
+        </nav>
+
+
+        <section class="content">
+            <header class="p-header">
+                <div>
+                    <div>
+                        <p class="tag">CATÁLOGO DE PRODUCTOS</p>
+                        <h1>Gestión de CDs y Vinilos</h1>
+                    </div>
+
+                    <div class="p-filter">
+                        <p>Filtrar por: </p>
+                        <p class="outerbox p-filter__box">ID</p>
+                        <p class="outerbox p-filter__box">Artista</p>
+                        <p class="outerbox p-filter__box"> Album</p>
+                        <p class="outerbox p-filter__box">Tipo</p>
+                    </div>
+                </div>
+
+                <div class="p-header__actions">
+                    <button id="btnOpenModal" class="button__items">
+                        <span class="material-symbols-rounded">add</span> Añadir Producto
+                    </button>
+                </div>
+
+            </header>
+
+            <section class="outerbox">
+                <h2>Productos</h2>
+
+                <div class="p-disc__grid" id="discContainer"></div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <div class="modal" id="productModal">
+        <div class="modal__content">
+            <div class="modal__top">
+                <h2>Añadir Nuevo Producto</h2>
+                <button id="btnCloseModal" class="modal__close">X</button>
+            </div>
+
+            <form id="productForm" class="modal__form">
+                <div class="form__group">
+                    <label>Título del Álbum</label>
+                    <input type="text" id="formTitulo" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Artista</label>
+                    <input type="text" id="formArtista" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Formato (CD / Vinilo)</label>
+                    <select id="formFormato">
+                        <option value="CD">CD</option>
+                        <option value="Vinilo">Vinilo</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label>Precio de Venta (€)</label>
+                    <input type="text" id="formPrecio" placeholder="ej: 24.99" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Stock Disponible</label>
+                    <input type="text" id="formStock" placeholder="ej: 10" required>
+                </div>
+
+                <div class="form__group">
+                    <label>URL de la Portada</label>
+                    <input type="url" id="formPortada" placeholder="https://...">
+                </div>
+
+                <button type="submit" id="btnSubmitProduct" class="button__items">
+                    Guardar Producto
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/storage.js"></script>
+    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/entities/Producto.js"></script>
+    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/script.js"></script>
+
+</body>
+
+</html>

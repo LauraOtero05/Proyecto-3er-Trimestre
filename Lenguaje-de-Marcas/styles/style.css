@@ -32,6 +32,107 @@ body{
     min-height: 100vh;
 }
 
+/* #region ---- COMMON ELEMENTS ---- */
+
+.button__items{ /*He cogido el elemento de Alvaro de: c-header__button*/
+    border:none;
+    background:var(--secondary-color);
+    color:var(--bg-color);
+    padding:14px 14px;
+    border-radius: 12px;
+    font-weight:600;
+    cursor:pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.content{ /* Estructura del secction general de la web para tener todos el mismo estilo ?????*/
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.outerbox{
+    background: rgba(181, 181, 181, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    margin-bottom: 30px;
+    padding: 20px;
+
+}
+
+.tag{
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+/* Elementos comunes MODAL */
+
+.modal { /* He cogido el elemento de Alvaro de: c-modal*/
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__content{ /* He cogido el elemento de Alvaro de: c-modal__content*/
+    width:450px;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:28px;
+}
+
+.modal__top{ /* He cogido el elemento de Alvaro de: c-modal__top*/
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.modal__close {
+    font-size: 1.5rem;
+    color: var(--white);
+    background-color: transparent;
+}
+
+.modal__form{ /* He cogido el elemento de Alvaro de: c-form*/
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.modal__form input,
+.modal__form select{ /* He cogido el elemento de Alvaro de: c-form input y c-form select*/
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    padding:14px;
+    border-radius:14px;
+    color:white;
+}
+
+.form__group{ /* He cogido el elemento de Alvaro de: c-form__group*/
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+/* #endregion */
+
 /* #region TEXTS*/
 
 .title{
@@ -286,7 +387,7 @@ body{
     font-weight:600;
 }
 
-.c-header__button{
+.c-header__button{ /*Lo convierto en estilo comun*/
     border:none;
     background:var(--secondary-color);
     color:var(--bg-color);
@@ -384,7 +485,7 @@ body{
     border-radius:10px;
     cursor:pointer;
 }
-.c-modal{
+.c-modal{ /* Lo convierto en estilo comun*/
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.55);
@@ -394,7 +495,7 @@ body{
     z-index:999;
 }
 
-.c-modal__content{
+.c-modal__content{ /* Lo convierto en estilo comun*/
     width:450px;
     background:#111827;
     border:1px solid rgba(255,255,255,.08);
@@ -402,7 +503,7 @@ body{
     padding:28px;
 }
 
-.c-modal__top{
+.c-modal__top{ /* Lo convierto en estilo comun*/
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -417,7 +518,7 @@ body{
     cursor:pointer;
 }
 
-.c-form{
+.c-form{ /* Lo convierto en estilo comun*/
     display:flex;
     flex-direction:column;
     gap:18px;
@@ -480,36 +581,13 @@ body{
 
 /* #region -----------------PRODUCTS----------------- */
 
-.content{
-    display: flex;
-    flex-direction: column;
-    background: rgba(181, 181, 181, 0.1);
-    border-radius: 12px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3.9px);
-    -webkit-backdrop-filter: blur(3.9px);
-    margin: 30px;
-    padding: 20px;
-    width: 100%;
-}
 
-.outerbox{
-    background: rgba(181, 181, 181, 0.1);
-    border-radius: 12px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3.9px);
-    -webkit-backdrop-filter: blur(3.9px);
-    margin-bottom: 30px;
-    padding: 20px;
-
-}
-
-.tag{
-    color: var(--secondary-color);
-    margin-bottom: 15px;
-}
 
 .p-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     width: 100%;
 }
 
@@ -524,6 +602,124 @@ body{
     justify-content: center;
     padding: 0;
     width: 80px;
+}
+
+.p-header__actions{
+    margin-right: 50px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Creación de cards de productos */
+
+.p-disc__grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.p-disc__card{
+    display: flex;
+}
+
+.p-image__container{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.p-disc__image{
+    display: block;
+    width: 150px;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+.p-disc__format{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border-radius: 2px;
+    z-index: 10;
+}
+
+.p-discCard__content{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 20px;
+    
+}
+
+.p-disc__title{
+    margin: 0 0 5px 0;
+    color: var(--secondary-color);
+}
+
+.p-disc__artist{
+    color: var(--tertiary-color);
+}
+
+.p-card__data{
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+.p-card__price{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.p-card__stock{
+    font-size: 15px;
+    color: var(--tertiary-color);
+}
+
+.p-card__actions{
+    display: flex;
+    gap: 10px;
+}
+
+button{
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.p-card__edit{
+    flex: 1;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid rgb(242, 166, 74);
+    background-color: transparent;
+    color: rgb(242, 166, 74);
+    font-weight: 400;
+
+}
+
+.p-card__delete{
+    flex: 1;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid rgb(246, 52, 52);
+    background-color: transparent;
+    color: rgb(246, 52, 52);
+    font-weight: 600;
+
 }
 
 /* #endregion */
