@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/styles/style.css">
 </head>
 
 <body>
+
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
     </div>
@@ -38,7 +39,7 @@
                     <span class="material-symbols-rounded">shopping_bag</span>
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
-                <div class="nav__item active" data-page="products" data-href="products.html">
+                <div class="nav__item" data-page="products" data-href="products.html">
                     <img src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-default="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-active="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
@@ -53,7 +54,7 @@
             <div class="nav__spacer"></div>
             <div class="nav__divider"></div>
             <div class="nav__section">
-                <div class="nav__item" data-page="settings" data-href="profile.html">
+                <div class="nav__item active" data-page="settings" data-href="profile.html">
                     <span class="material-symbols-rounded">account_circle</span>
                     <span class="nav__label">Perfil</span>
                 </div>
@@ -64,94 +65,86 @@
             </div>
         </nav>
 
-
         <section class="content">
             <header class="p-header">
+
                 <div>
-                    <div>
-                        <p class="tag">CATÁLOGO DE PRODUCTOS</p>
-                        <h1>Gestión de CDs y Vinilos</h1>
-                    </div>
-
-                    <div class="p-filter">
-                        <p>Filtrar por: </p>
-                        <p class="outerbox p-filter__box">ID</p>
-                        <p class="outerbox p-filter__box">Artista</p>
-                        <p class="outerbox p-filter__box"> Album</p>
-                        <p class="outerbox p-filter__box">Tipo</p>
-                    </div>
-                </div>
-
-                <div class="p-header__actions">
-                    <button id="OpenModal" class="button__items">
-                        <span class="material-symbols-rounded">add</span> Añadir Producto
-                    </button>
+                    <p class="tag">ÁREA PERSONAL</p>
+                    <h1>Bienvenido a tu área personal</h1>
                 </div>
 
             </header>
 
-            <section class="outerbox">
-                <h2>Productos</h2>
+            <section class="prof-outerbox">
 
-                <div class="p-disc__grid" id="discContainer"></div>
+                <div class="prof-data outerbox">
+                    <img class="prof-img" src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/images/Thor.jpeg"
+                        alt="imagen del trabajador">
+                    <h2>Noemí Cano</h2>
+                </div>
 
+                <form id="profileForm" class="modal__form outerbox">
+
+                    <h3>Información personal</h3>
+
+                    <div class="form__group form__group-line">
+
+                        <label class="form__radio">
+                            <input type="radio" name="gender" value="Femenino"checked>
+                            Femenino
+                        </label>
+
+                        <label class="form__radio">
+                            <input type="radio" name="gender" value="Masculino">
+                            Masculino
+                        </label>
+                    </div>
+
+                    <div class="form__group form__group-line">
+                        <div class="form__group">
+                            <label>Nombre</label>
+                            <input type="text" id="formName" required>
+                        </div>
+    
+                        <div class="form__group">
+                            <label>Apellido</label>
+                            <input type="text" id="formLastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label>Email</label>
+                        <input type="email" id="formEmail" required>
+                    </div>
+
+                    <div class="form__group">
+                        <label>Dirección</label>
+                        <input type="text" id="formAdress" placeholder=" Calle nombre, numero" required>
+                    </div>
+
+                    <div class="form__group form__group-line">
+                        <div class="form__group">
+                            <label>Número de movil</label>
+                            <input type="text" id="formNumber" placeholder="+34 600 00 00 00" required>
+                        </div>
+    
+                        <div class="form__group">
+                            <label>Fecha de nacimiento</label>
+                            <input type="date" id="formDate" placeholder="dd/mm/yyyy">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="SubmitInformation" class="button__items">
+                        Actualizar Datos
+                    </button>
+                </form>
             </section>
-
         </section>
 
     </main>
 
-    <div class="modal" id="productModal">
-        <div class="modal__content">
-            <div class="modal__top">
-                <h2>Añadir Nuevo Producto</h2>
-                <button id="CloseModal" class="modal__close">X</button>
-            </div>
-
-            <form id="productForm" class="modal__form">
-                <div class="form__group">
-                    <label>Título del Álbum</label>
-                    <input type="text" id="formTitulo" required>
-                </div>
-
-                <div class="form__group">
-                    <label>Artista</label>
-                    <input type="text" id="formArtista" required>
-                </div>
-
-                <div class="form__group">
-                    <label>Formato (CD / Vinilo)</label>
-                    <select id="formFormato">
-                        <option value="CD">CD</option>
-                        <option value="Vinilo">Vinilo</option>
-                    </select>
-                </div>
-
-                <div class="form__group">
-                    <label>Precio de Venta (€)</label>
-                    <input type="text" id="formPrecio" placeholder="ej: 24.99" required>
-                </div>
-
-                <div class="form__group">
-                    <label>Stock Disponible</label>
-                    <input type="text" id="formStock" placeholder="ej: 10" required>
-                </div>
-
-                <div class="form__group">
-                    <label>URL de la Portada</label>
-                    <input type="url" id="formPortada" placeholder="https://...">
-                </div>
-
-                <button type="submit" id="btnSubmitProduct" class="button__items">
-                    Guardar Producto
-                </button>
-            </form>
-        </div>
-    </div>
-
     <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/storage.js"></script>
-    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/entities/Producto.js"></script>
-    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/script.js"></script>
+    <script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/entities/profile.js"></script><script src="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/script/script.js"></script>
 
 </body>
 

@@ -10,6 +10,15 @@ const initialTrabajadores = [];
 const initialPedidos = [];
 const initialProveedores = [];
 
+const initialPerfilUsuario = {
+    gender: "Femenino",
+    nombre: "Noemi",
+    apellido: "Cano",
+    email: "noemi.cano@74minutes.com",
+    direccion: "Avenida de Europa, 2B",
+    movil: "+34 611 22 33 44",
+    fechaNacimiento: "1995-01-25"
+};
 
 // Creamos keys para almacenar luego la información
 const STORAGE_KEYS = {
@@ -17,7 +26,8 @@ const STORAGE_KEYS = {
     trabajadores: "74min_trabajadores",
     productos: "74min_productos",
     pedidos: "74min_pedidos",
-    proveedores: "74min_proveedores"
+    proveedores: "74min_proveedores",
+    perfil: "74min_perfil"
 };
 
 // Función flecha para guardar datos
@@ -38,7 +48,8 @@ function initializeStorage() {
         [STORAGE_KEYS.trabajadores]: initialTrabajadores,
         [STORAGE_KEYS.productos]: initialProductos,
         [STORAGE_KEYS.pedidos]: initialPedidos,
-        [STORAGE_KEYS.proveedores]: initialProveedores
+        [STORAGE_KEYS.proveedores]: initialProveedores,
+        [STORAGE_KEYS.perfil]: initialPerfilUsuario
     };
 
     // Usamos Object.entries para recorrer el mapa de forma eficiente
