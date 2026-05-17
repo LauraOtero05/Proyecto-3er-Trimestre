@@ -23,10 +23,10 @@ class Producto {
                     <p class="p-disc__artist">${this.artista}</p>
                     <div class="p-card__data">
                         <span class="p-card__stock">Stock: ${this.stock} u.</span>
-                        <span class="p-card__price">${this.precio.toFixed(2)}€</span>
+                        <span class="p-card__price">${this.precio.toFixed(2)} €</span>
                     </div>
                     <div class="p-card__actions">
-                        <button class="p-card__edit">Editar</button>
+                        <button class="p-card__edit" data-id="${this.id}">Editar</button>
                         <button class="p-card__delete" data-id="${this.id}">Eliminar</button>
                     </div>
                 </div>

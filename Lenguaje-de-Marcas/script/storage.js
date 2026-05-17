@@ -4,7 +4,7 @@ const initialProductos = [
     { id: "3", artista: "Michael Jackson", titulo: "Thriller", formato: "Vinilo", stock: 8, precio: 29.99, portada: "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" }
 ];
 
-// Las demás constantes que ya tenías
+// Rellenar para tener datos por defecto en esas categorias
 const initialClientes = [];
 const initialTrabajadores = [];
 const initialPedidos = [];
@@ -31,15 +31,8 @@ function getData(key) {
     return data ? JSON.parse(data) : [];
 }
 
-/**
- * ============================================
- * INICIALIZACIÓN DEL SISTEMA
- * ============================================
- * Esta función se encarga de cargar los datos iniciales 
- * solo si el almacenamiento está vacío.
- */
+/*Esta función carga los datos iniciales solo si el almacenamiento está vacio */
 function initializeStorage() {
-    // Mapeamos tus claves con los datos iniciales (procedentes de initial-data.js)
     const initialDataMap = {
         [STORAGE_KEYS.clientes]: initialClientes,
         [STORAGE_KEYS.trabajadores]: initialTrabajadores,

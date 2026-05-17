@@ -27,25 +27,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // #region --------------------- Carga de datos PRODUCTS.JS ---------------------
 
+let idProductoEnEdicion = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("1. DOM cargado correctamente.");
 
-    initializeStorage(); 
+    initializeStorage();
     renderProductos();
 
-    // Captura de elementos del Modal
     const modal = document.getElementById("productModal");
-    const btnAbrir = document.getElementById("btnOpenModal");
-    const btnCerrar = document.getElementById("btnCloseModal");
+    const modalTitulo = modal ? modal.querySelector(".modal__top h2") : null;
+    const btnAbrir = document.getElementById("OpenModal");
+    const btnCerrar = document.getElementById("CloseModal");
     const form = document.getElementById("productForm");
 
-    // Inputs para aplicar validaciones controladas
+    const inputTitulo = document.getElementById("formTitulo");
+    const inputArtista = document.getElementById("formArtista");
+    const inputFormato = document.getElementById("formFormato");
     const inputPrecio = document.getElementById("formPrecio");
     const inputStock = document.getElementById("formStock");
+    const inputPortada = document.getElementById("formPortada");
 
-    // --- GESTIÓN DE EVENTOS DEL DOM: MODAL ---
     if (btnAbrir && modal) {
         btnAbrir.addEventListener("click", () => {
+            idProductoEnEdicion = null;
+            if (modalTitulo) modalTitulo.textContent = "Añadir Nuevo Producto";
+            if (form) form.reset();
             modal.style.display = "flex";
         });
     }
@@ -53,94 +60,104 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnCerrar && modal) {
         btnCerrar.addEventListener("click", () => {
             modal.style.display = "none";
-            form.reset(); // Limpia los campos al cerrar
+            if (form) form.reset();
         });
     }
 
-    // Cerrar el modal haciendo clic fuera de la caja blanca (Uso de Window/Viewport indirecto)
     window.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.style.display = "none";
-            form.reset();
+            if (form) form.reset();
         }
     });
 
-    // --- RESTRICCIONES DE ENTRADA EN TIEMPO REAL ---
+    if (inputPrecio) {
+        inputPrecio.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/[^0-9.,]/g, "").replace(/,/g, ".");
+            const puntos = value.split(".");
+            if (puntos.length > 2) {
+                value = puntos[0] + "." + puntos.slice(1).join("");
+            }
+            e.target.value = value;
+        });
+    }
 
-    // Validar precio: Solo permite números y un único punto o coma (elimina símbolos como €)
-    inputPrecio.addEventListener("input", (e) => {
-        // Reemplaza cualquier caracter que no sea número, punto o coma
-        let value = e.target.value.replace(/[^0-9.,]/g, "");
-        // Cambia comas por puntos automáticamente para no romper la lógica decimal de JS
-        value = value.replace(/,/g, ".");
-        // Evita que pongan más de un punto decimal
-        const puntos = value.split(".");
-        if (puntos.length > 2) {
-            value = puntos[0] + "." + puntos.slice(1).join("");
-        }
-        e.target.value = value;
-    });
+    if (inputStock) {
+        inputStock.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, "");
+        });
+    }
 
-    // Validar Stock: Solo permite números enteros positivos
-    inputStock.addEventListener("input", (e) => {
-        e.target.value = e.target.value.replace(/[^0-9]/g, "");
-    });
+    const container = document.getElementById("discContainer");
+    if (container) {
+        container.addEventListener("click", (e) => {
+            const idProducto = e.target.getAttribute("data-id");
 
+            // Caso A: Click en Eliminar
+            if (e.target.classList.contains("p-card__delete")) {
+                eliminarProducto(idProducto);
+            }
 
-    // --- PROCESAR FORMULARIO DE ALTA ---
+            // Caso B: Click en Editar
+            if (e.target.classList.contains("p-card__edit")) {
+                abrirModalEditar(idProducto, modal, modalTitulo, inputTitulo, inputArtista, inputFormato, inputPrecio, inputStock, inputPortada);
+            }
+        });
+    }
+
     if (form) {
         form.addEventListener("submit", (e) => {
-            e.preventDefault(); // Evita que la página se recargue
+            e.preventDefault();
 
-            const titulo = document.getElementById("formTitulo").value.trim();
-            const artista = document.getElementById("formArtista").value.trim();
-            
-            // Tratamiento de Formato: Ya viene controlado por el <select>, aseguramos consistencia
-            const formatoSelect = document.getElementById("formFormato").value; 
+            const titulo = inputTitulo.value.trim();
+            const artista = inputArtista.value.trim();
+            const formatoSelect = inputFormato.value;
             const formatoFormateado = formatoSelect === "CD" ? "CD" : "Vinilo";
 
             const precio = parseFloat(inputPrecio.value);
             const stock = parseInt(inputStock.value);
-            const portada = document.getElementById("formPortada").value.trim();
+            const portada = inputPortada.value.trim();
 
             if (!titulo || !artista || isNaN(precio) || isNaN(stock)) {
-                alert("Por favor, rellena correctamente todos los campos obligatorios.");
+                alert("Por favor, rellena correctamente todos los campos obligatorios");
                 return;
             }
 
             const productosActuales = getData(STORAGE_KEYS.productos);
-            const nuevoId = Date.now().toString();
 
-            // Construimos el objeto plano para SessionStorage
-            const nuevoDiscoData = {
-                id: nuevoId,
-                titulo: titulo,
-                artista: artista,
-                genero: "General",
-                formato: formatoFormateado, // Guarda exactamente "CD" o "Vinilo"
-                precio: precio,
-                stock: stock,
-                portada: portada
-            };
+            if (idProductoEnEdicion === null) {
+                // MODO: CREAR NUEVO
+                const nuevoId = Date.now().toString();
+                const nuevoDiscoData = {
+                    id: nuevoId,
+                    titulo: titulo,
+                    artista: artista,
+                    genero: "General",
+                    formato: formatoFormateado,
+                    precio: precio,
+                    stock: stock,
+                    portada: portada
+                };
+                productosActuales.push(nuevoDiscoData);
+            } else {
+                // MODO: EDITAR EXISTENTE
+                const index = productosActuales.findIndex(prod => prod.id === idProductoEnEdicion);
+                if (index !== -1) {
+                    productosActuales[index].titulo = titulo;
+                    productosActuales[index].artista = artista;
+                    productosActuales[index].formato = formatoFormateado;
+                    productosActuales[index].precio = precio;
+                    productosActuales[index].stock = stock;
+                    productosActuales[index].portada = portada;
+                }
+            }
 
-            productosActuales.push(nuevoDiscoData);
             saveData(STORAGE_KEYS.productos, productosActuales);
-            
-            // Renderizamos, limpiamos el formulario y cerramos
+
             renderProductos();
             form.reset();
             modal.style.display = "none";
-        });
-    }
-
-    // Delegación de eventos para la acción de Eliminar
-    const container = document.getElementById("discContainer");
-    if (container) {
-        container.addEventListener("click", (e) => {
-            if (e.target.classList.contains("p-card__delete")) {
-                const idProducto = e.target.getAttribute("data-id");
-                eliminarProducto(idProducto);
-            }
+            idProductoEnEdicion = null;
         });
     }
 });
@@ -152,7 +169,7 @@ function renderProductos() {
     const productosRaw = getData(STORAGE_KEYS.productos);
 
     if (productosRaw.length === 0) {
-        container.innerHTML = `<p class="p-disc__empty">No hay productos en el catálogo.</p>`;
+        container.innerHTML = `<p class="p-disc__empty">No hay productos en el catálogo</p>`;
         return;
     }
 
@@ -163,22 +180,42 @@ function renderProductos() {
             prodData.id,
             prodData.titulo,
             prodData.artista,
-            prodData.genero || "General", 
+            prodData.genero || "General",
             prodData.formato,
             prodData.precio,
             prodData.stock,
             prodData.portada
         );
-        
+
         container.insertAdjacentHTML("beforeend", productoInstancia.createCardHTML());
     });
+}
+
+function abrirModalEditar(id, modal, modalTitulo, inputTitulo, inputArtista, inputFormato, inputPrecio, inputStock, inputPortada) {
+    const productos = getData(STORAGE_KEYS.productos);
+    const productoAEditar = productos.find(prod => prod.id === id);
+
+    if (!productoAEditar) return;
+
+    idProductoEnEdicion = id;
+
+    if (modalTitulo) modalTitulo.textContent = "Editar Producto";
+
+    inputTitulo.value = productoAEditar.titulo;
+    inputArtista.value = productoAEditar.artista;
+    inputFormato.value = productoAEditar.formato;
+    inputPrecio.value = productoAEditar.precio;
+    inputStock.value = productoAEditar.stock;
+    inputPortada.value = productoAEditar.portada;
+
+    if (modal) modal.style.display = "flex";
 }
 
 function eliminarProducto(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este disco?")) {
         const productosActuales = getData(STORAGE_KEYS.productos);
         const productosFiltrados = productosActuales.filter(prod => prod.id !== id);
-        
+
         saveData(STORAGE_KEYS.productos, productosFiltrados);
         renderProductos();
     }

@@ -120,8 +120,8 @@ body{
 .modal__form select{ /* He cogido el elemento de Alvaro de: c-form input y c-form select*/
     background:rgba(255,255,255,.06);
     border:1px solid rgba(255,255,255,.08);
-    padding:14px;
-    border-radius:14px;
+    padding: 8px;
+    border-radius: 4px;
     color:white;
 }
 
