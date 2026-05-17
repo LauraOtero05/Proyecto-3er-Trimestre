@@ -126,38 +126,114 @@
             </section>
             <section class="w-table-box">
 
-    <div class="w-table-box__top">
+                <div class="w-table-box__top">
 
-        <h2>
-            Lista de Trabajadores
-        </h2>
+                    <h2>
+                        Lista de Trabajadores
+                    </h2>
 
-    </div>
+                </div>
 
-    <div class="w-table">
+                <div class="w-table">
 
-        <div class="w-table__head">
+                    <div class="w-table__head">
 
-            <div>Trabajador</div>
-            <div>EMAIL</div>
-            <div>CARGO</div>
-            <div>ESTADO</div>
-            <div>ACCIONES</div>
+                        <div>Trabajador</div>
+                        <div>EMAIL</div>
+                        <div>CARGO</div>
+                        <div>ESTADO</div>
+                        <div>ACCIONES</div>
 
-        </div>
+                    </div>
 
-        <div
-            class="w-table__body"
-            id="tablaWorkers"
-        >
+                    <div class="w-table__body" id="tablaWorkers">
 
-        </div>
+                    </div>
 
-    </div>
+                </div>
 
-</section>
+            </section>
 
     </main>
+    <div class="w-modal" id="modal">
+
+        <div class="w-modal__content">
+
+            <div class="w-modal__top">
+
+                <h2>
+                    Nuevo trabajador
+                </h2>
+
+                <button id="cerrarModal">
+                    
+                </button>
+
+            </div>
+
+            <div class="w-form">
+
+                <div class="w-form__group">
+
+                    <label>
+                        Nombre
+                    </label>
+
+                    <input type="text" id="nombre">
+
+                </div>
+
+                <div class="w-form__group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input type="email" id="email">
+
+                </div>
+
+                <div class="w-form__group">
+
+                    <label>
+                        Cargo
+                    </label>
+
+                    <input type="text" id="cargo">
+
+                </div>
+
+                <div class="w-form__group">
+
+                    <label>
+                        Estado
+                    </label>
+
+                    <select id="estado">
+
+                        <option value="Activo">
+                            Activo
+                        </option>
+
+                        <option value="Inactivo">
+                            Inactivo
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button type="button" id="guardarWorker" class="w-form__button">
+
+                    Guardar Trabajador
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
 </body>
 
