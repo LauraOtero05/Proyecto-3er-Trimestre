@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajadores</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -36,7 +38,8 @@
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-default="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-active="/Lenguaje-de-Marcas/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
@@ -61,70 +64,101 @@
         </nav>
         <section class="w-dashboard">
 
-    <header class="w-header">
+            <header class="w-header">
 
-        <div>
+                <div>
 
-            <p class="w-header__subtitle">
-                CRM
-            </p>
+                    <p class="w-header__subtitle">
+                        CRM
+                    </p>
 
-            <h1 class="w-header__title">
-                Gestión de Trabajadores
-            </h1>
+                    <h1 class="w-header__title">
+                        Gestión de Trabajadores
+                    </h1>
+
+                </div>
+
+                <button class="w-header__button" id="abrirModal">
+
+                    + Nuevo Trabajador
+
+                </button>
+
+            </header>
+            <section class="w-stats">
+
+                <article class="w-stats__card">
+
+                    <span class="w-stats__label">
+                        Total Trabajadores
+                    </span>
+
+                    <h2 id="totalWorkers">
+                        0
+                    </h2>
+
+                </article>
+
+                <article class="w-stats__card">
+
+                    <span class="w-stats__label">
+                        Activos
+                    </span>
+
+                    <h2 id="workersActivos">
+                        0
+                    </h2>
+
+                </article>
+
+                <article class="w-stats__card">
+
+                    <span class="w-stats__label">
+                        Inactivos
+                    </span>
+
+                    <h2 id="workersInactivos">
+                        0
+                    </h2>
+
+                </article>
+
+            </section>
+            <section class="w-table-box">
+
+    <div class="w-table-box__top">
+
+        <h2>
+            Lista de Trabajadores
+        </h2>
+
+    </div>
+
+    <div class="w-table">
+
+        <div class="w-table__head">
+
+            <div>Trabajador</div>
+            <div>EMAIL</div>
+            <div>CARGO</div>
+            <div>ESTADO</div>
+            <div>ACCIONES</div>
 
         </div>
 
-        <button
-            class="w-header__button"
-            id="abrirModal"
+        <div
+            class="w-table__body"
+            id="tablaWorkers"
         >
 
-            + Nuevo Trabajador
+        </div>
 
-        </button>
-
-    </header>
-    <section class="w-stats">
-
-    <article class="w-stats__card">
-
-        <span class="w-stats__label">
-            Total Trabajadores
-        </span>
-
-        <h2 id="totalWorkers">
-            0
-        </h2>
-
-    </article>
-
-    <article class="w-stats__card">
-
-        <span class="w-stats__label">
-            Activos
-        </span>
-
-        <h2 id="workersActivos">
-            0
-        </h2>
-
-    </article>
-
-    <article class="w-stats__card">
-
-        <span class="w-stats__label">
-            Inactivos
-        </span>
-
-        <h2 id="workersInactivos">
-            0
-        </h2>
-
-    </article>
+    </div>
 
 </section>
+
     </main>
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
 </body>
+
 </html>
