@@ -89,6 +89,7 @@ body{
     align-items: center;
 }
 
+
 .modal__content{ /* He cogido el elemento de Alvaro de: c-modal__content*/
     width:450px;
     background:#111827;
