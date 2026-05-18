@@ -125,6 +125,10 @@ body{
     border-radius: 4px;
     color:white;
 }
+.modal__form select option{
+    background:#1F2634;
+    color:var(--white);
+}
 
 .form__group{ /* He cogido el elemento de Alvaro de: c-form__group*/
     display:flex;
@@ -470,12 +474,12 @@ body{
 
 .activo{
     background:#16a34a;
-    color:white;
+    color:#050814;
 }
 
 .inactivo{
     background:#dc2626;
-    color:white;
+    color:#050814;
 }
 
 .c-table__delete{
@@ -486,7 +490,7 @@ body{
     border-radius:10px;
     cursor:pointer;
 }
-.c-modal{ /* Lo convierto en estilo comun*/
+/* .c-modal{ 
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.55);
@@ -494,22 +498,22 @@ body{
     justify-content:center;
     align-items:center;
     z-index:999;
-}
+} */
 
-.c-modal__content{ /* Lo convierto en estilo comun*/
+/* .c-modal__content{ 
     width:450px;
     background:#111827;
     border:1px solid rgba(255,255,255,.08);
     border-radius:24px;
     padding:28px;
-}
+} */
 
-.c-modal__top{ /* Lo convierto en estilo comun*/
+/* .c-modal__top{ 
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:25px;
-}
+} */
 
 .c-modal__top button{
     background:none;
@@ -519,11 +523,11 @@ body{
     cursor:pointer;
 }
 
-.c-form{ /* Lo convierto en estilo comun*/
+/* .c-form{ 
     display:flex;
     flex-direction:column;
     gap:18px;
-}
+} */
 
 .c-form__group{
     display:flex;
@@ -829,6 +833,8 @@ button{
     font-weight:600;
 }
 
+
+
 .w-table__delete{
     border:none;
     background:#dc2626;
@@ -837,7 +843,7 @@ button{
     border-radius:10px;
     cursor:pointer;
 }
-.w-modal{
+/* .w-modal{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.55);
@@ -845,22 +851,22 @@ button{
     justify-content:center;
     align-items:center;
     z-index:999;
-}
+} */
 
-.w-modal__content{
+/* .w-modal__content{
     width:450px;
     background:#111827;
     border:1px solid rgba(255,255,255,.08);
     border-radius:24px;
     padding:28px;
-}
+} */
 
-.w-modal__top{
+/* .w-modal__top{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:25px;
-}
+} */
 
 .w-modal__top button{
     background:none;
@@ -870,11 +876,11 @@ button{
     cursor:pointer;
 }
 
-.w-form{
+/* .w-form{
     display:flex;
     flex-direction:column;
     gap:18px;
-}
+} */
 
 .w-form__group{
     display:flex;
