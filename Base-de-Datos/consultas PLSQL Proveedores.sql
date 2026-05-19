@@ -8,14 +8,13 @@ SET SERVEROUTPUT ON;
 DECLARE
 
     TYPE t_registro_proveedor IS RECORD (
-        nombre            proveedores.nombre%TYPE,
-        direccion         proveedores.direccion%TYPE,
-        id_codigo_postal  proveedores.id_codigo_postal%TYPE,
-        telefono          VARCHAR2(20),
-        email             VARCHAR2(150)
+        nombre proveedores.nombre%TYPE,
+        direccion proveedores.direccion%TYPE,
+        id_codigo_postal proveedores.id_codigo_postal%TYPE,
+        telefono VARCHAR2(20),
+        email VARCHAR2(150)
     );
 
-    -- ----------------Creamos una colección (Varray) capaz de almacenar estos registros---------------------------
     TYPE t_lista_proveedores IS VARRAY(5) OF t_registro_proveedor;
     v_nuevos_prov t_lista_proveedores;
     
@@ -40,11 +39,11 @@ BEGIN
             VALUES (v_nuevos_prov(i).nombre, v_nuevos_prov(i).direccion, v_nuevos_prov(i).id_codigo_postal)
             RETURNING id_proveedor INTO v_id_generado;
 
-            -- Insertamos en la tabla hija (telefonos_proveedor)
+
             INSERT INTO telefonos_proveedor (id_proveedor, telefono)
             VALUES (v_id_generado, v_nuevos_prov(i).telefono);
 
-            -- Insertamos en la tabla tabla hija (emails_proveedor)
+
             INSERT INTO emails_proveedor (id_proveedor, email)
             VALUES (v_id_generado, v_nuevos_prov(i).email);
 
@@ -86,7 +85,7 @@ BEGIN
 
         v_contador := v_contador + 1;
 
-        IF v_registro.direccion NOT LIKE '%(Zona UE)%' THEN -- El NOT LIKE es para decir que si "NO contiene" esa palabra en ninguna parte que entonces entre en el bucle
+        IF v_registro.direccion NOT LIKE '%(Zona UE)%' THEN
             
             UPDATE proveedores
             SET direccion = v_registro.direccion || ' - (Zona UE)',
@@ -187,7 +186,7 @@ DECLARE
         SELECT p.nombre, p.direccion 
         FROM proveedores p
         JOIN codigos_postales cp ON p.id_codigo_postal = cp.id_codigo_postal
-        WHERE SUBSTR(cp.codigo_postal, 1, 2) = '04'; -- Extrae desde la posición 1, un largo de 2 caracteres
+        WHERE SUBSTR(cp.codigo_postal, 1, 2) = '04';
         
     v_nombre    proveedores.nombre%TYPE;
     v_direccion proveedores.direccion%TYPE;
@@ -257,9 +256,6 @@ DECLARE
 BEGIN
     
     FOR r_analisis IN c_analisis_catalogo LOOP
-        -- El RPAD es un padding right
-        -- El LPAD es un paddin left
-        -- El '99.99' es para formatear los números a ese formato
         DBMS_OUTPUT.PUT_LINE('Proveedor: ' || RPAD(r_analisis.proveedor, 22) || ' Álbumes: ' || LPAD(r_analisis.total_albumes, 3) ||'   Precio Medio: ' || TO_CHAR(ROUND(r_analisis.precio_promedio, 2), '99.99') || '€');    
     
     END LOOP;
@@ -271,9 +267,8 @@ END;
 DECLARE
     
     CURSOR c_impacto_ventas IS
-        SELECT p.id_proveedor, 
-               p.nombre AS proveedor,
-               (SELECT NVL(SUM(dp.cantidad), 0) 
+        SELECT p.id_proveedor, p.nombre AS proveedor,
+                (SELECT NVL(SUM(dp.cantidad), 0) 
                 FROM detalles_pedido dp
                 JOIN albumes a ON dp.id_album = a.id_album
                 WHERE a.id_proveedor = p.id_proveedor) AS unidades_vendidas
@@ -294,9 +289,7 @@ BEGIN
                 v_clasificacion := 'SIN VENTAS REGISTRADAS';
         END CASE;
         
-        DBMS_OUTPUT.PUT_LINE('ID: ' || r_prov.id_proveedor || ' | ' || RPAD(r_prov.proveedor, 20, ' ') || 
-                             ' | Uds Vendidas: ' || r_prov.unidades_vendidas || 
-                             ' | Rango: ' || v_clasificacion);
+        DBMS_OUTPUT.PUT_LINE('ID: ' || r_prov.id_proveedor || ' | ' || RPAD(r_prov.proveedor, 20, ' ') || ' | Uds Vendidas: ' || r_prov.unidades_vendidas || ' | Rango: ' || v_clasificacion);
     END LOOP;
 END;
 /
@@ -342,7 +335,7 @@ END;
 
 BEGIN
     pr_insertar_proveedor_seguro('Discográfica Neptuno', 'Calle Falsa 123', 1);
-    pr_insertar_proveedor_seguro('Discográfica Invalida', 'Avenida Ilegal', 999); -- Debe saltar la excepción controlada
+    pr_insertar_proveedor_seguro('Discográfica Invalida', 'Avenida Ilegal', 999); -- Debe saltar una excepción controlada
 END;
 /
 
@@ -382,7 +375,7 @@ END;
 
 BEGIN
     pr_reporte_datos_proveedor(1);
-    DBMS_OUTPUT.PUT_LINE(chr(10)); -- Salto de línea
+    DBMS_OUTPUT.PUT_LINE(chr(10));
 END;
 /
 

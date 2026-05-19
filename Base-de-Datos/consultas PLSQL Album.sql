@@ -125,8 +125,7 @@ BEGIN
 
         EXIT WHEN c_inventario%NOTFOUND;
         
-        DBMS_OUTPUT.PUT_LINE('Disco: ' || v_titulo || ' - Artista: ' || v_artista || 
-                            ' - Valor en Almacén: ' || v_valor || '€');
+        DBMS_OUTPUT.PUT_LINE('Disco: ' || v_titulo || ' - Artista: ' || v_artista || ' - Valor en Almacén: ' || v_valor || '€');
     
     END LOOP;
 
@@ -197,8 +196,7 @@ BEGIN
 
     FOR r_stock IN (SELECT titulo, artista, stock FROM Albumes WHERE stock < 60) LOOP
 
-        DBMS_OUTPUT.PUT_LINE('¡ATENCIÓN! -> ' || r_stock.titulo || ' de ' || r_stock.artista || 
-                            ' tiene solo ' || r_stock.stock || ' unidades.');
+        DBMS_OUTPUT.PUT_LINE('¡ATENCIÓN! -> ' || r_stock.titulo || ' de ' || r_stock.artista || ' tiene solo ' || r_stock.stock || ' unidades');
 
     END LOOP;
 END;
@@ -220,8 +218,7 @@ BEGIN
 
     FOR item IN c_logistica LOOP
 
-        DBMS_OUTPUT.PUT_LINE('Proveedor: ' || item.proveedor || ' | Formato: ' || 
-                            item.formato || ' | Título: ' || item.titulo);
+        DBMS_OUTPUT.PUT_LINE('Proveedor: ' || item.proveedor || ' | Formato: ' || item.formato || ' | Título: ' || item.titulo);
     
     END LOOP;
 END;
@@ -253,7 +250,7 @@ BEGIN
     FOR reg IN c_productos LOOP
 
         v_encontrado := TRUE;
-        -- Estructura de control y función SQL (NVL para evitar nulos)
+
         IF reg.stock > 0 THEN
 
             v_total := v_total + (NVL(reg.precio, 0) * reg.stock);
@@ -265,7 +262,6 @@ BEGIN
         RAISE e_genero_vacio;
     END IF;
 
-    -- Función SQL ROUND
     RETURN ROUND(v_total, 2);
 
 EXCEPTION
@@ -298,7 +294,7 @@ RETURN VARCHAR2 IS
     v_resultado VARCHAR2(50);
 
 BEGIN
-    -- Función SQL UPPER y SUM
+
     SELECT SUM(stock) INTO v_stock_total 
     FROM Albumes 
     WHERE UPPER(artista) = UPPER(p_nombre_artista);
@@ -427,7 +423,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Total de modelos de álbumes repuestos: ' || c_stock_bajo%ROWCOUNT);
     
     CLOSE c_stock_bajo;
-    --COMMIT;
+    COMMIT;
 
 EXCEPTION
 
