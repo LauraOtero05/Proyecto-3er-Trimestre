@@ -1,23 +1,45 @@
-@media(max-width:900px){
+/* MEDIA QUERIES CLIENTES*/
+
+@media (max-width: 900px){
+
+    .c-dashboard{
+        padding:20px;
+    }
+
+    .c-header{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
 
     .c-stats{
         grid-template-columns:1fr;
     }
 
+    .c-table{
+        overflow-x:auto;
+    }
+
     .c-table__head,
     .c-table__row{
-        grid-template-columns:1fr;
-        gap:12px;
+        grid-template-columns:repeat(5, minmax(120px,1fr));
+        min-width:700px;
     }
 
-    .c-header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:20px;
-    }
-
-    .c-modal__content{
+    .modal__content{
         width:90%;
+    }
+
+}
+
+@media (max-width: 600px){
+
+    .c-header__title{
+        font-size:24px;
+    }
+
+    .c-stats__card h2{
+        font-size:28px;
     }
 
 }

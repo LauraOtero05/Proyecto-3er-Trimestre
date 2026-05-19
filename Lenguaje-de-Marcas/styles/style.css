@@ -474,12 +474,12 @@ body{
 
 .activo{
     background:#16a34a;
-    color:#050814;
+    color:white;;
 }
 
 .inactivo{
     background:#dc2626;
-    color:#050814;
+    color:white;
 }
 
 .c-table__delete{
