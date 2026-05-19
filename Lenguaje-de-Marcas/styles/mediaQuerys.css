@@ -42,4 +42,49 @@
         font-size:28px;
     }
 
+
+      /*  MEDIA QUERIES WORKERS*/
+}
+@media (max-width: 900px){
+
+    .w-dashboard{
+        padding:20px;
+    }
+
+    .w-header{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .w-stats{
+        grid-template-columns:1fr;
+    }
+
+    .w-table{
+        overflow-x:auto;
+    }
+
+    .w-table__head,
+    .w-table__row{
+        grid-template-columns:repeat(5, minmax(120px,1fr));
+        min-width:700px;
+    }
+
+    .modal__content{
+        width:90%;
+    }
+
+}
+
+@media (max-width: 600px){
+
+    .w-header__title{
+        font-size:24px;
+    }
+
+    .w-stats__card h2{
+        font-size:28px;
+    }
+
 }
