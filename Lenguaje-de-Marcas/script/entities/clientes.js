@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.getItem("clientes")
         ) || [];
 
+    let clienteEnEdicion = null;
+
     const listaClientes =
         document.getElementById("tablaClientes");
 
@@ -42,8 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientesInactivos =
         document.getElementById("clientesInactivos");
 
+    const modalTitulo =
+        modal.querySelector(".modal__top h2");
+
     abrirModal.addEventListener("click", () => {
 
+        clienteEnEdicion = null;
+        modalTitulo.textContent = "Nuevo Cliente";
+        document.getElementById("nombre").value  = "";
+        document.getElementById("email").value   = "";
+        document.getElementById("empresa").value = "";
+        document.getElementById("estado").value  = "Activo";
         modal.style.display = "flex";
 
     });
@@ -102,15 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 </div>
 
-                <div class="c-table__cell">
+                <div class="c-table__cell" style="display:flex; gap:8px;">
 
                     <button
-                        class="c-table__delete"
+                        class="table__edit"
                         data-index="${index}"
                     >
+                        Editar
+                    </button>
 
+                    <button
+                        class="table__delete"
+                        data-index="${index}"
+                    >
                         Borrar
-
                     </button>
 
                 </div>
@@ -130,13 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const nombre =
-            document.getElementById("nombre").value;
+            document.getElementById("nombre").value.trim();
 
         const email =
-            document.getElementById("email").value;
+            document.getElementById("email").value.trim();
 
         const empresa =
-            document.getElementById("empresa").value;
+            document.getElementById("empresa").value.trim();
 
         const estado =
             document.getElementById("estado").value;
@@ -151,15 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        const nuevoCliente =
-            new Cliente(
-                nombre,
-                email,
-                empresa,
-                estado
-            );
+        if (clienteEnEdicion === null) {
 
-        clientes.push(nuevoCliente);
+            clientes.push(new Cliente(nombre, email, empresa, estado));
+
+        } else {
+
+            clientes[clienteEnEdicion] = new Cliente(nombre, email, empresa, estado);
+            clienteEnEdicion = null;
+
+        }
 
         sessionStorage.setItem(
             "clientes",
@@ -168,22 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pintarClientes();
 
-        document.getElementById("nombre").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("empresa").value = "";
-
         modal.style.display = "none";
 
     });
 
     listaClientes.addEventListener("click", (e) => {
 
-        if (
-            e.target.classList.contains("c-table__delete")
-        ) {
+        const index = parseInt(e.target.dataset.index);
 
-            const index =
-                e.target.dataset.index;
+        if (e.target.classList.contains("table__delete")) {
 
             clientes.splice(index, 1);
 
@@ -193,6 +203,21 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             pintarClientes();
+
+        }
+
+        if (e.target.classList.contains("table__edit")) {
+
+            clienteEnEdicion = index;
+            const c = clientes[index];
+
+            modalTitulo.textContent = "Editar Cliente";
+            document.getElementById("nombre").value  = c.nombre;
+            document.getElementById("email").value   = c.email;
+            document.getElementById("empresa").value = c.empresa;
+            document.getElementById("estado").value  = c.estado;
+
+            modal.style.display = "flex";
 
         }
 

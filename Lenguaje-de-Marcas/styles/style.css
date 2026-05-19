@@ -482,13 +482,21 @@ body{
     color:white;
 }
 
-.c-table__delete{
+.table__delete{
     border:none;
     background:#dc2626;
     color:white;
     padding:10px 14px;
     border-radius:10px;
     cursor:pointer;
+}
+.table__edit {
+    border: none;
+    background: #d97706;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 /* .c-modal{ 
     position:fixed;

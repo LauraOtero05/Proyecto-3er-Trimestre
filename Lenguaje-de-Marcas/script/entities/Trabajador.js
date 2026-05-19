@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.getItem("workers")
         ) || [];
 
+    let workerEnEdicion = null;
+
     const tablaWorkers =
         document.getElementById("tablaWorkers");
 
@@ -42,8 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const workersInactivos =
         document.getElementById("workersInactivos");
 
+    const modalTitulo =
+        modal.querySelector(".modal__top h2");
+
     abrirModal.addEventListener("click", () => {
 
+        workerEnEdicion = null;
+        modalTitulo.textContent = "Nuevo Trabajador";
+        document.getElementById("nombre").value = "";
+        document.getElementById("email").value  = "";
+        document.getElementById("cargo").value  = "";
+        document.getElementById("estado").value = "Activo";
         modal.style.display = "flex";
 
     });
@@ -96,15 +107,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 </div>
 
-                <div>
+                <div style="display:flex; gap:8px;">
 
                     <button
-                        class="w-table__delete"
+                        class="table__edit"
                         data-index="${index}"
                     >
+                        Editar
+                    </button>
 
+                    <button
+                        class="table__delete"
+                        data-index="${index}"
+                    >
                         Borrar
-
                     </button>
 
                 </div>
@@ -145,13 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
     guardarWorker.addEventListener("click", () => {
 
         const nombre =
-            document.getElementById("nombre").value;
+            document.getElementById("nombre").value.trim();
 
         const email =
-            document.getElementById("email").value;
+            document.getElementById("email").value.trim();
 
         const cargo =
-            document.getElementById("cargo").value;
+            document.getElementById("cargo").value.trim();
 
         const estado =
             document.getElementById("estado").value;
@@ -166,15 +182,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        const nuevoWorker =
-            new Worker(
-                nombre,
-                email,
-                cargo,
-                estado
-            );
+        if (workerEnEdicion === null) {
 
-        workers.push(nuevoWorker);
+            workers.push(new Worker(nombre, email, cargo, estado));
+
+        } else {
+
+            workers[workerEnEdicion] = new Worker(nombre, email, cargo, estado);
+            workerEnEdicion = null;
+
+        }
 
         sessionStorage.setItem(
             "workers",
@@ -183,24 +200,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pintarWorkers();
 
-        document.getElementById("nombre").value = "";
-
-        document.getElementById("email").value = "";
-
-        document.getElementById("cargo").value = "";
-
         modal.style.display = "none";
 
     });
 
     tablaWorkers.addEventListener("click", (e) => {
 
-        if (
-            e.target.classList.contains("w-table__delete")
-        ) {
+        const index = parseInt(e.target.dataset.index);
 
-            const index =
-                e.target.dataset.index;
+        if (e.target.classList.contains("table__delete")) {
 
             workers.splice(index, 1);
 
@@ -210,6 +218,21 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
             pintarWorkers();
+
+        }
+
+        if (e.target.classList.contains("table__edit")) {
+
+            workerEnEdicion = index;
+            const w = workers[index];
+
+            modalTitulo.textContent = "Editar Trabajador";
+            document.getElementById("nombre").value = w.nombre;
+            document.getElementById("email").value  = w.email;
+            document.getElementById("cargo").value  = w.cargo;
+            document.getElementById("estado").value = w.estado;
+
+            modal.style.display = "flex";
 
         }
 
