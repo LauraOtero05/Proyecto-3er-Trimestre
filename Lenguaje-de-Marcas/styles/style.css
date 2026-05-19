@@ -98,6 +98,22 @@ body{
     padding:28px;
 }
 
+.modal--center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modal__text{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 0;
+    margin-left: 18px;
+}
+
 .modal__top{ /* He cogido el elemento de Alvaro de: c-modal__top*/
     display:flex;
     justify-content:space-between;
@@ -154,6 +170,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1); /* 🌟 Convierte el icono negro en blanco */
     cursor: pointer;
 }
+
+.modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Ejemplo rápido por si no tienes clases de botones */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 
 /* #endregion */
 
@@ -621,11 +654,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 20px;
 }
 
-.p-filter__box{
+.p-filter__box {
     display: flex;
-    justify-content: center;
-    padding: 0;
-    width: 80px;
+    color: var(--tertiary-color);
+    padding: 12px;
+    width: 160px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center; 
+    background-size: 16px; 
+    background-color: #324554;
 }
 
 .p-header__actions{
@@ -731,6 +772,17 @@ button{
     border: 1px solid rgb(242, 166, 74);
     background-color: transparent;
     color: rgb(242, 166, 74);
+    font-weight: 400;
+
+}
+
+.p-card__cancel{
+    flex: 1;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
     font-weight: 400;
 
 }

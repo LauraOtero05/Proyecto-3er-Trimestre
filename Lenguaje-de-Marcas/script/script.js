@@ -28,18 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // #region --------------------- Carga de datos PRODUCTS.JS ---------------------
 
 let idProductoEnEdicion = null;
+let idProductoAEliminar = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("1. DOM cargado correctamente.");
 
     initializeStorage();
     renderProductos();
+    inicializarFiltros();
 
     const modal = document.getElementById("productModal");
     const modalTitulo = modal ? modal.querySelector(".modal__top h2") : null;
     const btnAbrir = document.getElementById("OpenModal");
     const btnCerrar = document.getElementById("CloseModal");
     const form = document.getElementById("productForm");
+    const confirmModal = document.getElementById("confirmModal");
+    const btnConfirmCancel = document.getElementById("btnConfirmCancel");
+    const btnConfirmDelete = document.getElementById("btnConfirmDelete");
 
     const inputTitulo = document.getElementById("formTitulo");
     const inputArtista = document.getElementById("formArtista");
@@ -47,6 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputPrecio = document.getElementById("formPrecio");
     const inputStock = document.getElementById("formStock");
     const inputPortada = document.getElementById("formPortada");
+
+    document.getElementById("filterArtista")?.addEventListener("change", aplicarFiltros);
+    document.getElementById("filterFormato")?.addEventListener("change", aplicarFiltros);
 
     if (btnAbrir && modal) {
         btnAbrir.addEventListener("click", () => {
@@ -93,12 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
         container.addEventListener("click", (e) => {
             const idProducto = e.target.getAttribute("data-id");
 
-            // Caso A: Click en Eliminar
             if (e.target.classList.contains("p-card__delete")) {
                 eliminarProducto(idProducto);
             }
 
-            // Caso B: Click en Editar
             if (e.target.classList.contains("p-card__edit")) {
                 abrirModalEditar(idProducto, modal, modalTitulo, inputTitulo, inputArtista, inputFormato, inputPrecio, inputStock, inputPortada);
             }
@@ -126,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const productosActuales = getData(STORAGE_KEYS.productos);
 
             if (idProductoEnEdicion === null) {
-                // MODO: CREAR NUEVO
+
                 const nuevoId = Date.now().toString();
                 const nuevoDiscoData = {
                     id: nuevoId,
@@ -140,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
                 productosActuales.push(nuevoDiscoData);
             } else {
-                // MODO: EDITAR EXISTENTE
+
                 const index = productosActuales.findIndex(prod => prod.id === idProductoEnEdicion);
                 if (index !== -1) {
                     productosActuales[index].titulo = titulo;
@@ -160,22 +166,51 @@ document.addEventListener("DOMContentLoaded", () => {
             idProductoEnEdicion = null;
         });
     }
+
+    if (btnConfirmCancel && confirmModal) {
+        btnConfirmCancel.addEventListener("click", () => {
+            confirmModal.style.display = "none";
+            idProductoAEliminar = null;
+        });
+    }
+
+    if (btnConfirmDelete && confirmModal) {
+        btnConfirmDelete.addEventListener("click", () => {
+            if (idProductoAEliminar) {
+                const productosActuales = getData(STORAGE_KEYS.productos);
+                const productosFiltrados = productosActuales.filter(prod => prod.id !== idProductoAEliminar);
+
+                saveData(STORAGE_KEYS.productos, productosFiltrados);
+                renderProductos();
+
+                confirmModal.style.display = "none";
+                idProductoAEliminar = null;
+            }
+        });
+    }
+
+    window.addEventListener("click", (e) => {
+        if (e.target === confirmModal) {
+            confirmModal.style.display = "none";
+            idProductoAEliminar = null;
+        }
+    });
 });
 
-function renderProductos() {
+function renderProductos(productosFiltrados = null) {
     const container = document.getElementById("discContainer");
     if (!container) return;
 
-    const productosRaw = getData(STORAGE_KEYS.productos);
+    const productosAVisualizar = productosFiltrados || getData(STORAGE_KEYS.productos);
 
-    if (productosRaw.length === 0) {
-        container.innerHTML = `<p class="p-disc__empty">No hay productos en el catálogo</p>`;
+    if (productosAVisualizar.length === 0) {
+        container.innerHTML = `<p class="p-disc__empty">No hay productos para mostrar</p>`;
         return;
     }
 
     container.innerHTML = "";
 
-    productosRaw.forEach(prodData => {
+    productosAVisualizar.forEach(prodData => {
         const productoInstancia = new Producto(
             prodData.id,
             prodData.titulo,
@@ -189,6 +224,36 @@ function renderProductos() {
 
         container.insertAdjacentHTML("beforeend", productoInstancia.createCardHTML());
     });
+}
+
+function inicializarFiltros() {
+
+    const productos = getData(STORAGE_KEYS.productos);
+    const selectArtista = document.getElementById("filterArtista");
+    
+    if (!selectArtista) return;
+    const artistasUnicos = [...new Set(productos.map(p => p.artista))];
+    
+    artistasUnicos.forEach(artista => {
+        selectArtista.insertAdjacentHTML("beforeend", `<option value="${artista}">${artista}</option>`);
+    });
+
+}
+
+function aplicarFiltros() {
+    const productos = getData(STORAGE_KEYS.productos);
+    
+    const filtroArtista = document.getElementById("filterArtista").value;
+    const filtroFormato = document.getElementById("filterFormato").value;
+    const productosFiltrados = productos.filter(prod => {
+
+        const coincideArtista = filtroArtista === "" || prod.artista === filtroArtista;
+        const coincideFormato = filtroFormato === "" || prod.formato === filtroFormato;
+
+        return coincideArtista && coincideFormato;
+    });
+
+    renderProductos(productosFiltrados);
 }
 
 function abrirModalEditar(id, modal, modalTitulo, inputTitulo, inputArtista, inputFormato, inputPrecio, inputStock, inputPortada) {
@@ -212,13 +277,12 @@ function abrirModalEditar(id, modal, modalTitulo, inputTitulo, inputArtista, inp
 }
 
 function eliminarProducto(id) {
-    if (confirm("¿Estás seguro de que deseas eliminar este disco?")) {
-        const productosActuales = getData(STORAGE_KEYS.productos);
-        const productosFiltrados = productosActuales.filter(prod => prod.id !== id);
+    const confirmModal = document.getElementById("confirmModal");
+    if (!confirmModal) return;
 
-        saveData(STORAGE_KEYS.productos, productosFiltrados);
-        renderProductos();
-    }
+    idProductoAEliminar = id; 
+
+    confirmModal.style.display = "flex"; 
 }
 
 // #endregion

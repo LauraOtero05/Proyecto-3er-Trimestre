@@ -18,8 +18,7 @@
                 <div class="logo">
                     <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
                 </div>
-                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt=""
-                    class="logo__text">
+                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
             </div>
             <div class="nav__section">
                 <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
@@ -74,11 +73,17 @@
                     </div>
 
                     <div class="p-filter">
-                        <p>Filtrar por: </p>
-                        <p class="outerbox p-filter__box">ID</p>
-                        <p class="outerbox p-filter__box">Artista</p>
-                        <p class="outerbox p-filter__box"> Album</p>
-                        <p class="outerbox p-filter__box">Tipo</p>
+                        <p style="padding: 12px;">Aplicar filtros: </p>
+
+                        <select id="filterArtista" class="outerbox p-filter__box">
+                            <option value="">Artista (Todos)</option>
+                        </select>
+
+                        <select id="filterFormato" class="outerbox p-filter__box">
+                            <option value="">Formato (Todos)</option>
+                            <option value="CD">CD</option>
+                            <option value="Vinilo">Vinilo</option>
+                        </select>
                     </div>
                 </div>
 
@@ -129,12 +134,12 @@
 
                 <div class="form__group">
                     <label>Precio de Venta (€)</label>
-                    <input type="text" id="formPrecio" placeholder="ej: 24.99" required>
+                    <input type="text" id="formPrecio" placeholder="Ej: 24.99" required>
                 </div>
 
                 <div class="form__group">
                     <label>Stock Disponible</label>
-                    <input type="text" id="formStock" placeholder="ej: 10" required>
+                    <input type="text" id="formStock" placeholder="Ej: 10" required>
                 </div>
 
                 <div class="form__group">
@@ -146,6 +151,20 @@
                     Guardar Producto
                 </button>
             </form>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+        <div class="modal__content ">
+            <div class="modal__top modal--center">
+                <h2>¿Eliminar Producto?</h2>
+            </div>
+            <p class="modal__text">¿Estás seguro de que deseas eliminar este disco? Esta acción no se puede deshacer.
+            </p>
+            <div class="modal__actions">
+                <button id="btnConfirmCancel" class="p-card__cancel">Cancelar</button>
+                <button id="btnConfirmDelete" class="p-card__delete">Eliminar</button>
+            </div>
         </div>
     </div>
 
