@@ -42,6 +42,11 @@ public class AlbumController {
         int idProveedor = InputHelper.readInt("ID Proveedor: ");
         int idGenero = InputHelper.readInt("ID Género: ");
 
+        if (!albumService.verificarRelaciones(idProveedor, idGenero)) {
+            System.out.println("No se pudo registrar el álbum. Revisa los IDs introducidos.");
+            return;
+        }
+
         Album nuevoAlbum = new Album(0, titulo, artista, formato, precio, stock, idProveedor, idGenero);
 
         albumService.crearAlbum(nuevoAlbum);
@@ -84,42 +89,100 @@ public class AlbumController {
 
         int id = InputHelper.readInt("Introduce el ID del álbum que deseas modificar: ");
 
-        Album existente = albumService.obtenerAlbumPorId(id);
+        Album album = albumService.obtenerAlbumPorId(id);
 
-        if (existente == null) {
+        if (album == null) {
             return;
         }
 
-        System.out.println("\nDeje los campos vacíos o use los nuevos valores:");
+        int opcionModificar;
 
-        String titulo = InputHelper.readString("Nuevo Título (Actual: " + existente.getTitulo() + "): ");
-        String artista = InputHelper.readString("Nuevo Artista (Actual: " + existente.getArtista() + "): ");
+        do {
+            System.out.println("\n--- DATOS ACTUALES DEL ÁLBUM ---");
+            System.out.println("1. Título:       " + album.getTitulo());
+            System.out.println("2. Artista:      " + album.getArtista());
+            System.out.println("3. Formato:      " + album.getFormato());
+            System.out.println("4. Precio:       " + album.getPrecio() + " €");
+            System.out.println("5. Stock:        " + album.getStock());
+            System.out.println("6. ID Proveedor: " + album.getIdProveedor());
+            System.out.println("7. ID Género:    " + album.getIdGenero());
+            System.out.println("0. GUARDAR CAMBIOS Y SALIR");
 
-        FormatoDisco formato = null;
+            opcionModificar = InputHelper.readIntInRange("¿Qué campo deseas modificar? (0-7): ", 0, 7);
 
-        while (formato == null) {
+            switch (opcionModificar) {
 
-            try {
+                case 1 -> {
+                    String nuevoTitulo = InputHelper.readString("Introduce el nuevo Título: ");
+                    album.setTitulo(nuevoTitulo);
+                }
+                case 2 -> {
+                    String nuevoArtista = InputHelper.readString("Introduce el nuevo Artista: ");
+                    album.setArtista(nuevoArtista);
+                }
+                case 3 -> {
+                    boolean formatoValido = false;
+                    while (!formatoValido) {
 
-                String formatoTexto = InputHelper.readString("Nuevo Formato (Actual: " + existente.getFormato() + "): ");
+                        try {
+                            String formatoTexto = InputHelper.readString("Introduce el nuevo Formato (CD, Vinilo, Cassette, Digital): ");
+                            album.setFormato(FormatoDisco.fromString(formatoTexto));
+                            formatoValido = true;
 
-                formato = FormatoDisco.fromString(formatoTexto);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error: " + e.getMessage() + " Inténtalo de nuevo.");
 
-            } catch (IllegalArgumentException e) {
+                        }
+                    }
+                }
+                case 4 -> {
+                    double nuevoPrecio = InputHelper.readDouble("Introduce el nuevo Precio (€): ");
 
-                System.out.println("Error: " + e.getMessage() + " Inténtalo de nuevo.");
+                    if (nuevoPrecio < 0) {
+                        System.out.println("Error: El precio no puede ser negativo. No se ha modificado.");
+
+                    } else {
+                        album.setPrecio(nuevoPrecio);
+                    }
+                }
+                case 5 -> {
+                    int nuevoStock = InputHelper.readInt("Introduce el nuevo Stock: ");
+
+                    if (nuevoStock < 0) {
+                        System.out.println("Error: El stock no puede ser negativo. No se ha modificado.");
+
+                    } else {
+                        album.setStock(nuevoStock);
+                    }
+                }
+                case 6 -> {
+                    int nuevoProv = InputHelper.readInt("Introduce el nuevo ID Proveedor: ");
+
+                    if (albumService.verificarRelaciones(nuevoProv, album.getIdGenero())) {
+                        album.setIdProveedor(nuevoProv);
+                    }
+                }
+                case 7 -> {
+                    int nuevoGen = InputHelper.readInt("Introduce el nuevo ID Género: ");
+
+                    if (albumService.verificarRelaciones(album.getIdProveedor(), nuevoGen)) {
+                        album.setIdGenero(nuevoGen);
+                    }
+                }
+                case 0 -> {
+
+                    if (albumService.verificarRelaciones(album.getIdProveedor(), album.getIdGenero())) {
+                        System.out.println("Enviando actualizaciones a la base de datos...");
+                        albumService.actualizarAlbum(album);
+
+                    } else {
+                        System.out.println("No se guardaron los cambios debido a IDs inválidos.");
+                    }
+                }
             }
-        }
-
-        double precio = InputHelper.readDouble("Nuevo Precio (€) (Actual: " + existente.getPrecio() + "): ");
-        int stock = InputHelper.readInt("Nuevo Stock (Actual: " + existente.getStock() + "): ");
-        int idProveedor = InputHelper.readInt("Nuevo ID Proveedor (Actual: " + existente.getIdProveedor() + "): ");
-        int idGenero = InputHelper.readInt("Nuevo ID Género (Actual: " + existente.getIdGenero() + "): ");
-
-        Album albumActualizado = new Album(id, titulo, artista, formato, precio, stock, idProveedor, idGenero);
-
-        albumService.actualizarAlbum(albumActualizado);
+        } while (opcionModificar != 0);
     }
+
 
     public void eliminarAlbum() {
 
