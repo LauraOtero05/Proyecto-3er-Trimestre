@@ -46,14 +46,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modalTitulo =
         modal.querySelector(".modal__top h2");
+    
+    let indiceAEliminar = null;
+
+    const modalConfirmar =
+        document.getElementById("modalConfirmar");
+
+    const cancelarEliminar =
+        document.getElementById("cancelarEliminar");
+
+    const confirmarEliminar =
+        document.getElementById("confirmarEliminar");
+
+    cancelarEliminar.addEventListener("click", () => {
+        modalConfirmar.style.display = "none";
+        indiceAEliminar = null;
+    });
+
+    confirmarEliminar.addEventListener("click", () => {
+        if (indiceAEliminar !== null) {
+            workers.splice(indiceAEliminar, 1);
+            sessionStorage.setItem("workers", JSON.stringify(workers));
+            pintarWorkers();
+            indiceAEliminar = null;
+        }
+        modalConfirmar.style.display = "none";
+    });
 
     abrirModal.addEventListener("click", () => {
 
         workerEnEdicion = null;
         modalTitulo.textContent = "Nuevo Trabajador";
         document.getElementById("nombre").value = "";
-        document.getElementById("email").value  = "";
-        document.getElementById("cargo").value  = "";
+        document.getElementById("email").value = "";
+        document.getElementById("cargo").value = "";
         document.getElementById("estado").value = "Activo";
         modal.style.display = "flex";
 
@@ -209,17 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = parseInt(e.target.dataset.index);
 
         if (e.target.classList.contains("table__delete")) {
-
-            workers.splice(index, 1);
-
-            sessionStorage.setItem(
-                "workers",
-                JSON.stringify(workers)
-            );
-
-            pintarWorkers();
-
-        }
+    indiceAEliminar = index;
+    modalConfirmar.style.display = "flex";
+}
 
         if (e.target.classList.contains("table__edit")) {
 
@@ -228,8 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             modalTitulo.textContent = "Editar Trabajador";
             document.getElementById("nombre").value = w.nombre;
-            document.getElementById("email").value  = w.email;
-            document.getElementById("cargo").value  = w.cargo;
+            document.getElementById("email").value = w.email;
+            document.getElementById("cargo").value = w.cargo;
             document.getElementById("estado").value = w.estado;
 
             modal.style.display = "flex";
