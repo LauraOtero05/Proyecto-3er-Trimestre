@@ -74,7 +74,7 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     @Override
     public void update(Album album) throws SQLException {
 
-        String sql = "UPDATE albumes SET titulo = ?, artista = ?, formato = ?, precio = ?, stock = ?, id_provedor = ?, id_genero = ? WHERE id_album = ?";
+        String sql = "UPDATE albumes SET titulo = ?, artista = ?, formato = ?, precio = ?, stock = ?, id_proveedor = ?, id_genero = ? WHERE id_album = ?";
         Connection conn = DataBaseConnection.getConnection();
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -116,5 +116,39 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         int idGenero = rs.getInt("id_genero");
 
         return new Album(id, titulo, artista, formato, precio, stock, idProveedor, idGenero);
+    }
+
+    public boolean existeProveedor(int idProveedor) throws SQLException {
+
+        String sql = "SELECT 1 FROM proveedores WHERE id_proveedor = ?";
+
+        Connection conn = DataBaseConnection.getConnection();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idProveedor);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                return rs.next();
+            }
+        }
+    }
+
+    public boolean existeGenero(int idGenero) throws SQLException {
+
+        String sql = "SELECT 1 FROM generos_musicales WHERE id_genero = ?";
+
+        Connection conn = DataBaseConnection.getConnection();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idGenero);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                return rs.next();
+            }
+        }
     }
 }
