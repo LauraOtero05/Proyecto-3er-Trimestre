@@ -46,6 +46,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modalTitulo =
         modal.querySelector(".modal__top h2");
+        const modalConfirmar   = document.getElementById("modalConfirmar");
+const cancelarEliminar = document.getElementById("cancelarEliminar");
+const confirmarEliminar = document.getElementById("confirmarEliminar");
+
+let indiceAEliminar = null;
+
+cancelarEliminar.addEventListener("click", () => {
+    modalConfirmar.style.display = "none";
+    indiceAEliminar = null;
+});
+
+confirmarEliminar.addEventListener("click", () => {
+    if (indiceAEliminar !== null) {
+        clientes.splice(indiceAEliminar, 1);
+        sessionStorage.setItem("clientes", JSON.stringify(clientes));
+        pintarClientes();
+        indiceAEliminar = null;
+    }
+    modalConfirmar.style.display = "none";
+});
 
     abrirModal.addEventListener("click", () => {
 
@@ -189,22 +209,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    listaClientes.addEventListener("click", (e) => {
+     listaClientes.addEventListener("click", (e) => {
 
         const index = parseInt(e.target.dataset.index);
 
         if (e.target.classList.contains("table__delete")) {
-
-            clientes.splice(index, 1);
-
-            sessionStorage.setItem(
-                "clientes",
-                JSON.stringify(clientes)
-            );
-
-            pintarClientes();
-
+            indiceAEliminar = index;
+            modalConfirmar.style.display = "flex";
         }
+
+        if (e.target.classList.contains("table__edit")) {
+            clienteEnEdicion = index;
+            const c = clientes[index];
+            modalTitulo.textContent = "Editar Cliente";
+            document.getElementById("nombre").value  = c.nombre;
+            document.getElementById("email").value   = c.email;
+            document.getElementById("empresa").value = c.empresa;
+            document.getElementById("estado").value  = c.estado;
+            modal.style.display = "flex";
+        }
+    
+
 
         if (e.target.classList.contains("table__edit")) {
 
