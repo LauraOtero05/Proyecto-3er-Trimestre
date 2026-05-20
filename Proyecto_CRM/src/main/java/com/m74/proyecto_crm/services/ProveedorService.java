@@ -26,7 +26,7 @@ public class ProveedorService {
             }
 
             proveedorRepository.save(proveedor);
-            System.out.println("¡Proveedor [" + proveedor.getNombre() + "] guardado con éxito!");
+            System.out.println("¡Proveedor '" + proveedor.getNombre() + "' guardado con éxito!");
 
         } catch (SQLException e) {
             System.err.println("Error de base de datos al guardar el proveedor: " + e.getMessage());
@@ -42,6 +42,25 @@ public class ProveedorService {
             return proveedor;
         } catch (SQLException e) {
             System.err.println("Error al buscar el proveedor: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public Proveedor obtenerProveedorPorIdONombre(String criterio) {
+
+        try {
+            if (criterio.matches("\\d+")) {
+                int id = Integer.parseInt(criterio);
+                return proveedorRepository.findById(id);
+            } else {
+                Proveedor p = proveedorRepository.findByNombre(criterio);
+                if (p == null) {
+                    System.out.println("No se encontró ningún proveedor con el nombre: '" + criterio + "'");
+                }
+                return p;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar el proveedor de forma flexible: " + e.getMessage());
             return null;
         }
     }
