@@ -190,43 +190,6 @@ public class ProveedorRepositoryImpl implements  ProveedorRepository {
 
     }
 
-
-    public int obtenerIdPorCodigoPostal(String cp) throws SQLException {
-        String sql = "SELECT id_codigo_postal FROM codigos_postales WHERE codigo_postal = ?";
-        Connection conn = DataBaseConnection.getConnection();
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, cp); // Buscamos la cadena de texto directamente
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id_codigo_postal");
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int crearCodigoPostal(String cp, String ciudad, String provincia, String codigoPais) throws SQLException {
-        String sql = "INSERT INTO codigos_postales (codigo_postal, ciudad, provincia, codigo_pais) VALUES (?, ?, ?, ?)";
-        Connection conn = DataBaseConnection.getConnection();
-
-        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, cp);
-            ps.setString(2, ciudad);
-            ps.setString(3, provincia);
-            ps.setString(4, codigoPais.toUpperCase());
-
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1); // Devolvemos el id_codigo_postal recién asignado por MySQL
-                }
-            }
-        }
-        throw new SQLException("No se pudo crear el código postal en el sistema.");
-    }
-
     private void cargarContactos(Proveedor proveedor) throws SQLException {
         Connection conn = DataBaseConnection.getConnection();
 

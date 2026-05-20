@@ -2,6 +2,7 @@ package com.m74.proyecto_crm.controllers;
 
 import com.m74.proyecto_crm.entities.Proveedor;
 import com.m74.proyecto_crm.services.ProveedorService;
+import com.m74.proyecto_crm.services.UbicationService;
 import com.m74.proyecto_crm.util.InputHelper;
 
 import java.util.ArrayList;
@@ -10,32 +11,24 @@ import java.util.List;
 public class ProveedorController {
 
     private final ProveedorService proveedorService;
+    private final UbicationService ubicationService = new UbicationService();
 
     public ProveedorController() {
         this.proveedorService = new ProveedorService();
     }
 
     public void crearProveedor() {
+
         System.out.println("\n--- REGISTRAR NUEVO PROVEEDOR ---");
 
         String nombre = InputHelper.readString("Nombre de la empresa: ");
         String direccion = InputHelper.readString("Dirección física: ");
         String cpInput = InputHelper.readString("Código Postal (Texto/Números): ");
 
-        int idCp = proveedorService.verificarCodigoPostal(cpInput);
-
+        int idCp = com.m74.proyecto_crm.util.UbicationHelper.solicitarORegistrarUbicacion(cpInput);
         if (idCp == -1) {
-            System.out.println("\n[!] El código postal '" + cpInput + "' no está registrado en el sistema.");
-            System.out.println("Por favor, introduce los datos de localización para darlo de alta:");
-            String ciudad = InputHelper.readString("Ciudad: ");
-            String provincia = InputHelper.readString("Provincia: ");
-            String pais = InputHelper.readString("Código de País (Ej: ES, US): ");
-
-            idCp = proveedorService.darDeAltaCodigoPostal(cpInput, ciudad, provincia, pais);
-            if (idCp == -1) {
-                System.out.println("Error al procesar la ubicación. Operación cancelada.");
-                return;
-            }
+            System.out.println("No se pudo procesar la dirección. Cancelando registro del proveedor.");
+            return;
         }
 
         Proveedor nuevoProveedor = new Proveedor(0, nombre, direccion, idCp, cpInput);
@@ -112,14 +105,10 @@ public class ProveedorController {
                 }
                 case 3 -> {
                     String nuevoCp = InputHelper.readString("Introduce el nuevo Código Postal: ");
-                    int idCp = proveedorService.verificarCodigoPostal(nuevoCp);
-                    if (idCp == -1) {
-                        System.out.println("\n[!] Código postal no existente. Creando ubicación:");
-                        String ciudad = InputHelper.readString("Ciudad: ");
-                        String provincia = InputHelper.readString("Provincia: ");
-                        String pais = InputHelper.readString("País (Ej: ES): ");
-                        idCp = proveedorService.darDeAltaCodigoPostal(nuevoCp, ciudad, provincia, pais);
-                    }
+
+                    // Reutilizamos el mismo asistente exacto en la modificación
+                    int idCp = com.m74.proyecto_crm.util.UbicationHelper.solicitarORegistrarUbicacion(nuevoCp);
+
                     if (idCp != -1) {
                         proveedor.setIdCodigoPostal(idCp);
                         proveedor.setCodigoPostal(nuevoCp);
