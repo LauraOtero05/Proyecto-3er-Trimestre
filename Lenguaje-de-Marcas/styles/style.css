@@ -1073,6 +1073,70 @@ button{
     color: var(--primary-color);
 }
 
+.prof-inf{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prof-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prof-inf__list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 280px;
+}
+
+.prof-inf__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.prof-inf__item .material-symbols-rounded {
+    color: var(--primary-color);
+    font-size: 22px;
+    opacity: 0.8;
+}
+
+.prof-inf__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.prof-inf__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--primary-color);
+}
+
+.prof-inf__value {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.prof-inf__link {
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.prof-inf__link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
 
 /* #endregion */
 

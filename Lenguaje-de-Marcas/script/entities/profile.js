@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputMovil = document.getElementById("formNumber");
     const inputFecha = document.getElementById("formDate");
 
+    const successModal = document.getElementById("successProfileModal");
+    const btnAccept = document.getElementById("btnSuccessAccept");
+
     cargarDatosPerfil();
 
     if (formPerfil) {
@@ -30,12 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
             saveData(STORAGE_KEYS.perfil, perfilActualizado);
 
-            alert("¡Información personal actualizada con éxito!");
+            if (successModal) {
+                successModal.style.display = "flex";
+            }
         });
     }
 
-    function cargarDatosPerfil() {
+    if (btnAccept && successModal) {
+        btnAccept.addEventListener("click", () => {
+            successModal.style.display = "none";
+        });
+    }
 
+    window.addEventListener("click", (e) => {
+        if (e.target === successModal) {
+            successModal.style.display = "none";
+        }
+    });
+
+    function cargarDatosPerfil() {
         const datosCargados = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.perfil));
 
         if (!datosCargados) return;
@@ -47,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inputMovil.value = datosCargados.movil || "";
         inputFecha.value = datosCargados.fechaNacimiento || "";
 
-        // REQUISITO: Callback en función flecha corta para marcar el circulito adecuado
         const radios = document.querySelectorAll('input[name="gender"]');
         radios.forEach(radio => {
             if (radio.value === datosCargados.gender) {
