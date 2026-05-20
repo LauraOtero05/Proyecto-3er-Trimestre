@@ -91,13 +91,13 @@ public class Proveedor {
 
     @Override
     public String toString() {
-        return "Proveedor: " +
-                " idProveedor: " + idProveedor +
-                ", nombre: " + nombre +
-                ", direccion: " + direccion +
-                ", codigoPostal: " + codigoPostal +
-                ", telefonos: " + telefonos +
-                ", emails: " + emails;
+        return  "\nId Proveedor:    " + idProveedor + "\n" +
+                "Nombre:          " + nombre +  "\n" +
+                "Direccion:       " + direccion +
+                ", Código Postal: " + codigoPostal +  "\n" +
+                "Teléfonos:       " + telefonos +  "\n" +
+                "E-mails:         " + emails + "\n" +
+                "---------------------";
     }
 
     @Override
