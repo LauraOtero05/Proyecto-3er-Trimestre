@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const KEYS = {
         orders: "74min_pedidos",
-        clients: "74min_clientes",
-        employees: "74min_trabajadores",
+        clients: "clientes",
+        employees: "workers",
         products: "74min_productos"
     };
 
@@ -58,10 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function fillSelectOptions(element, dataKey, defaultText) {
         const items = read(dataKey);
         element.innerHTML = `<option value="">— ${defaultText} —</option>`;
+        
         items.forEach(item => {
             const opt = document.createElement('option');
-            opt.value = item.id;
-            opt.textContent = item.name || `${item.titulo} (${item.precio.toFixed(2)} €)`;
+
+            opt.value = item.id || item.nombre; 
+            
+            opt.textContent = item.nombre || `${item.titulo} (${item.precio.toFixed(2)} €)`;
             element.appendChild(opt);
         });
     }
@@ -100,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const btnDeleteLine = document.createElement('button');
-            btnDeleteLine.classList.add('button__secondary');
-            btnDeleteLine.classList.add('button__secondary--red');
+            btnDeleteLine.type = 'button';
+            btnDeleteLine.classList.add('button__secondary', 'button__secondary--red');
             btnDeleteLine.textContent = '✕';
             btnDeleteLine.addEventListener('click', () => {
                 currentLines.splice(index, 1);
@@ -242,7 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const totalPages = Math.ceil(orders.length / itemsPerPage);
-
         if (currentPage > totalPages) currentPage = totalPages || 1;
 
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -250,8 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const visibleOrders = orders.slice(startIndex, endIndex);
 
         visibleOrders.forEach(order => {
-            const clientName = clients.find(c => String(c.id) === String(order.clientId))?.name || '(Desconocido)';
-            const workerName = employees.find(e => String(e.id) === String(order.employeeId))?.name || '—';
+            const clientMatch = clients.find(c => String(c.id) === String(order.clientId) || c.nombre === order.clientId);
+            const clientName = clientMatch ? clientMatch.nombre : (order.clientId || '(Desconocido)');
+
+            const workerMatch = employees.find(e => String(e.id) === String(order.employeeId) || e.nombre === order.employeeId);
+            const workerName = workerMatch ? workerMatch.nombre : (order.employeeId || '—');
 
             const row = document.createElement('div');
             row.className = 'o-table__row';
@@ -410,5 +415,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createOrdersTable();
 });
-
-
