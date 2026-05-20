@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -36,7 +38,8 @@
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
@@ -59,7 +62,149 @@
                 </div>
             </div>
         </nav>
+
+        <section class="content">
+
+            <header class="s-header">
+
+                <div>
+                    <p class="tag">GESTIÓN DE PROVEEDORES</p>
+                    <h1>Gestión de los proveedores</h1>
+                </div>
+
+                <div class="s-header__actions">
+                    <button id="OpenModalSuppliers" class="button__items">
+                        <span class="material-symbols-rounded">add</span> Añadir Proveedor
+                    </button>
+                </div>
+
+            </header>
+
+            <section class="s-stats">
+
+                <article class="s-stats__card">
+                    <span class="s-stats__label">
+                        Total Proveedores
+                    </span>
+                    <h2 id="totalProveedores">
+                        0
+                    </h2>
+                </article>
+
+                <article class="s-stats__card">
+                    <span class="s-stats__label">
+                        Activos
+                    </span>
+                    <h2 id="proveedoresActivos">
+                        0
+                    </h2>
+                </article>
+
+                <article class="s-stats__card">
+                    <span class="s-stats__label">
+                        Inactivos
+                    </span>
+                    <h2 id="clientesInactivos">
+                        0
+                    </h2>
+                </article>
+
+            </section>
+
+            <section>
+
+                <div class="s-filter">
+                    <p>Aplicar filtros: </p>
+
+                    <select id="filterProveedorID" class="outerbox s-filter__box">
+                        <option value="">ID</option>
+                    </select>
+
+                    <select id="filterProveedorName" class="outerbox s-filter__box">
+                        <option value="">Nombre</option>
+                    </select>
+
+                    <select id="filterProveedorPais" class="outerbox s-filter__box">
+                        <option value="">Pais</option>
+                    </select>
+                </div>
+
+            </section>
+
+            <section class="outerbox">
+
+                <div class="s-tableBox s-table__header">
+                    <div class="s-table__item s-item__id">ID</div>
+                    <div class="s-table__item s-item__name">Nombre</div>
+                    <div class="s-table__item s-item__mvl">Teléfono</div>
+                    <div class="s-table__item s-item__email">Email</div>
+                    <div class="s-table__item s-item__city">Ciudad</div>
+                    <div class="s-table__item s-item__pais">País</div>
+                    <div class="s-table__item s-item__status">Estado</div>
+                    <div class="s-table__item s-item__actions">Acciones</div>
+                </div>
+
+                <div id="suppliersTable" class="s-table__body"></div>
+
+            </section>
+
+        </section>
+
     </main>
+
+
+    <div class="modal" id="supplierModal" style="display: none;">
+        <div class="modal__content">
+            <div class="modal__top">
+                <h2 id="supplierModalTitle">Añadir Nuevo Proveedor</h2>
+                <button id="CloseModalSuppliers" class="modal__close">X</button>
+            </div>
+
+            <form id="supplierForm" class="modal__form">
+                <div class="form__group">
+                    <label>Nombre del Proveedor</label>
+                    <input type="text" id="formSupplierName" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Teléfono</label>
+                    <input type="text" id="formSupplierPhone" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Email de Contacto</label>
+                    <input type="email" id="formSupplierEmail" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Ciudad</label>
+                    <input type="text" id="formSupplierCity" required>
+                </div>
+
+                <div class="form__group">
+                    <label>País</label>
+                    <input type="text" id="formSupplierCountry" required>
+                </div>
+
+                <div class="form__group">
+                    <label>Estado del Proveedor</label>
+                    <select id="formSupplierStatus">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="btnSubmitSupplier" class="button__items">
+                    Guardar Proveedor
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/Proveedor.js"></script>
+
 </body>
+
 </html>
