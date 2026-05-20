@@ -85,8 +85,8 @@ public class ClienteController {
             System.out.println("3. Dirección: " + cliente.getDireccion());
             System.out.println("4. CP Actual: " + cliente.getCodigoPostal());
             System.out.println("5. Email:     " + cliente.getEmail());
-            System.out.println("6. Contraseña");
-            System.out.println("7. Gestionar Teléfonos (" + cliente.getTelefonos().size() + " registrados)");
+            System.out.println("6. Contraseña ********");
+            System.out.println("7. Teléfonos: " + cliente.getTelefonos());
             System.out.println("0. GUARDAR CAMBIOS Y SALIR");
 
             opcionModificar = InputHelper.readIntInRange("¿Qué campo deseas modificar? (0-7): ", 0, 7);
@@ -156,6 +156,7 @@ public class ClienteController {
         }
 
         String nombreArchivo = "clientes_export.csv";
+        System.out.println("Generando archivo CSV, esto puede tardar un momento...");
         java.io.File archivo = new java.io.File(nombreArchivo);
 
         try (java.io.PrintWriter writer = new java.io.PrintWriter(
