@@ -1013,6 +1013,9 @@ button{
     border: 1px solid rgb(242, 166, 74);
     background-color: transparent;
     color: rgb(242, 166, 74);
+
+    /* background-color: rgba(231, 165, 60, 0.15);
+    color: #e7b43c; */
     font-weight: 400;
 
 }
@@ -1035,6 +1038,9 @@ button{
     border: 1px solid rgb(246, 52, 52);
     background-color: transparent;
     color: rgb(246, 52, 52);
+
+    /* background-color: rgba(231, 76, 60, 0.15);
+    color: #e74c3c; */
     font-weight: 600;
 
 }

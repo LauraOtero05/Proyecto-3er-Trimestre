@@ -22,6 +22,7 @@ const initialTrabajadores = [
     { id: "T003", name: "John Doe" }
 ];
 
+
 // Historial de pedidos iniciales para que la tabla no aparezca vacía al arrancar
 const initialPedidos = [
     {
@@ -103,6 +104,7 @@ function initializeStorage() {
             saveData(key, value);
         }
     });
+
 }
 
 /* REINICIO DEL SISTEMA */

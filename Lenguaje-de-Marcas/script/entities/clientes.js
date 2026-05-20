@@ -16,7 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let clientes =
         JSON.parse(
             sessionStorage.getItem("clientes")
-        ) || [];
+        );
+
+    if (!clientes || clientes.length === 0) {
+    clientes = [
+        new Cliente("Josiah Starline", "josiah@amazon.com", "amazon", "Activo"),
+        new Cliente("Isabel Bravo", "isabel.bravo@vinted.com", "vinted", "Activo"),
+        new Cliente("Amelia Pond", "amelia.pond@wallapop.com", "wallapop", "Activo")
+    ];
+    sessionStorage.setItem("clientes", JSON.stringify(clientes));}
 
     let clienteEnEdicion = null;
 
