@@ -19,8 +19,7 @@
                 <div class="logo">
                     <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
                 </div>
-                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt=""
-                    class="logo__text">
+                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
             </div>
             <div class="nav__section">
                 <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
@@ -81,6 +80,46 @@
                     <img class="prof-img" src="/Lenguaje-de-Marcas/resources/images/Thor.jpeg"
                         alt="imagen del trabajador">
                     <h2>Noemí Cano</h2>
+
+                    <div class="prof-inf">
+                        <div class="prof-badge">Administradora de Sistemas</div>
+
+                        <div class="prof-inf__list">
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">corporate_fare</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Sede: </span>
+                                    <span class="prof-inf__value">Alcorcón, Madrid</span>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">mail</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Email </span>
+                                    <a href="mailto:noemi@74minutes.com"
+                                        class="prof-inf__value prof-inf__link">noemi@74minutes.com</a>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">call</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Teléfono</span>
+                                    <span class="prof-inf__value">+34 912 34 56 78 (Ext. 104)</span>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">badge</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Identificador</span>
+                                    <span class="prof-inf__value">EMP-2026-042</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
                 </div>
 
                 <form id="profileForm" class="modal__form outerbox">
@@ -90,7 +129,7 @@
                     <div class="form__group form__group-line">
 
                         <label class="form__radio">
-                            <input type="radio" name="gender" value="Femenino"checked>
+                            <input type="radio" name="gender" value="Femenino" checked>
                             Femenino
                         </label>
 
@@ -105,7 +144,7 @@
                             <label>Nombre</label>
                             <input type="text" id="formName" required>
                         </div>
-    
+
                         <div class="form__group">
                             <label>Apellido</label>
                             <input type="text" id="formLastName" required>
@@ -127,7 +166,7 @@
                             <label>Número de movil</label>
                             <input type="text" id="formNumber" placeholder="+34 600 00 00 00" required>
                         </div>
-    
+
                         <div class="form__group">
                             <label>Fecha de nacimiento</label>
                             <input type="date" id="formDate" placeholder="dd/mm/yyyy">
@@ -142,6 +181,20 @@
         </section>
 
     </main>
+
+    <div id="successProfileModal" class="modal" style="display: none;">
+        <div class="modal__content" style="text-align: center; padding: 30px;">
+            <div class="modal__top" style="justify-content: center; border: none; margin-bottom: 15px;">
+                <h2>¡Cambios Guardados!</h2>
+            </div>
+            <p style="color: var(--tertiary-color); margin-bottom: 20px;">
+                Tu información personal ha sido actualizada con éxito.
+            </p>
+            <button id="btnSuccessAccept" class="button__items" style="margin: 0 auto; min-width: 120px;">
+                Entendido
+            </button>
+        </div>
+    </div>
 
     <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
     <script src="/Lenguaje-de-Marcas/script/entities/profile.js"></script>

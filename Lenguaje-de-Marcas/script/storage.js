@@ -22,6 +22,7 @@ const initialTrabajadores = [
     { id: "T003", name: "John Doe" }
 ];
 
+
 // Historial de pedidos iniciales para que la tabla no aparezca vacía al arrancar
 const initialPedidos = [
     {
@@ -49,8 +50,10 @@ const initialPedidos = [
     }
 ];
 
-
-const initialProveedores = [];
+const initialProveedores = [
+    { id: "P001", name: "Sony Music Spain", phone: "+34 911 234 567", email: "distribucion@sony.com", city: "Madrid", country: "España", status: "Activo" },
+    { id: "P002", name: "Universal Vinyls", phone: "+44 207 123 456", email: "orders@universal.co.uk", city: "Londres", country: "Reino Unido", status: "Inactivo" }
+];
 
 const initialPerfilUsuario = {
     gender: "Femenino",
@@ -101,6 +104,7 @@ function initializeStorage() {
             saveData(key, value);
         }
     });
+
 }
 
 /* REINICIO DEL SISTEMA */

@@ -16,7 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let workers =
         JSON.parse(
             sessionStorage.getItem("workers")
-        ) || [];
+        );
+
+    if (!workers || workers.length === 0) {
+        workers = [
+            new Worker("Marcus Vance", "marcus@74minutes.com", "Manager", "Activo"),
+            new Worker("Sarah Connor", "sarah@74minutes.com", "Dependienta", "Activo"),
+            new Worker("John Doe", "john@74minutes.com", "Mozo de almacén", "Inactivo")
+        ];
+        sessionStorage.setItem("workers", JSON.stringify(workers));
+    }
 
     let workerEnEdicion = null;
 

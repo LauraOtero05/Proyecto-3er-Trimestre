@@ -55,7 +55,7 @@ if (sidebarToggle && sidebar) {
 
 // #endregion
 
-// #region --------------------- Carga de datos PRODUCTS.JS ---------------------
+// #region --------------------- DOM de Productos ---------------------
 
 let idProductoEnEdicion = null;
 let idProductoAEliminar = null;
@@ -443,4 +443,276 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // #endregion
+
+
+// #region --------------------- DOM de Productos ---------------------
+
+let idProveedorEnEdicion = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("1. DOM de Proveedores cargado correctamente.");
+
+    initializeStorage();
+    
+    poblarFiltros();
+    renderProveedores();
+
+    const modal = document.getElementById("supplierModal");
+    const modalTitulo = document.getElementById("supplierModalTitle");
+    const btnAbrir = document.getElementById("OpenModalSuppliers");
+    const btnCerrar = document.getElementById("CloseModalSuppliers");
+    const form = document.getElementById("supplierForm");
+
+    const selectFilterId = document.getElementById("filterProveedorID");
+    const selectFilterName = document.getElementById("filterProveedorName");
+    const selectFilterPais = document.getElementById("filterProveedorPais");
+
+    const inputName = document.getElementById("formSupplierName");
+    const inputPhone = document.getElementById("formSupplierPhone");
+    const inputEmail = document.getElementById("formSupplierEmail");
+    const inputCity = document.getElementById("formSupplierCity");
+    const inputCountry = document.getElementById("formSupplierCountry");
+    const inputStatus = document.getElementById("formSupplierStatus");
+
+    const ejecutarFiltro = () => {
+        const valId = selectFilterId ? selectFilterId.value : "";
+        const valName = selectFilterName ? selectFilterName.value : "";
+        const valPais = selectFilterPais ? selectFilterPais.value : "";
+
+        const proveedoresTodos = getData(STORAGE_KEYS.proveedores);
+
+        const proveedoresFiltrados = proveedoresTodos.filter(prov => {
+            const cumpleId = valId === "" || prov.id === valId;
+            const cumpleName = valName === "" || prov.name === valName;
+            const cumplePais = valPais === "" || prov.country === valPais;
+            return cumpleId && cumpleName && cumplePais;
+        });
+
+        renderProveedores(proveedoresFiltrados);
+    };
+
+    if (selectFilterId) selectFilterId.addEventListener("change", ejecutarFiltro);
+    if (selectFilterName) selectFilterName.addEventListener("change", ejecutarFiltro);
+    if (selectFilterPais) selectFilterPais.addEventListener("change", ejecutarFiltro);
+
+
+    if (btnAbrir && modal) {
+        btnAbrir.addEventListener("click", () => {
+            idProveedorEnEdicion = null;
+            if (modalTitulo) modalTitulo.textContent = "Añadir Nuevo Proveedor";
+            if (form) form.reset();
+            modal.style.display = "flex";
+        });
+    }
+
+    if (btnCerrar && modal) {
+        btnCerrar.addEventListener("click", () => {
+            modal.style.display = "none";
+            if (form) form.reset();
+        });
+    }
+
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            if (form) form.reset();
+        }
+    });
+
+    const tableBody = document.getElementById("suppliersTable");
+    if (tableBody) {
+        tableBody.addEventListener("click", (e) => {
+            const idProveedor = e.target.getAttribute("data-id");
+            if (!idProveedor) return;
+
+            if (e.target.classList.contains("s-btn__delete") || e.target.parentElement.classList.contains("s-btn__delete")) {
+                eliminarProveedor(idProveedor);
+            }
+
+            if (e.target.classList.contains("s-btn__edit") || e.target.parentElement.classList.contains("s-btn__edit")) {
+                abrirModalEditarProveedor(
+                    idProveedor, modal, modalTitulo, 
+                    inputName, inputPhone, inputEmail, 
+                    inputCity, inputCountry, inputStatus
+                );
+            }
+        });
+    }
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const nombre = inputName.value.trim();
+            const telefono = inputPhone.value.trim();
+            const email = inputEmail.value.trim();
+            const ciudad = inputCity.value.trim();
+            const pais = inputCountry.value.trim();
+            const estado = inputStatus.value;
+
+            if (!nombre || !telefono || !email || !ciudad || !pais) {
+                alert("Por favor, rellena todos los campos obligatorios.");
+                return;
+            }
+
+            const proveedoresActuales = getData(STORAGE_KEYS.proveedores);
+
+            if (idProveedorEnEdicion === null) {
+                let siguienteNumero = 1;
+                
+                if (proveedoresActuales.length > 0) {
+                    const idsNumericos = proveedoresActuales.map(p => {
+                        const numero = parseInt(p.id.replace("P", ""), 10);
+                        return isNaN(numero) ? 0 : numero;
+                    });
+                    siguienteNumero = Math.max(...idsNumericos) + 1;
+                }
+
+                const nuevoId = "P" + siguienteNumero.toString().padStart(3, "0");
+
+                const nuevoProveedor = {
+                    id: nuevoId,
+                    name: nombre,
+                    phone: telefono,
+                    email: email,
+                    city: ciudad,
+                    country: pais,
+                    status: estado
+                };
+                proveedoresActuales.push(nuevoProveedor);
+            } else {
+                const index = proveedoresActuales.findIndex(prov => prov.id === idProveedorEnEdicion);
+                if (index !== -1) {
+                    proveedoresActuales[index].name = nombre;
+                    proveedoresActuales[index].phone = telefono;
+                    proveedoresActuales[index].email = email;
+                    proveedoresActuales[index].city = ciudad;
+                    proveedoresActuales[index].country = pais;
+                    proveedoresActuales[index].status = estado;
+                }
+            }
+
+            saveData(STORAGE_KEYS.proveedores, proveedoresActuales);
+            
+            poblarFiltros(); 
+            renderProveedores();
+            
+            form.reset();
+            modal.style.display = "none";
+            idProveedorEnEdicion = null;
+        });
+    }
+});
+
+function poblarFiltros() {
+    const selectFilterId = document.getElementById("filterProveedorID");
+    const selectFilterName = document.getElementById("filterProveedorName");
+    const selectFilterPais = document.getElementById("filterProveedorPais");
+    
+    const proveedores = getData(STORAGE_KEYS.proveedores);
+
+    if (selectFilterId) selectFilterId.innerHTML = '<option value="">&nbsp;&nbsp;ID (Todos)</option>';
+    if (selectFilterName) selectFilterName.innerHTML = '<option value="">&nbsp;&nbsp;Nombre (Todos)</option>';
+    if (selectFilterPais) selectFilterPais.innerHTML = '<option value="">&nbsp;&nbsp;País (Todos)</option>';
+
+    const paisesUnicos = new Set();
+
+    proveedores.forEach(prov => {
+        if (selectFilterId) {
+            selectFilterId.insertAdjacentHTML('beforeend', `<option value="${prov.id}">&nbsp;&nbsp;${prov.id}</option>`);
+        }
+        if (selectFilterName) {
+            selectFilterName.insertAdjacentHTML('beforeend', `<option value="${prov.name}">&nbsp;&nbsp;${prov.name}</option>`);
+        }
+        if (prov.country) {
+            paisesUnicos.add(prov.country);
+        }
+    });
+
+    paisesUnicos.forEach(pais => {
+        if (selectFilterPais) {
+            selectFilterPais.insertAdjacentHTML('beforeend', `<option value="${pais}">&nbsp;&nbsp;${pais}</option>`);
+        }
+    });
+}
+
+function renderProveedores(proveedoresLista = null) {
+    const container = document.getElementById("suppliersTable");
+    if (!container) return;
+
+    const proveedoresTodos = getData(STORAGE_KEYS.proveedores);
+    const listaAMostrar = proveedoresLista === null ? proveedoresTodos : proveedoresLista;
+
+    actualizarEstadisticas(proveedoresTodos);
+
+    if (listaAMostrar.length === 0) {
+        container.innerHTML = `<p style="padding: 20px; text-align: center; color: var(--tertiary-color);">No se encontraron proveedores con los filtros aplicados.</p>`;
+        return;
+    }
+
+    container.innerHTML = "";
+
+    listaAMostrar.forEach(prov => {
+        const proveedorInstancia = new Proveedor(
+            prov.id,
+            prov.name,
+            prov.phone,
+            prov.email,
+            prov.city,
+            prov.country,
+            prov.status
+        );
+        container.insertAdjacentHTML("beforeend", proveedorInstancia.createRowHTML());
+    });
+}
+
+function actualizarEstadisticas(proveedores) {
+    const totalElement = document.getElementById("totalProveedores");
+    const activosElement = document.getElementById("proveedoresActivos");
+    const inactivosElement = document.getElementById("clientesInactivos");
+
+    const total = proveedores.length;
+    const activos = proveedores.filter(p => p.status === "Activo").length;
+    const inactivos = proveedores.filter(p => p.status === "Inactivo").length;
+
+    if (totalElement) totalElement.textContent = total;
+    if (activosElement) activosElement.textContent = activos;
+    if (inactivosElement) inactivosElement.textContent = inactivos;
+}
+
+function abrirModalEditarProveedor(id, modal, modalTitulo, inputName, inputPhone, inputEmail, inputCity, inputCountry, inputStatus) {
+    const proveedores = getData(STORAGE_KEYS.proveedores);
+    const proveedorAEditar = proveedores.find(prov => prov.id === id);
+
+    if (!providerAEditar && !proveedorAEditar) return;
+    const prov = proveedorAEditar;
+
+    idProveedorEnEdicion = id;
+
+    if (modalTitulo) modalTitulo.textContent = "Editar Proveedor";
+
+    inputName.value = prov.name;
+    inputPhone.value = prov.phone;
+    inputEmail.value = prov.email;
+    inputCity.value = prov.city;
+    inputCountry.value = prov.country;
+    inputStatus.value = prov.status || "Activo";
+
+    if (modal) modal.style.display = "flex";
+}
+
+function eliminarProveedor(id) {
+    if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
+        const proveedoresActuales = getData(STORAGE_KEYS.proveedores);
+        const proveedoresFiltrados = proveedoresActuales.filter(prov => prov.id !== id);
+
+        saveData(STORAGE_KEYS.proveedores, proveedoresFiltrados);
+        
+        poblarFiltros();
+        renderProveedores();
+    }
+}
+
+// #endregion
+
 
