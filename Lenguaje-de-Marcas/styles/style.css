@@ -15,6 +15,7 @@
     --secondary-color:#6CA6C1;
     --tertiary-color:#CECECE;
     --font: Roboto, Arial, sans-serif;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body{
@@ -72,6 +73,10 @@ body{
 .tag{
     color: var(--secondary-color);
     margin-bottom: 15px;
+}
+
+.tag--red{
+    color: rgb(246, 52, 52);
 }
 
 /* Elementos comunes MODAL */
@@ -225,6 +230,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.button__secondary{
+    flex: 1;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.button__secondary--red{
+    border: 1px solid rgb(246, 52, 52);
+    color: rgb(246, 52, 52);
+}
+
+.button__secondary--orange{
+    border: 1px solid rgb(242, 166, 74);
+    color: rgb(242, 166, 74);
 }
 
 
@@ -498,7 +523,153 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* #endregion*/
 
-/* #region DASHBOARD */
+/* #region ----------------- DASHBOARD ----------------- */
+
+.d-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.d-kpi__container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.d-kpi__card {
+    flex: 1;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.d-kpi__card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.d-kpi__card__header .text {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.d-kpi__card .tag {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.d-kpi__icon {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
+
+.d-kpi__icon--red {
+    color: rgb(246, 52, 52);
+}
+
+.d-kpi__card__value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.d-grid{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.d´grid__main{
+    flex: 3; 
+    margin-bottom: 0;
+}
+
+.d-grid__sidebar{
+    flex: 2; 
+    margin-bottom: 0;
+}
+
+.d-grid__main{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.d-activity__feed{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.d-activity__item{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.d-activity__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary-color);
+}
+
+.d-top__list{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.d-top__item{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.d-top__thumb {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.d-top__info {
+    flex: 1;
+}
+
+.d-top__badge {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* #endregion*/
+
+/* #region ------------ CLIENTS ------------  */
 
 .c-dashboard{
     flex:1;
@@ -580,7 +751,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .c-table__head,
 .c-table__row{
     display:grid;
-    align-items:center;
+    justify-content: center;
     grid-template-columns:2fr 2fr 2fr 1fr 1fr;
 }
 
@@ -865,6 +1036,7 @@ button{
 }
 
 /* #endregion */
+
 
 /* #region ------------PROFILE------------ */
 
@@ -1171,7 +1343,10 @@ button{
     align-items: center;
     padding: 0 8px;
     box-sizing: border-box;
+}
 
+.o-table__item--blue{
+    color: var(--secondary-color);
 }
 
 .o-form__details{

@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         products: "74min_productos"
     };
 
+    if (typeof initializeStorage === "function") {
+        initializeStorage();
+    }
+
     const ordersTableBody = document.getElementById('ordersTableBody');
     const addOrderModal = document.getElementById('addOrderModal');
     const modalForm = document.getElementById('productForm');
@@ -30,7 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let idToDelete = null;
     let currentLines = [];
 
-    const read = (key) => JSON.parse(sessionStorage.getItem(key)) || [];
+    const read = (key) => {
+        const data = sessionStorage.getItem(key);
+        if (!data) return [];
+        return JSON.parse(data);
+    };
     const save = (key, data) => sessionStorage.setItem(key, JSON.stringify(data));
 
     function generateOrderId() {
@@ -84,7 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const btnDeleteLine = document.createElement('button');
-            btnDeleteLine.classList.add('p-card__delete');
+            btnDeleteLine.classList.add('button__secondary');
+            btnDeleteLine.classList.add('button__secondary--red');
             btnDeleteLine.textContent = '✕';
             btnDeleteLine.addEventListener('click', () => {
                 currentLines.splice(index, 1);
@@ -220,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             row.innerHTML = `
                 <div class="o-table__item o-cell__id">${order.id}</div>
                 <div class="o-table__item o-cell__date">${order.date}</div>
-                <div class="o-table__item o-cell__status"><span class="tag">${order.status}</span></div>
+                <div class="o-table__item o-table__item--blue o-cell__status">${order.status}</div>
                 <div class="o-table__item o-cell__client">${clientName}</div>
                 <div class="o-table__item o-cell__worker">${workerName}</div>
                 <div class="o-table__item o-cell__amount" style="font-weight: 600;">${Number(order.totalAmount).toFixed(2)} €</div>

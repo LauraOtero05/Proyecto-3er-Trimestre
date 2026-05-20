@@ -1,3 +1,5 @@
+// #region --------------------- NAVEGACIÓN SIDEBAR ---------------------
+
 document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav__item');
 
@@ -24,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// #endregion
 
 // #region --------------------- Carga de datos PRODUCTS.JS ---------------------
 
@@ -286,3 +290,131 @@ function eliminarProducto(id) {
 }
 
 // #endregion
+
+// #region --------------------- DASHBOARD ---------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const KEYS = {
+        pedidos: "74min_pedidos",
+        productos: "74min_productos",
+        perfil: "74min_perfil",
+        trabajadores: "74min_trabajadores"
+    };
+
+    const welcomeName = document.getElementById('welcomeName');
+    const kpiIngresos = document.getElementById('kpiIngresos');
+    const kpiStock = document.getElementById('kpiStock');
+    const kpiRuta = document.getElementById('kpiRuta');
+    const kpiClientes = document.getElementById('kpiClientes');
+
+    function loadProfileName() {
+        const perfil = JSON.parse(sessionStorage.getItem(KEYS.perfil));
+        
+        if (perfil && perfil.nombre) {
+            welcomeName.textContent = perfil.nombre;
+        } else {
+            welcomeName.textContent = "Josiah";
+        }
+    }
+
+    function calculateDashboardKPIs() {
+        const pedidos = JSON.parse(sessionStorage.getItem(KEYS.pedidos)) || [];
+        const productos = JSON.parse(sessionStorage.getItem(KEYS.productos)) || [];
+
+        const totalIngresos = pedidos.reduce((acc, p) => acc + Number(p.totalAmount || 0), 0);
+        kpiIngresos.textContent = `${totalIngresos.toFixed(2)} €`;
+
+        const stockCritico = productos.filter(p => Number(p.stock) < 5).length;
+        kpiStock.textContent = stockCritico;
+
+        const pedidosEnRuta = pedidos.filter(p => p.status === "Enviado").length;
+        kpiRuta.textContent = pedidosEnRuta;
+
+        const clientesConPedido = pedidos.map(p => p.clientId);
+        const clientesUnicos = new Set(clientesConPedido).size;
+        kpiClientes.textContent = clientesUnicos;
+    }
+
+    function createActivityFeed() {
+        const feedContainer = document.getElementById('activityFeed');
+        const pedidos = JSON.parse(sessionStorage.getItem(KEYS.pedidos)) || [];
+        const trabajadores = JSON.parse(sessionStorage.getItem(KEYS.trabajadores)) || [];
+
+        feedContainer.innerHTML = '';
+
+        if (pedidos.length === 0) {
+            feedContainer.innerHTML = '<p class="text">No hay movimientos registrados.</p>';
+            return;
+        }
+
+        const lastOrders = pedidos.slice(-3).reverse();
+
+        lastOrders.forEach(pedido => {
+            const worker = trabajadores.find(t => String(t.id) === String(pedido.employeeId))?.name || "Sistema";
+            
+            const item = document.createElement('div');
+            item.className = 'd-activity__item';
+            item.innerHTML = `
+                <div class="d-activity__icon">
+                    <span class="material-symbols-rounded">assignment_turned_in</span>
+                </div>
+                <div>
+                    <p class="text">
+                        Pedido <strong>#${pedido.id}</strong> registrado con éxito.
+                    </p>
+                    <p class="text">Gestionado por el trabajador: <strong>${worker}</strong></p>
+                </div>
+            `;
+            feedContainer.appendChild(item);
+        });
+    }
+
+    function createTopProducts() {
+        const listContainer = document.getElementById('topProductsList');
+        const pedidos = JSON.parse(sessionStorage.getItem(KEYS.pedidos)) || [];
+        const productos = JSON.parse(sessionStorage.getItem(KEYS.productos)) || [];
+
+        listContainer.innerHTML = '';
+
+        const sellsMap = {};
+        pedidos.forEach(pedido => {
+            if (pedido.details) {
+                pedido.details.forEach(line => {
+                    sellsMap[line.productId] = (sellsMap[line.productId] || 0) + Number(line.quantity);
+                });
+            }
+        });
+
+        const productsSold = productos.map(prod => {
+            return {
+                ...prod,
+                sold: sellsMap[prod.id] || 0
+            };
+        });
+
+        const top3 = productsSold.sort((a, b) => b.sold - a.sold).slice(0, 3);
+
+        top3.forEach(album => {
+            const item = document.createElement('div');
+            item.className = 'd-top__item';
+            item.innerHTML = `
+                <img src="${album.portada || 'https://via.placeholder.com/50'}" alt="${album.titulo}" class="d-top__thumb">
+                <div class="d-top__info">
+                    <p class="text">${album.titulo}</p>
+                    <p class="text">${album.artista} (${album.formato})</p>
+                </div>
+                <div class="d-top__badge">${album.sold} ud${album.sold !== 1 ? 's' : ''}</div>
+            `;
+            listContainer.appendChild(item);
+        });
+    }
+
+    loadProfileName();
+    calculateDashboardKPIs();
+    createActivityFeed();
+    createTopProducts();
+});
+
+// #endregion
+

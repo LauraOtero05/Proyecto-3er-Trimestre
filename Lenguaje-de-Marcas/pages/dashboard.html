@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/mediaQuerys.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -36,7 +39,9 @@
                     <span class="nav__label">Pedidos (Detalles del Pedido)</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
                 <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
@@ -58,7 +63,77 @@
                 </div>
             </div>
         </nav>
+        <section id="dashboardContentSection" class="content">
+
+            <header class="d-header">
+                <p class="tag">RESUMEN GENERAL</p>
+                <h1 class="title">Welcome, <span id="welcomeName">User</span> </h1>
+            </header>
+
+            <section class="d-kpi__container">
+                <div class="outerbox d-kpi__card">
+                    <div class="d-kpi__card__header">
+                        <span class="text">Ingresos Totales</span><span
+                            class="material-symbols-rounded d-kpi__icon">payments</span>
+                    </div>
+                    <h2 class="d-kpi__card__value" id="kpiIngresos">0.00 €</h2>
+                    <span class="tag">Caja acumulada</span>
+                </div>
+                <div class="outerbox d-kpi__card">
+                    <div class="d-kpi__card__header">
+                        <span class="text">Alerta de Stock</span>
+                        <span class="material-symbols-rounded d-kpi__icon d-kpi__icon--red">album</span>
+                    </div>
+                    <h2 class="d-kpi__card__value" id="kpiStock">0</h2>
+                    <span class="tag tag--red">Álbumes bajos (<5) </span>
+                </div>
+                <div class="outerbox d-kpi__card">
+                    <div class="d-kpi__card__header">
+                        <span class="text">Pedidos en Ruta</span>
+                        <span class="material-symbols-rounded d-kpi__icon">local_shipping</span>
+                    </div>
+                    <h2 class="d-kpi__card__value" id="kpiRuta">0</h2>
+                    <span class="tag">Estado: "Enviado"</span>
+                </div>
+                <div class="outerbox d-kpi__card">
+                    <div class="d-kpi__card__header">
+                        <span class="text">Clientes Activos</span>
+                        <span class="material-symbols-rounded d-kpi__icon">group</span>
+                    </div>
+                    <h2 class="d-kpi__card__value" id="kpiClientes">0</h2>
+                    <span class="tag">Con pedidos realizados</span>
+                </div>
+            </section>
+
+            <section class="d-grid">
+
+                <div class="outerbox d-grid__main">
+                    <div>
+                        <p class="tag">LOGS DEL SISTEMA</p>
+                        <h3 class="title">Actividad Reciente</h3>
+                        <p class="text">Últimos movimientos cruzados entre Pedidos, Empleados y Proveedores.</p>
+                    </div>
+                    <div id="activityFeed" class="d-activity__feed">
+                    </div>
+                </div>
+
+                <div class="outerbox d-grid__sidebar">
+                    <div>
+                        <p class="tag">RANKING</p>
+                        <h3 class="title">Top 3 Más Vendidos</h3>
+                        <p class="text">Los vinilos y CDs con mayor éxito actualmente.</p>
+                    </div>
+
+                    <div id="topProductsList" class="d-top__list">
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
     </main>
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
 </body>
+
 </html>

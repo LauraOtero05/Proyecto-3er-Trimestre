@@ -56,9 +56,9 @@
                     <span class="material-symbols-rounded">account_circle</span>
                     <span class="nav__label">Perfil</span>
                 </div>
-                <div class="nav__item" data-page="profile">
+                <div class="nav__item" data-page="profile" data-href="index.html">
                     <span class="material-symbols-rounded">logout</span>
-                    <span class="nav__label">Cerrar Sesión</span>
+                    <span class="nav__label" >Cerrar Sesión</span>
                 </div>
             </div>
         </nav>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="outerbox o-header__filter">
                     <button id="openOrdersModal" class="button__items o-header__btn">
-                        Añadir Producto <span class="material-symbols-rounded">add</span>
+                        Añadir Pedido <span class="material-symbols-rounded">add</span>
                     </button>
                     <button id="filterOrders" class="button__items o-header__btn">
                         <span class="material-symbols-rounded">filter_alt</span>Filtrar
@@ -147,16 +147,16 @@
                 <p>¿Seguro que quieres eliminar este pedido?</p>
                 <p><small>También se eliminarán todos sus detalles.</small></p>
                 <div style="display:flex; gap:12px; justify-content:center; margin-top:16px;">
-                    <button id="cancelDeleteOrder" class="p-card__edit">Cancelar</button>
-                    <button id="confirmDeleteOrder" class="p-card__delete">Eliminar</button>
+                    <button id="cancelDeleteOrder" class="button__secondary">Cancelar</button>
+                    <button id="confirmDeleteOrder" class="button__secondary button__secondary--red">Eliminar</button>
                 </div>
             </div>
         </div>
 
 
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
-    <script src="/Lenguaje-de-Marcas/script/test.js"></script>
     <script src="/Lenguaje-de-Marcas/script/entities/pedidos.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
 </body>
 
 </html>
