@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
 </head>
+
 <body>
     <div class="scene" aria-hidden="true">
         <div class="scene__aurora"></div>
@@ -33,10 +35,11 @@
                 </div>
                 <div class="nav__item active" data-page="orders" data-href="orders.html">
                     <span class="material-symbols-rounded">shopping_bag</span>
-                    <span class="nav__label">Pedidos (Detalles del Pedido)</span>
+                    <span class="nav__label">Pedidos</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
@@ -59,7 +62,101 @@
                 </div>
             </div>
         </nav>
+        <section id="ordersContentSection" class="content">
+            <header class="o-header">
+                <div>
+                    <p class="tag">GESTIÓN DE PEDIDOS</p>
+                    <h1>Gestión de CDs y Vinilos</h1>
+                </div>
+                <div class="outerbox o-header__filter">
+                    <button id="openOrdersModal" class="button__items o-header__btn">
+                        Añadir Producto <span class="material-symbols-rounded">add</span>
+                    </button>
+                    <button id="filterOrders" class="button__items o-header__btn">
+                        <span class="material-symbols-rounded">filter_alt</span>Filtrar
+                    </button>
+                </div>
+            </header>
+            <section class="outerbox o-table">
+                <div class="outerbox o-table__header">
+                    <div class="o-table__item o-cell__id">ID</div>
+                    <div class="o-table__item o-cell__date">Fecha</div>
+                    <div class="o-table__item o-cell__status">Estado</div>
+                    <div class="o-table__item o-cell__client">Cliente</div>
+                    <div class="o-table__item o-cell__worker">Trabajador</div>
+                    <div class="o-table__item o-cell__amount">Importe Total</div>
+                    <div class="o-table__item o-cell__actions"></div>
+                </div>
+                <div id="ordersTableBody" class="o-table__body">
+                </div>
+            </section>
+        </section>
     </main>
+
+    <div id="addOrderModal" class="modal">
+        <div class="modal__content modal__content--scroll">
+            <div class="modal__top o-form__header">
+                <h2>Añadir Nuevo Pedido</h2>
+                <button id="closeOrdersModal" class="modal__close">X</button>
+            </div>
+            <form id="productForm" class="modal__form">
+                <div class="form__group">
+                    <label>Date</label>
+                    <input type="date" id="orderDate" class="o-form__input">
+                </div>
+
+                <div class="form__group">
+                    <label>Estado</label>
+                    <select id="orderStatus">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label>Cliente</label>
+                    <select id="orderClient" class="o-form__select"></select>
+                </div>
+
+                <div class="form__group">
+                    <label>Trabajador</label>
+                    <select id="orderWorker" class="o-form__select"></select>
+                </div>
+
+                <div class="form__group">
+                    <label>Detalles del Pedido</label>
+                    <div id="detailLinesContainer"></div>
+                </div>
+                <button type="button" id="addLineBtn" class="button__items o-btn--secondary">+ Añadir detalles</button>
+
+                <div class="o-form__total">
+                    <span>Importe Total:</span>
+                    <strong id="calculatedOrderTotal">0.00 €</strong>
+                </div>
+
+                <button type="submit" id="btnSubmitOrder" class="button__items"> Guardar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalDeleteOrder" class="modal">
+            <div class="modal__content">
+                <p>¿Seguro que quieres eliminar este pedido?</p>
+                <p><small>También se eliminarán todos sus detalles.</small></p>
+                <div style="display:flex; gap:12px; justify-content:center; margin-top:16px;">
+                    <button id="cancelDeleteOrder" class="p-card__edit">Cancelar</button>
+                    <button id="confirmDeleteOrder" class="p-card__delete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/test.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/pedidos.js"></script>
 </body>
+
 </html>

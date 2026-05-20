@@ -29,6 +29,7 @@ body{
 .layout {
     display: flex;
     width: 100%;
+    padding-left: 80px;
     min-height: 100vh;
 }
 
@@ -96,6 +97,45 @@ body{
     border:1px solid rgba(255,255,255,.08);
     border-radius:24px;
     padding:28px;
+}
+
+.modal__content--scroll{ 
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.modal__content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal__content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.modal__content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .modal--center{
@@ -192,6 +232,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* #region TEXTS*/
 
+/*deberíamos ponerle estilo permanente aunq nos guste como queda ahora, por si cambia entre dispositivos???*/
+
 .title{
     color: var(--white);
     margin: 0;
@@ -232,7 +274,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     animation: auroraDrift 10s ease-in-out infinite alternate;
 }
 
-.main{
+.login{
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -241,7 +283,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin: 150px;
 }
 
-.box{
+.login__card{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -255,7 +297,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-backdrop-filter: blur(3.9px);
 }
 
-.box__input{
+.login__input{
     padding: 10px;
     margin-bottom: 10px;
     width: 90%;
@@ -267,7 +309,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: 0.2s;
 }
 
-.box__button{
+.login__button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -286,21 +328,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* #region SIDEBAR*/
 
 .sidebar{
+    position: fixed;
     width: 60px;
-    background: rgba(181, 181, 181, 0.1);
+    height: 100vh;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    top: 0;
+    left: 0;
     padding: 16px 0;
     gap: 4px;
+
     overflow: hidden;
     white-space: nowrap;
+    z-index: 100;
+
+    background: rgba(181, 181, 181, 0.1);
     backdrop-filter: blur(3.9px);
     -webkit-backdrop-filter: blur(3.9px);
-    border-right: 0.5px solid var(--clr-border);
-    transition: width var(--transition), box-shadow var(--transition);
-    flex-shrink: 0;
-    z-index: 100;
+    transition: width var(--transition), box-shadow var(--transition), left var(--transition);
 }
 
 .sidebar:hover{
@@ -312,7 +360,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 0 16px 16px;
+    padding: 0 10px 16px;
     border-bottom: 0.5px solid color-mix(var(--black), 0,1);
     width: 100%;
     margin-bottom: 8px;
@@ -625,7 +673,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* #region -----------------PRODUCTS----------------- */
 
 
-
 .p-header{
     display: flex;
     justify-content: space-between;
@@ -813,6 +860,9 @@ button{
 
 
 /* #endregion */
+
+
+/* #region ------------WORKERS------------ */
 
 .w-dashboard{
     flex:1;
@@ -1026,3 +1076,185 @@ button{
     font-weight: 600;
     cursor: pointer;
 }
+
+/* #endregion */
+
+
+/* #region ------------ORDERS------------ */
+
+.o-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.o-header__filter{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 40px;
+}
+
+.o-header__btn{
+    padding: 8px 18px;
+    border-radius: 20px;
+    margin: 0px 20px;
+    font-size: 13px;
+}
+
+.o-table{
+    overflow: visible !important;
+}
+
+.o-table__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+}
+
+.o-form__header{
+    margin-bottom: 2px;
+}
+
+.o-table__row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--contrast-color);
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.o-table__item{
+    color: var(--tertiary-color);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+}
+
+.o-form__details{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.o-cell__id {
+    width: 15%;
+    min-width: 65px;
+}
+
+.o-cell__date {
+    width: 15%;
+    min-width: 100px;
+}
+
+.o-cell__status {
+    width: 15%;
+    min-width: 95px;
+}
+
+.o-cell__client {
+    width: 15%;
+}
+
+.o-cell__worker {
+    width: 15%;
+}
+
+.o-cell__amount {
+    width: 15%;
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.o-cell__actions {
+    width: 10%;
+    min-width: 30px;
+    margin-left: auto; 
+}
+
+.o-action__icon {
+    margin-left: auto; 
+}
+
+/*  POR REVISAR  */
+
+.o-dropdown {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    overflow: visible !important;
+}
+
+.o-action__icon {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.o-action__icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.o-dropdown__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 99;
+    min-width: 130px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.o-dropdown__menu.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.o-dropdown__item {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--contrast-color);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    transition: background-color 0.15s ease;
+}
+
+.o-dropdown__item .material-symbols-rounded {
+    font-size: 16px;
+}
+
+.o-dropdown__item--delete {
+    color: #ff4d4f;
+}
+
+/* #endregion */
+
