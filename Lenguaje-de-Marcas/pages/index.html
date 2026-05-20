@@ -17,12 +17,28 @@
         <div id="stars3"></div>
     </div>
     <section class="login">
-        <div class="login_card">
-            <h1 class="title">Iniciar Sesión</h1>
-            <p class="text">Inicia sesión con tu usuario y contraseña.</p>
-            <p class="text text--white">Usuario</p>
-            <input class="login__input" type="text" placeholder="ejemplo@email.com">
-            <a class="login__button" href="dashboard.html">Iniciar Sesión</a>
+        <div class="login__card">
+            <header class="login__header">
+                <h1 class="title">Iniciar Sesión</h1>
+                <p class="text">Introduce tus credenciales para acceder al sistema.</p>
+            </header>
+
+            <form class="login__form" action="dashboard.html">
+                <div class="form__group">
+                    <label class="login__label" for="username">Usuario o Email</label>
+                    <input class="login__input" id="username" type="email" placeholder="ejemplo@email.com" required>
+                </div>
+                <div class="form__group">
+                    <div class="login__label-wrapper">
+                        <label class="login__label" for="password">Contraseña</label>
+                    </div>
+                    <input class="login__input" id="password" type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login__button">
+                    Iniciar Sesión <span class="material-symbols-rounded">arrow_forward</span>
+                </button>
+            </form>
+
         </div>
     </section>
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>

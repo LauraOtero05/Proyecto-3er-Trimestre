@@ -236,17 +236,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .title{
     color: var(--white);
-    margin: 0;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
 }
 
 .text{
     color: var(--tertiary-color);
-    margin-bottom: 5px;
-}
-
-.text--white{
-    color: var(--white);
-    margin-bottom: 5px;
+    line-height: 1.5;
+    margin: 0;
 }
 
 /* #endregion*/
@@ -275,52 +272,88 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .login{
-    height: max-content;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content:center;
     align-items: center;
-    margin: 150px;
+    padding: 20px;
 }
 
 .login__card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items:flex-start;
-    width: 28%;
-    padding: 20px;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
     background: rgba(181, 181, 181, 0.1);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.9px);
     -webkit-backdrop-filter: blur(3.9px);
 }
 
+.login__header {
+    margin-bottom: 28px;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.login__label {
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.login__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .login__input{
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 10px;
     text-align: left;
-    border-radius: 10px;
-    background-color: color-mix(srgb, var(--contrast-color), 80%);
+    background-color: color-mix(var(--contrast-color), 80%);
     color: var(--tertiary-color);
     font-size: 16px;
-    transition: 0.2s;
 }
 
 .login__button{
     display: flex;
     justify-content: center;
     align-items: center;
-    width:90%;
-    font-weight: 100;
+    width: 100%;
     color: var(--white);
     background-color: var(--primary-color);
     text-decoration: none;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.login__button:hover {
+    background-color: var(--bg-color);
+}
+
+.login__button .material-symbols-rounded {
+    margin-left: 3px;
+    font-size: 18px;
 }
 
 /* #endregion */
