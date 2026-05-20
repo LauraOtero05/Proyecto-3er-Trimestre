@@ -25,6 +25,32 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = item.dataset.href;
         });
     });
+
+const sidebar = document.querySelector('.sidebar');
+const sidebarToggle = document.getElementById('sidebarToggle');
+
+if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('is-open');
+        
+        const icon = sidebarToggle.querySelector('.material-symbols-rounded');
+        if (icon) {
+            icon.textContent = sidebar.classList.contains('is-open') ? 'close' : 'menu';
+        }
+    });
+
+    const navItems = document.querySelectorAll('.nav__item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            sidebar.classList.remove('is-open');
+            const icon = sidebarToggle.querySelector('.material-symbols-rounded');
+            if (icon) icon.textContent = 'menu';
+        });
+    });
+}
+
+
 });
 
 // #endregion
