@@ -2,55 +2,44 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav__item');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
 
-    const activeItem = document.querySelector('.nav__item.active');
-    if (activeItem) {
-        const img = activeItem.querySelector('img');
-        if (img) img.src = img.dataset.active;
-    }
+    const currentPath = window.location.pathname.split('/').pop() || 'dashboard.html';
 
     navItems.forEach(item => {
-        item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (img) img.src = img.dataset.default;
 
-            navItems.forEach(i => {
-                const img = i.querySelector('img');
-                i.classList.remove('active');
-                if (img) img.src = img.dataset.default;
-            });
-
+        if (item.dataset.href === currentPath) {
             item.classList.add('active');
-            const activeImg = item.querySelector('img');
-            if (activeImg) activeImg.src = activeImg.dataset.active;
+            if (img) img.src = img.dataset.active;
+        }
 
+        item.addEventListener('click', () => {
             window.location.href = item.dataset.href;
         });
     });
 
-const sidebar = document.querySelector('.sidebar');
-const sidebarToggle = document.getElementById('sidebarToggle');
-
-if (sidebarToggle && sidebar) {
-    sidebarToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        sidebar.classList.toggle('is-open');
-        
-        const icon = sidebarToggle.querySelector('.material-symbols-rounded');
-        if (icon) {
-            icon.textContent = sidebar.classList.contains('is-open') ? 'close' : 'menu';
-        }
-    });
-
-    const navItems = document.querySelectorAll('.nav__item');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            sidebar.classList.remove('is-open');
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('is-open');
+            
             const icon = sidebarToggle.querySelector('.material-symbols-rounded');
-            if (icon) icon.textContent = 'menu';
+            if (icon) {
+                icon.textContent = sidebar.classList.contains('is-open') ? 'close' : 'menu';
+            }
         });
-    });
-}
 
-
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                sidebar.classList.remove('is-open');
+                const icon = sidebarToggle.querySelector('.material-symbols-rounded');
+                if (icon) icon.textContent = 'menu';
+            });
+        });
+    }
 });
 
 // #endregion

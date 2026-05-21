@@ -15,6 +15,9 @@
     </div>
     <main class="layout">
         <nav class="sidebar">
+            <button class="sidebar__toggle" id="sidebarToggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
             <div class="sidebar__logo">
                 <div class="logo">
                     <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
@@ -22,7 +25,7 @@
                 <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
             </div>
             <div class="nav__section">
-                <div class="nav__item active" data-page="dashboard" data-href="dashboard.html">
+                <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
                     <span class="material-symbols-rounded">dashboard</span>
                     <span class="nav__label">Dashboard</span>
                 </div>
@@ -36,7 +39,7 @@
                 </div>
                 <div class="nav__item" data-page="orders" data-href="orders.html">
                     <span class="material-symbols-rounded">shopping_bag</span>
-                    <span class="nav__label">Pedidos </span>
+                    <span class="nav__label">Pedidos</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
                     <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
@@ -57,12 +60,13 @@
                     <span class="material-symbols-rounded">account_circle</span>
                     <span class="nav__label">Perfil</span>
                 </div>
-                <div class="nav__item" data-page="profile">
+                <div class="nav__item" data-page="profile" data-href="index.html">
                     <span class="material-symbols-rounded">logout</span>
-                    <span class="nav__label">Cerrar Sesión</span>
+                    <span class="nav__label" >Cerrar Sesión</span>
                 </div>
             </div>
         </nav>
+        
         <section id="dashboardContentSection" class="content">
 
             <header class="d-header">

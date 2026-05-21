@@ -14,6 +14,9 @@
     </div>
     <main class="layout">
         <nav class="sidebar">
+            <button class="sidebar__toggle" id="sidebarToggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
             <div class="sidebar__logo">
                 <div class="logo">
                     <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
@@ -29,16 +32,17 @@
                     <span class="material-symbols-rounded">headphones</span>
                     <span class="nav__label">Clientes</span>
                 </div>
-                <div class="nav__item active" data-page="workers" data-href="workers.html">
+                <div class="nav__item" data-page="workers" data-href="workers.html">
                     <span class="material-symbols-rounded">support_agent</span>
                     <span class="nav__label">Trabajadores</span>
                 </div>
                 <div class="nav__item" data-page="orders" data-href="orders.html">
                     <span class="material-symbols-rounded">shopping_bag</span>
-                    <span class="nav__label">Pedidos </span>
+                    <span class="nav__label">Pedidos</span>
                 </div>
                 <div class="nav__item" data-page="products" data-href="products.html">
-                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg" data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
                         data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
                     <span class="nav__label">Productos</span>
                 </div>
@@ -55,9 +59,9 @@
                     <span class="material-symbols-rounded">account_circle</span>
                     <span class="nav__label">Perfil</span>
                 </div>
-                <div class="nav__item" data-page="profile">
+                <div class="nav__item" data-page="profile" data-href="index.html">
                     <span class="material-symbols-rounded">logout</span>
-                    <span class="nav__label">Cerrar Sesión</span>
+                    <span class="nav__label" >Cerrar Sesión</span>
                 </div>
             </div>
         </nav>
