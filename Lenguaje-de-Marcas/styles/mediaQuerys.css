@@ -146,7 +146,7 @@
 
     /* #region MEDIA QUERIES CLIENTES */
 
-    .c-dashboard {
+    /* .c-dashboard {
         padding: 20px;
     }
 
@@ -168,7 +168,7 @@
     .c-table__row {
         grid-template-columns: repeat(5, minmax(120px, 1fr));
         min-width: 700px;
-    }
+    } */
 
     .modal__content {
         width: 90%;
@@ -178,7 +178,7 @@
 
     /* #region MEDIA QUERIES WORKERS */
 
-    .w-dashboard {
+    /* .w-dashboard {
         padding: 20px;
     }
 
@@ -200,7 +200,7 @@
     .w-table__row {
         grid-template-columns: repeat(5, minmax(120px, 1fr));
         min-width: 700px;
-    }
+    } */
 
     .modal__content {
         width: 90%;
@@ -450,25 +450,25 @@
 
     /* #region MEDIA QUERIES CLIENTES */
 
-    .c-header__title {
+    /* .c-header__title {
         font-size: 24px;
     }
 
     .c-stats__card h2 {
         font-size: 28px;
-    }
+    } */
 
     /* #endregion */
 
     /* #region MEDIA QUERIES WORKERS */
-
+/* 
     .w-header__title {
         font-size: 24px;
     }
 
     .w-stats__card h2 {
         font-size: 28px;
-    }
+    } */
 
     /* #endregion */
 
@@ -478,6 +478,8 @@
         width: 100% !important;
         margin: 0;
     }
+
+    /* #endregion */
 
     /* #region MEDIA QUERIES SIDEBAR*/
 
@@ -786,3 +788,236 @@
     /* #endregion */
 }
 
+@media (max-width: 768px) {
+
+    /* CLIENTES */
+    .c-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .c-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .c-table__head {
+        display: none;
+    }
+
+    .c-table__row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .c-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .c-table__cell {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+    }
+
+    .c-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .c-table__cell:nth-child(1)::before { content: "Cliente"; }
+    .c-table__cell:nth-child(2)::before { content: "Email"; }
+    .c-table__cell:nth-child(3)::before { content: "Empresa"; }
+    .c-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .c-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
+
+    .button__items {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* WORKERS */
+    .w-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .w-header__button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .w-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .w-table__head {
+        display: none;
+    }
+
+    .w-table__row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .w-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .w-table__cell {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 14px;
+    }
+
+    .w-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
+    .w-table__cell:nth-child(2)::before { content: "Email"; }
+    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
+    .w-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .w-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
+
+}
+
+/* ── 480px ────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+    .c-dashboard {
+        padding: 16px;
+    }
+
+    .c-header__title {
+        font-size: 24px;
+    }
+
+    .w-dashboard {
+        padding: 16px;
+    }
+
+    .w-header__title {
+        font-size: 24px;
+    }
+
+    .w-stats__card h2,
+    .c-stats__card h2 {
+        font-size: 30px;
+    }
+
+}
+
+/* ── 350px ────────────────────────────────────────── */
+@media (max-width: 350px) {
+
+    .c-dashboard,
+    .w-dashboard {
+        padding: 10px;
+    }
+
+    .c-header__title,
+    .w-header__title {
+        font-size: 20px;
+    }
+
+    .c-header__subtitle,
+    .w-header__subtitle {
+        font-size: 11px;
+    }
+
+    .button__items,
+    .w-header__button {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    .c-stats__card,
+    .w-stats__card {
+        padding: 16px;
+    }
+
+    .c-stats__card h2,
+    .w-stats__card h2 {
+        font-size: 28px;
+    }
+
+    .c-table__row,
+    .w-table__row {
+        padding: 14px 12px;
+        gap: 8px;
+    }
+
+    .c-table__cell,
+    .w-table__cell {
+        font-size: 13px;
+    }
+
+    .c-table__cell::before,
+    .w-table__cell::before {
+        font-size: 10px;
+    }
+
+    .c-table__cell:nth-child(5),
+    .w-table__cell:nth-child(5) {
+        justify-content: flex-start;
+    }
+
+    .table__edit,
+    .table__delete,
+    .w-table__edit,
+    .w-table__delete {
+        flex: 1;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .c-table-box,
+    .w-table-box {
+        border-radius: 12px;
+    }
+
+    .c-table-box__top,
+    .w-table-box__top {
+        padding: 14px 12px;
+    }
+
+    .c-table-box__top h2,
+    .w-table-box__top h2 {
+        font-size: 15px;
+    }
+
+}
