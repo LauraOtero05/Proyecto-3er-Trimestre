@@ -102,6 +102,38 @@
 
 }
 
+@media (max-width: 820px) {
+
+    /* #region ----Profile---- */
+
+    .prof-outerbox {
+        grid-template-columns: 1fr;
+    }
+
+    .prof-inf__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px 30px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .prof-inf__item {
+        flex: 0 1 auto;
+        min-width: 160px;
+    }
+
+    .prof-inf__value {
+        word-break: break-all;
+    }
+
+    /* #endregion */
+}
+
 @media (max-width: 768px) {
 
     /* #region MEDIA QUERIES DASHBOARD */
