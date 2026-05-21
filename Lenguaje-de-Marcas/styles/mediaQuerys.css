@@ -218,7 +218,10 @@
 
     .prof-outerbox {
         grid-template-columns: 1fr;
+        padding-right: 60px;
+
     }
+
 
     .prof-inf__list {
         display: flex;
@@ -230,6 +233,7 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
+
     }
 
     .prof-inf__item {
@@ -252,6 +256,10 @@
     .content {
         margin: 15px;
         padding: 10px;
+    }
+
+    .layout {
+        padding-left: 65px;
     }
 
     /* #endregion */
@@ -287,11 +295,11 @@
     /* #region MEDIA QUERIES ORDERS */
 
     @media (max-width: 600px) {
-    .o-header__search-container {
-        width: 100% !important;
-        margin: 0;
+        .o-header__search-container {
+            width: 100% !important;
+            margin: 0;
+        }
     }
-}
 
     /* #endregion*/
 
@@ -503,4 +511,3 @@
 
     /* #endregion */
 }
-
