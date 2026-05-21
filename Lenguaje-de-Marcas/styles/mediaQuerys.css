@@ -100,6 +100,116 @@
 
     /* #endregion */
 
+    /* #region MEDIA QUERIES ORDERS */
+
+    .o-table__header {
+        display: none;
+    }
+
+    .o-table__body {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .o-table__row {
+        background: rgba(181, 181, 181, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(3.9px);
+        -webkit-backdrop-filter: blur(3.9px);
+        margin-bottom: 15px;
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+    }
+
+    .o-table__item {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0;
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    .o-cell__id::before {
+        content: "ID Pedido: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__date::before {
+        content: "Fecha: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__status::before {
+        content: "Estado: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__client::before {
+        content: "Cliente: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__worker::before {
+        content: "Asignado a: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__amount::before {
+        content: "Total cobrado: ";
+        font-weight: bold;
+        margin-right: 6px;
+        color: var(--white);
+    }
+
+    .o-cell__id {
+        font-size: 15px;
+        color: var(--secondary-color) !important;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 6px !important;
+    }
+
+    .o-cell__amount {
+        font-size: 16px;
+        color: var(--secondary-color);
+        margin-top: 4px;
+        padding-top: 6px !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .o-cell__actions {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: auto !important;
+        margin: 0;
+    }
+
+    .o-dropdown__menu {
+        top: 100%;
+        right: 0;
+        left: auto;
+    }
+
+    /* #endregion */
+
+
 }
 
 @media (max-width: 820px) {
@@ -173,9 +283,109 @@
 
     /* #endregion */
 
+    /* #region MEDIA QUERIES ORDERS */
+
+    @media (max-width: 600px) {
+    .o-header__search-container {
+        width: 100% !important;
+        margin: 0;
+    }
+}
+
+    /* #endregion*/
+
+
+
 }
 
 @media (max-width: 480px) {
+
+    /* #region MEDIA QUERIES SIDEBAR*/
+
+    .layout {
+        padding-left: 10px;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        height: 60px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        overflow: hidden;
+        transition: var(--transition);
+        background: rgba(20, 20, 20, 0.5) !important;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar.is-open {
+        height: auto;
+        max-height: 100vh;
+
+        overflow-y: auto;
+        padding-bottom: 20px;
+    }
+
+    .sidebar__toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        order: 1;
+    }
+
+    .sidebar__toggle .material-symbols-rounded {
+        font-size: 28px;
+    }
+
+    .sidebar__logo {
+        width: auto;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding: 0;
+        order: 0;
+    }
+
+    .logo__text {
+        opacity: 1 !important;
+        height: 20px;
+    }
+
+    .nav__section {
+        width: 100%;
+        order: 2;
+        margin-top: 10px;
+    }
+
+    .nav__item {
+        padding: 12px 16px;
+        border-left: 4px solid transparent;
+    }
+
+    .nav__label {
+        opacity: 1 !important;
+        font-size: 14px;
+    }
+
+    .nav__divider,
+    .nav__spacer {
+        display: none !important;
+    }
+
+    main.content,
+    section.content {
+        margin-top: 76px !important;
+        margin-left: 0 !important;
+    }
+
+    /* #endregion */
 
     /* #region MEDIA QUERIES DASHBOARD */
 
@@ -272,4 +482,23 @@
 
     /* #endregion */
 
+
+    /* #region MEDIA QUERIES ORDERS*/
+
+    .o-header h1 {
+        font-size: 20px;
+    }
+
+    .o-table__row {
+        padding: 14px;
+    }
+
+    .o-form__total {
+        font-size: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    /* #endregion */
 }

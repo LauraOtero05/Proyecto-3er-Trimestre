@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/mediaQuerys.css">
 </head>
 
 <body>
@@ -14,6 +15,9 @@
     </div>
     <main class="layout">
         <nav class="sidebar">
+            <button class="sidebar__toggle" id="sidebarToggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
             <div class="sidebar__logo">
                 <div class="logo">
                     <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
@@ -72,9 +76,10 @@
                     <button id="openOrdersModal" class="button__items o-header__btn">
                         Añadir Pedido <span class="material-symbols-rounded">add</span>
                     </button>
-                    <button id="filterOrders" class="button__items o-header__btn">
-                        <span class="material-symbols-rounded">filter_alt</span>Filtrar
-                    </button>
+                    <div class="o-header__search-container">
+                        <span class="material-symbols-rounded search-container__icon">search</span>
+                        <input type="text" id="searchOrderId" placeholder="Buscar por ID..." class="o-header__search-input">
+                    </div>
                 </div>
             </header>
             <section class="outerbox o-table">
@@ -88,6 +93,11 @@
                     <div class="o-table__item o-cell__actions"></div>
                 </div>
                 <div id="ordersTableBody" class="o-table__body">
+                </div>
+                <div class="o-table__pagination">
+                    <button id="prevPageBtn" class="o-pagination__arrow"><span class="material-symbols-rounded">chevron_left</span></button>
+                    <div id="paginationNumbers" class="o-pagination__pages"></div>
+                    <button id="nextPageBtn" class="o-pagination__arrow"><span class="material-symbols-rounded">chevron_right</span></button>
                 </div>
             </section>
         </section>
