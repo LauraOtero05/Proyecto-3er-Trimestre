@@ -214,14 +214,138 @@
 
 @media (max-width: 768px) {
 
-    /* #region MEDIA QUERIES DASHBOARD */
-
     .content {
         margin: 15px;
         padding: 10px;
     }
 
-    /* #endregion */
+    /* CLIENTES */
+    .c-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .c-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .c-table__head {
+        display: none;
+    }
+
+    .c-table__row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .c-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .c-table__cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .c-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .c-table__cell:nth-child(1)::before { content: "Cliente"; }
+    .c-table__cell:nth-child(2)::before { content: "Email"; }
+    .c-table__cell:nth-child(3)::before { content: "Empresa"; }
+    .c-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .c-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
+
+    .button__items {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* WORKERS */
+    .w-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .w-header__button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .w-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .w-table__head {
+        display: none;
+    }
+
+    .w-table__row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .w-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .w-table__cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .w-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
+    .w-table__cell:nth-child(2)::before { content: "Email"; }
+    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
+    .w-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .w-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
 
 }
 
@@ -471,75 +595,9 @@
     /* #endregion */
 }
 
-/* ── 768px ────────────────────────────────────────── */
-/* ── 768px ────────────────────────────────────────── */
-@media (max-width: 768px) {
 
-    /* WORKERS */
-    .w-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding-top: 60px;
-    }
 
-    .w-header__button {
-        width: 100%;
-        text-align: center;
-    }
 
-    .w-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .w-table__head {
-        display: none;
-    }
-
-    .w-table__row {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 18px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .w-table__row:last-child {
-        border-bottom: none;
-    }
-
-    .w-table__cell {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        font-size: 14px;
-        width: 100%;
-    }
-
-    .w-table__cell::before {
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
-    .w-table__cell:nth-child(2)::before { content: "Email"; }
-    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
-    .w-table__cell:nth-child(4)::before { content: "Estado"; }
-
-    .w-table__cell:nth-child(5) {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, .06);
-        margin-top: 4px;
-    }
-
-}
 
 /* ── 480px ────────────────────────────────────────── */
 @media (max-width: 480px) {
