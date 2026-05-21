@@ -355,6 +355,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    modalDeleteOrder.addEventListener('click', (e) => {
+        if (e.target === modalDeleteOrder) {
+            modalDeleteOrder.style.display = 'none';
+            idToDelete = null;
+        }
+    });
+
     window.addEventListener('click', () => {
         document.querySelectorAll('.o-dropdown__menu').forEach(menu => {
             menu.classList.remove('is-active');
