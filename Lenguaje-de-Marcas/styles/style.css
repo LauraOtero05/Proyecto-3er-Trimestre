@@ -94,7 +94,6 @@ body{
     align-items: center;
 }
 
-
 .modal__content{ /* He cogido el elemento de Alvaro de: c-modal__content*/
     width:450px;
     background:#111827;
@@ -1661,7 +1660,7 @@ button{
 
 
 
-/* #region ----------------PROVEEDORES---------------- */
+/* #region ----------------SUPPLIERS---------------- */
 
 .s-header{
     display: flex;
@@ -1770,9 +1769,10 @@ button{
 .s-table__item {
     color: var(--tertiary-color);
     font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: break-word;
 }
 
 .s-item__actions {

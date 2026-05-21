@@ -13,6 +13,109 @@
 
     /* #endregion */
 
+    /* #region -----SUPPLIERS----- */
+
+    .s-table__header {
+        display: none !important;
+    }
+
+    .s-table__body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .s-tableBox {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        backdrop-filter: blur(5px);
+    }
+
+    .s-table__item {
+        padding: 4px 0;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        width: 100%;
+    }
+
+    .s-item__actions {
+    border-bottom: none;
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.s-item__actions::before {
+    margin-right: auto;
+    content: "Acciones:";
+}
+
+    .s-table__item::before {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--tertiary-color);
+        opacity: 0.6;
+        letter-spacing: 0.5px;
+    }
+
+    .s-item__id::before {
+        content: "ID:";
+    }
+
+    .s-item__name::before {
+        content: "Nombre:";
+    }
+
+    .s-item__mvl::before {
+        content: "Teléfono:";
+    }
+
+    .s-item__email::before {
+        content: "Email:";
+    }
+
+    .s-item__city::before {
+        content: "Ciudad:";
+    }
+
+    .s-item__pais::before {
+        content: "País:";
+    }
+
+    .s-item__status::before {
+        content: "Estado:";
+    }
+
+    .s-item__actions::before {
+        content: "Acciones:";
+    }
+
+    .s-table__item>* {
+        text-align: right;
+    }
+
+    .s-item__email {
+        word-break: break-all;
+    }
+
+    .s-item__actions {
+        border-bottom: none;
+        padding-top: 10px;
+        justify-content: space-between;
+    }
+
+    /* #endregion */
+
 }
 
 @media (max-width: 900px) {
@@ -262,14 +365,64 @@
 
     /* #endregion */
 
-    /* #region ---- PRODUCTOS ----*/
+    /* #region -----SUPPLIERS----- */
 
+    .s-table__body {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 
+    .s-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
 
+    .s-header__actions {
+        margin-right: 0;
+        width: 100%;
+    }
 
+    .s-header__actions button {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
 
+    .s-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
 
+    .s-stats__card {
+        padding: 16px;
+        border-radius: 14px;
+    }
 
+    .s-stats__card h2 {
+        font-size: 28px;
+        margin-top: 5px;
+    }
+
+    .s-filter {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .s-filter p {
+        padding: 0;
+        width: 100%;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .s-filter__box {
+        flex: 1 1 140px;
+        width: 100%;
+    }
 
     /* #endregion */
 
@@ -616,3 +769,20 @@
     /* #endregion */
 
 }
+
+
+@media (max-width: 380px) {
+
+    /* #region -----SUPPLIERS----- */
+
+    .s-tableBox {
+        padding: 14px;
+    }
+
+    .s-table__item {
+        font-size: 13px;
+    }
+
+    /* #endregion */
+}
+

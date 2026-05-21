@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             sidebar.classList.toggle('is-open');
-            
+
             const icon = sidebarToggle.querySelector('.material-symbols-rounded');
             if (icon) {
                 icon.textContent = sidebar.classList.contains('is-open') ? 'close' : 'menu';
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // #endregion
 
-// #region --------------------- DOM de Productos ---------------------
+// #region --------------------- PRODUCTS ---------------------
 
 let idProductoEnEdicion = null;
 let idProductoAEliminar = null;
@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
             saveData(STORAGE_KEYS.productos, productosActuales);
 
             renderProductos();
+            inicializarFiltros();
             form.reset();
             modal.style.display = "none";
             idProductoEnEdicion = null;
@@ -201,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 saveData(STORAGE_KEYS.productos, productosFiltrados);
                 renderProductos();
+                inicializarFiltros();
 
                 confirmModal.style.display = "none";
                 idProductoAEliminar = null;
@@ -246,22 +248,23 @@ function renderProductos(productosFiltrados = null) {
 }
 
 function inicializarFiltros() {
-
     const productos = getData(STORAGE_KEYS.productos);
     const selectArtista = document.getElementById("filterArtista");
-    
+
     if (!selectArtista) return;
-    const artistasUnicos = [...new Set(productos.map(p => p.artista))];
     
+    selectArtista.innerHTML = '<option value="">Artista (Todos)</option>';
+
+    const artistasUnicos = [...new Set(productos.map(p => p.artista).filter(Boolean))].sort();
+
     artistasUnicos.forEach(artista => {
         selectArtista.insertAdjacentHTML("beforeend", `<option value="${artista}">${artista}</option>`);
     });
-
 }
 
 function aplicarFiltros() {
     const productos = getData(STORAGE_KEYS.productos);
-    
+
     const filtroArtista = document.getElementById("filterArtista").value;
     const filtroFormato = document.getElementById("filterFormato").value;
     const productosFiltrados = productos.filter(prod => {
@@ -299,9 +302,9 @@ function eliminarProducto(id) {
     const confirmModal = document.getElementById("confirmModal");
     if (!confirmModal) return;
 
-    idProductoAEliminar = id; 
+    idProductoAEliminar = id;
 
-    confirmModal.style.display = "flex"; 
+    confirmModal.style.display = "flex";
 }
 
 // #endregion
@@ -309,7 +312,7 @@ function eliminarProducto(id) {
 // #region --------------------- DASHBOARD ---------------------
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const KEYS = {
         pedidos: "74min_pedidos",
         productos: "74min_productos",
@@ -325,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadProfileName() {
         const perfil = JSON.parse(sessionStorage.getItem(KEYS.perfil));
-        
+
         if (perfil && perfil.nombre) {
             welcomeName.textContent = perfil.nombre;
         } else {
@@ -367,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         lastOrders.forEach(pedido => {
             const worker = trabajadores.find(t => String(t.id) === String(pedido.employeeId))?.name || "Sistema";
-            
+
             const item = document.createElement('div');
             item.className = 'd-activity__item';
             item.innerHTML = `
@@ -434,15 +437,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // #endregion
 
 
-// #region --------------------- DOM de Productos ---------------------
+// #region --------------------- SUPPLIERS ---------------------
 
 let idProveedorEnEdicion = null;
+let idProveedorAEliminar = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("1. DOM de Proveedores cargado correctamente.");
 
     initializeStorage();
-    
+
     poblarFiltros();
     renderProveedores();
 
@@ -451,6 +455,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAbrir = document.getElementById("OpenModalSuppliers");
     const btnCerrar = document.getElementById("CloseModalSuppliers");
     const form = document.getElementById("supplierForm");
+
+    const deleteModal = document.getElementById("deleteConfirmModal");
+    const btnCloseDelete = document.getElementById("CloseDeleteModal");
+    const btnCancelDelete = document.getElementById("btnCancelDelete");
+    const btnConfirmDelete = document.getElementById("btnConfirmDelete");
 
     const selectFilterId = document.getElementById("filterProveedorID");
     const selectFilterName = document.getElementById("filterProveedorName");
@@ -501,10 +510,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const cerrarModalBorrado = () => {
+        if (deleteModal) deleteModal.style.display = "none";
+        idProveedorAEliminar = null;
+    };
+
+    if (btnCloseDelete) btnCloseDelete.addEventListener("click", cerrarModalBorrado);
+    if (btnCancelDelete) btnCancelDelete.addEventListener("click", cerrarModalBorrado);
+
+    if (btnConfirmDelete) {
+        btnConfirmDelete.addEventListener("click", () => {
+            if (idProveedorAEliminar) {
+                ejecutarEliminacionReal(idProveedorAEliminar);
+                cerrarModalBorrado();
+            }
+        });
+    }
+
     window.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.style.display = "none";
             if (form) form.reset();
+        }
+        if (e.target === deleteModal) {
+            cerrarModalBorrado();
         }
     });
 
@@ -515,13 +544,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!idProveedor) return;
 
             if (e.target.classList.contains("s-btn__delete") || e.target.parentElement.classList.contains("s-btn__delete")) {
-                eliminarProveedor(idProveedor);
+                idProveedorAEliminar = idProveedor;
+                if (deleteModal) deleteModal.style.display = "flex";
             }
 
             if (e.target.classList.contains("s-btn__edit") || e.target.parentElement.classList.contains("s-btn__edit")) {
                 abrirModalEditarProveedor(
-                    idProveedor, modal, modalTitulo, 
-                    inputName, inputPhone, inputEmail, 
+                    idProveedor, modal, modalTitulo,
+                    inputName, inputPhone, inputEmail,
                     inputCity, inputCountry, inputStatus
                 );
             }
@@ -548,7 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (idProveedorEnEdicion === null) {
                 let siguienteNumero = 1;
-                
+
                 if (proveedoresActuales.length > 0) {
                     const idsNumericos = proveedoresActuales.map(p => {
                         const numero = parseInt(p.id.replace("P", ""), 10);
@@ -582,10 +612,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             saveData(STORAGE_KEYS.proveedores, proveedoresActuales);
-            
-            poblarFiltros(); 
+
+            poblarFiltros();
             renderProveedores();
-            
+
             form.reset();
             modal.style.display = "none";
             idProveedorEnEdicion = null;
@@ -597,7 +627,7 @@ function poblarFiltros() {
     const selectFilterId = document.getElementById("filterProveedorID");
     const selectFilterName = document.getElementById("filterProveedorName");
     const selectFilterPais = document.getElementById("filterProveedorPais");
-    
+
     const proveedores = getData(STORAGE_KEYS.proveedores);
 
     if (selectFilterId) selectFilterId.innerHTML = '<option value="">&nbsp;&nbsp;ID (Todos)</option>';
@@ -614,7 +644,7 @@ function poblarFiltros() {
             selectFilterName.insertAdjacentHTML('beforeend', `<option value="${prov.name}">&nbsp;&nbsp;${prov.name}</option>`);
         }
         if (prov.country) {
-            paisesUnicos.add(prov.country);
+            paimsUnicos = paisesUnicos.add(prov.country);
         }
     });
 
@@ -673,7 +703,7 @@ function abrirModalEditarProveedor(id, modal, modalTitulo, inputName, inputPhone
     const proveedores = getData(STORAGE_KEYS.proveedores);
     const proveedorAEditar = proveedores.find(prov => prov.id === id);
 
-    if (!providerAEditar && !proveedorAEditar) return;
+    if (!proveedorAEditar) return;
     const prov = proveedorAEditar;
 
     idProveedorEnEdicion = id;
@@ -690,16 +720,14 @@ function abrirModalEditarProveedor(id, modal, modalTitulo, inputName, inputPhone
     if (modal) modal.style.display = "flex";
 }
 
-function eliminarProveedor(id) {
-    if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
-        const proveedoresActuales = getData(STORAGE_KEYS.proveedores);
-        const proveedoresFiltrados = proveedoresActuales.filter(prov => prov.id !== id);
+function ejecutarEliminacionReal(id) {
+    const proveedoresActuales = getData(STORAGE_KEYS.proveedores);
+    const proveedoresFiltrados = proveedoresActuales.filter(prov => prov.id !== id);
 
-        saveData(STORAGE_KEYS.proveedores, proveedoresFiltrados);
-        
-        poblarFiltros();
-        renderProveedores();
-    }
+    saveData(STORAGE_KEYS.proveedores, proveedoresFiltrados);
+
+    poblarFiltros();
+    renderProveedores();
 }
 
 // #endregion
