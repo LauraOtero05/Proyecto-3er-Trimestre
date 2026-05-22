@@ -103,8 +103,6 @@ public class Menu {
 
     // region WORKER
 
-    private final TrabajadorController trabajadorController = new TrabajadorController();
-
     private void manageWorker(){
 
         int option;
@@ -135,27 +133,19 @@ public class Menu {
     }
 
     private void addWorker(){
-        trabajadorController.crearTrabajador();
 
     }
 
     private void findAllWorkers(){
-        trabajadorController.listarTrabajadores();
-
     }
 
     private void findWorkerByID(){
-        trabajadorController.buscarTrabajadorPorDni();
-
     }
 
     private void updateWorker(){
-        trabajadorController.modificarTrabajador();
     }
 
-    private void deleteWorker(){
-        trabajadorController.eliminarTrabajador();
-    }
+    private void deleteWorker(){}
 
     // endregion
 
