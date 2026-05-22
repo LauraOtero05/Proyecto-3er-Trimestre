@@ -18,8 +18,7 @@ public class TrabajadorRepositoryImpl implements  TrabajadorRepository {
         String sqlTrabajador = "INSERT INTO trabajadores (DNI, nombre, apellido, rol, email, password_hash) VALUES (?, ?, ?, ?, ?, ?)";
         String sqlTlf = "INSERT INTO telefonos_trabajador (DNI, telefono) VALUES (?, ?)";
 
-        try (PreparedStatement psTrabajador = conn.prepareStatement(sqlTrabajador);
-             PreparedStatement psTlf = conn.prepareStatement(sqlTlf)) {
+        try (PreparedStatement psTrabajador = conn.prepareStatement(sqlTrabajador); PreparedStatement psTlf = conn.prepareStatement(sqlTlf)) {
 
             psTrabajador.setString(1, trabajador.getDni());
             psTrabajador.setString(2, trabajador.getNombre());
@@ -79,8 +78,7 @@ public class TrabajadorRepositoryImpl implements  TrabajadorRepository {
         String sql = "SELECT * FROM trabajadores";
         Connection conn = DataBaseConnection.getConnection();
 
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 String dni = rs.getString("DNI");
@@ -108,9 +106,7 @@ public class TrabajadorRepositoryImpl implements  TrabajadorRepository {
         String sqlDelTlfs = "DELETE FROM telefonos_trabajador WHERE DNI = ?";
         String sqlInsTlf = "INSERT INTO telefonos_trabajador (DNI, telefono) VALUES (?, ?)";
 
-        try (PreparedStatement psTrabajador = conn.prepareStatement(sqlTrabajador);
-             PreparedStatement psDelTlfs = conn.prepareStatement(sqlDelTlfs);
-             PreparedStatement psInsTlf = conn.prepareStatement(sqlInsTlf)) {
+        try (PreparedStatement psTrabajador = conn.prepareStatement(sqlTrabajador); PreparedStatement psDelTlfs = conn.prepareStatement(sqlDelTlfs); PreparedStatement psInsTlf = conn.prepareStatement(sqlInsTlf)) {
 
             psTrabajador.setString(1, trabajador.getNombre());
             psTrabajador.setString(2, trabajador.getApellido());

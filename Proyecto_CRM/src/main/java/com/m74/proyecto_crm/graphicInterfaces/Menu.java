@@ -104,7 +104,7 @@ public class Menu {
         List<Cliente> clientes = clienteController.obtenerTodosLosClientes();
 
         if (clientes.isEmpty()) {
-            System.out.println("[!] No hay clientes registrados.");
+            System.out.println("No hay clientes registrados.");
             return -1;
         }
 
@@ -124,7 +124,7 @@ public class Menu {
         do {
             id = InputHelper.readInt("Introduce el ID del cliente: ");
             if (!idsValidos.contains(id)) {
-                System.out.println("[!] ID no válido. Elige uno de la lista.");
+                System.out.println("ID no válido. Elige uno de la lista.");
             }
         } while (!idsValidos.contains(id));
 

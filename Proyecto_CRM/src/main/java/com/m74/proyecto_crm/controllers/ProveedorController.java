@@ -56,7 +56,7 @@ public class ProveedorController {
         List<Proveedor> proveedores = proveedorService.obtenerTodosLosProveedores();
 
         if (proveedores.isEmpty()) {
-            System.out.println("No hay proveedores registrados en el sistema.");
+            System.out.println("No hay proveedores registrados en el sistema");
             return;
         }
 
@@ -71,14 +71,14 @@ public class ProveedorController {
         List<Proveedor> listaCompleta = proveedorService.obtenerTodosLosProveedores();
 
         if (listaCompleta.isEmpty()) {
-            System.out.println("No hay proveedores registrados en el sistema para buscar.");
+            System.out.println("No hay proveedores registrados en el sistema para buscar");
             return;
         }
 
         System.out.println("Proveedores disponibles en el sistema:");
         System.out.println("----------------------------------------");
         for (Proveedor p : listaCompleta) {
-            System.out.println(" > ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+            System.out.println(" ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
         }
         System.out.println("----------------------------------------");
 
@@ -88,12 +88,12 @@ public class ProveedorController {
 
         if (proveedorEncontrado != null) {
             System.out.println("\n==================================================");
-            System.out.println("• ID Proveedor:  " + proveedorEncontrado.getIdProveedor());
-            System.out.println("• Empresa:       " + proveedorEncontrado.getNombre());
-            System.out.println("• Dirección:     " + proveedorEncontrado.getDireccion());
-            System.out.println("• Cód. Postal:   " + proveedorEncontrado.getCodigoPostal());
-            System.out.println("• Teléfonos:     " + proveedorEncontrado.getTelefonos());
-            System.out.println("• Emails:        " + proveedorEncontrado.getEmails());
+            System.out.println(" ID Proveedor:  " + proveedorEncontrado.getIdProveedor());
+            System.out.println(" Empresa:       " + proveedorEncontrado.getNombre());
+            System.out.println(" Dirección:     " + proveedorEncontrado.getDireccion());
+            System.out.println(" Cód. Postal:   " + proveedorEncontrado.getCodigoPostal());
+            System.out.println(" Teléfonos:     " + proveedorEncontrado.getTelefonos());
+            System.out.println(" Emails:        " + proveedorEncontrado.getEmails());
             System.out.println("==================================================\n");
         }
     }
@@ -103,20 +103,20 @@ public class ProveedorController {
 
         List<Proveedor> listaCompleta = proveedorService.obtenerTodosLosProveedores();
         if (listaCompleta.isEmpty()) {
-            System.out.println("No hay proveedores registrados en el sistema para modificar.");
+            System.out.println("No hay proveedores registrados en el sistema para modificar");
             return;
         }
 
         System.out.println("Proveedores disponibles en el sistema:");
         System.out.println("----------------------------------------");
         for (Proveedor p : listaCompleta) {
-            System.out.println(" > ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+            System.out.println(" ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
         }
         System.out.println("----------------------------------------");
 
-        String criterio = InputHelper.readString("Introduce el ID o Nombre del proveedor (o marca '0' para salir): ");
+        String criterio = InputHelper.readString("Introduce el ID o Nombre del proveedor (o escribe '0' para salir): ");
         if (criterio.trim().equals("0")) {
-            System.out.println("Actualización cancelada de forma segura.");
+            System.out.println("Actualización cancelada de forma segura");
             return;
         }
 
@@ -138,16 +138,16 @@ public class ProveedorController {
             switch (opcionModificar) {
                 case 1 -> {
                     System.out.println("[Modificando Nombre | Valor actual: " + proveedor.getNombre() + "]");
-                    String nuevoNombre = InputHelper.readString("Introduce el nuevo Nombre (o marca '0' para cancelar): ");
+                    String nuevoNombre = InputHelper.readString("Introduce el nuevo Nombre (o escribe '0' para cancelar): ");
                     if (!nuevoNombre.trim().equals("0")) {
                         proveedor.setNombre(nuevoNombre);
                     } else {
-                        System.out.println("Edición de campo cancelada.");
+                        System.out.println("Edición de campo cancelada");
                     }
                 }
                 case 2 -> {
                     System.out.println("[Modificando Dirección | Valor actual: " + proveedor.getDireccion() + "]");
-                    String nuevaDir = InputHelper.readString("Introduce la nueva Dirección (o marca '0' para cancelar): ");
+                    String nuevaDir = InputHelper.readString("Introduce la nueva Dirección (o escribe '0' para cancelar): ");
                     if (!nuevaDir.trim().equals("0")) {
                         proveedor.setDireccion(nuevaDir);
                     } else {
@@ -156,7 +156,7 @@ public class ProveedorController {
                 }
                 case 3 -> {
                     System.out.println("[Modificando CP | Valor actual: " + proveedor.getCodigoPostal() + "]");
-                    String nuevoCp = InputHelper.readString("Introduce el nuevo Código Postal (o marca '0' para cancelar): ");
+                    String nuevoCp = InputHelper.readString("Introduce el nuevo Código Postal (o escribe '0' para cancelar): ");
                     if (!nuevoCp.trim().equals("0")) {
                         int idCp = ubicationService.buscarIdCP(nuevoCp);
                         if (idCp == -1) {
@@ -167,7 +167,7 @@ public class ProveedorController {
                             proveedor.setCodigoPostal(nuevoCp);
                         }
                     } else {
-                        System.out.println("Edición de campo cancelada.");
+                        System.out.println("Edición de campo cancelada");
                     }
                 }
                 case 4 -> gestionarListaContactos(proveedor.getTelefonos(), "Teléfono");
@@ -181,7 +181,7 @@ public class ProveedorController {
     }
 
     private void gestionarListaContactos(List<String> lista, String tipoContacto) {
-        int opt; // Mantienes tu variable si la necesitas, aunque con el break directo se gestiona solo
+        int opt;
         do {
             System.out.println("\n--- GESTIONAR " + tipoContacto.toUpperCase() + "S ---");
             if (lista.isEmpty()) {
@@ -200,21 +200,21 @@ public class ProveedorController {
 
             switch (entrada) {
                 case "A" -> {
-                    String nuevo = InputHelper.readString("Introduce el nuevo " + tipoContacto.toLowerCase() + " (o marca '0' para cancelar): ");
+                    String nuevo = InputHelper.readString("Introduce el nuevo " + tipoContacto.toLowerCase() + " (o escribe '0' para cancelar): ");
                     if (!nuevo.trim().equals("0")) lista.add(nuevo);
                 }
                 case "M" -> {
                     if (lista.isEmpty()) {
-                        System.out.println("No hay nada que modificar.");
+                        System.out.println("No hay nada que modificar");
                         break;
                     }
                     int indice = InputHelper.readIntInRange("Número del " + tipoContacto.toLowerCase() + " a modificar (1-" + lista.size() + "): ", 1, lista.size()) - 1;
-                    String modificado = InputHelper.readString("Introduce el nuevo valor (Actual: " + lista.get(indice) + " | o marca '0' para cancelar): ");
+                    String modificado = InputHelper.readString("Introduce el nuevo valor (Actual: " + lista.get(indice) + " | o escribe '0' para cancelar): ");
                     if (!modificado.trim().equals("0")) lista.set(indice, modificado);
                 }
                 case "B" -> {
                     if (lista.isEmpty()) {
-                        System.out.println("No hay nada que borrar.");
+                        System.out.println("No hay nada que borrar");
                         break;
                     }
                     int indice = InputHelper.readIntInRange("Número del " + tipoContacto.toLowerCase() + " a borrar (1-" + lista.size() + "): ", 1, lista.size()) - 1;

@@ -19,8 +19,7 @@ public class Cliente {
         this.telefonos = new ArrayList<>();
     }
 
-    public Cliente(int idCliente, String nombre, String apellido, String direccion,
-                   int idCodigoPostal, String codigoPostal, String email, String passwordHash) {
+    public Cliente(int idCliente, String nombre, String apellido, String direccion, int idCodigoPostal, String codigoPostal, String email, String passwordHash) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;

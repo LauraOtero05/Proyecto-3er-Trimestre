@@ -19,8 +19,7 @@ public class Trabajador {
         this.telefonos = new ArrayList<>();
     }
 
-    public Trabajador(String dni, String nombre, String apellido, RolTrabajador rol,
-                      String email, String passwordHash) {
+    public Trabajador(String dni, String nombre, String apellido, RolTrabajador rol, String email, String passwordHash) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
