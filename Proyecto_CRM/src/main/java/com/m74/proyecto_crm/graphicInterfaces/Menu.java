@@ -1,6 +1,9 @@
 package com.m74.proyecto_crm.graphicInterfaces;
 
-import com.m74.proyecto_crm.controllers.*;
+import com.m74.proyecto_crm.controllers.AlbumController;
+import com.m74.proyecto_crm.controllers.DetallePedidoController;
+import com.m74.proyecto_crm.controllers.PedidoController;
+import com.m74.proyecto_crm.controllers.ProveedorController;
 import com.m74.proyecto_crm.entities.DetallePedido;
 import com.m74.proyecto_crm.entities.Pedido;
 import com.m74.proyecto_crm.util.InputHelper;
@@ -42,8 +45,6 @@ public class Menu {
 
     // region CLIENT
 
-    private final ClienteController clienteController = new ClienteController();
-
     private void manageClient(){
 
         int option;
@@ -57,9 +58,8 @@ public class Menu {
             System.out.println("3. Ver un Cliente");
             System.out.println("4. Actualizar un Cliente");
             System.out.println("5. Eliminar un Cliente");
-            System.out.println("6. Exportar Clientes a un documento .csv");
             System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,6);
+            option = InputHelper.readIntInRange("",0,5);
 
             switch (option){
 
@@ -69,35 +69,25 @@ public class Menu {
                 case 3 -> findClientByID();
                 case 4 -> updateClient();
                 case 5 -> deleteClient();
-                case 6 -> generateCsvClient();
                 default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
             }
         }while (option!= 0);
     }
 
     private void addClient(){
-        clienteController.crearCliente();
+
     }
 
     private void findAllClients(){
-        clienteController.listarClientes();
     }
 
     private void findClientByID(){
-        clienteController.buscarClientePorId();
     }
 
     private void updateClient(){
-        clienteController.modificarCliente();
     }
 
-    private void deleteClient(){
-        clienteController.eliminarCliente();
-    }
-
-    private void generateCsvClient(){
-        clienteController.exportarCsv();
-    }
+    private void deleteClient(){}
 
     // endregion
 
