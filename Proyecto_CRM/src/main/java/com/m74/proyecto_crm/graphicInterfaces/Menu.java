@@ -38,47 +38,7 @@ public class Menu {
 
     private void manageClient(){
 
-        int option;
-
-        do{
-
-            System.out.println("\nBIENVENIDO A GESTIÓN DE CLIENTES");
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir Cliente");
-            System.out.println("2. Ver todos los Clientes");
-            System.out.println("3. Ver un Cliente");
-            System.out.println("4. Actualizar un Cliente");
-            System.out.println("5. Eliminar un Cliente");
-            System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,5);
-
-            switch (option){
-
-                case 0 -> System.out.println("Volviendo");
-                case 1 -> addClient();
-                case 2 -> findAllClients();
-                case 3 -> findClientByID();
-                case 4 -> updateClient();
-                case 5 -> deleteClient();
-                default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
-            }
-        }while (option!= 0);
     }
-
-    private void addClient(){
-
-    }
-
-    private void findAllClients(){
-    }
-
-    private void findClientByID(){
-    }
-
-    private void updateClient(){
-    }
-
-    private void deleteClient(){}
 
     // endregion
 
@@ -86,47 +46,7 @@ public class Menu {
 
     private void manageWorker(){
 
-        int option;
-
-        do{
-
-            System.out.println("\nBIENVENIDO A GESTIÓN DE TRABAJADORES");
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir Trabajador");
-            System.out.println("2. Ver todos los Trabajadores");
-            System.out.println("3. Ver un Trabajador");
-            System.out.println("4. Actualizar un Trabajador");
-            System.out.println("5. Eliminar un Trabajador");
-            System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,5);
-
-            switch (option){
-
-                case 0 -> System.out.println("Volviendo");
-                case 1 -> addWorker();
-                case 2 -> findAllWorkers();
-                case 3 -> findWorkerByID();
-                case 4 -> updateWorker();
-                case 5 -> deleteWorker();
-                default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
-            }
-        }while (option!= 0);
     }
-
-    private void addWorker(){
-
-    }
-
-    private void findAllWorkers(){
-    }
-
-    private void findWorkerByID(){
-    }
-
-    private void updateWorker(){
-    }
-
-    private void deleteWorker(){}
 
     // endregion
 
@@ -134,47 +54,7 @@ public class Menu {
 
     private void manageSupplier(){
 
-        int option;
-
-        do{
-
-            System.out.println("\nBIENVENIDO A GESTIÓN DE PROVEEDORES");
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir Proveedor");
-            System.out.println("2. Ver todos los Proveedor");
-            System.out.println("3. Ver un Proveedor");
-            System.out.println("4. Actualizar un Proveedor");
-            System.out.println("5. Eliminar un Proveedor");
-            System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,5);
-
-            switch (option){
-
-                case 0 -> System.out.println("Volviendo");
-                case 1 -> addSupplier();
-                case 2 -> findAllSuppliers();
-                case 3 -> findSupplierByID();
-                case 4 -> updateSupplier();
-                case 5 -> deleteSupplier();
-                default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
-            }
-        }while (option!= 0);
     }
-
-    private void addSupplier(){
-
-    }
-
-    private void findAllSuppliers(){
-    }
-
-    private void findSupplierByID(){
-    }
-
-    private void updateSupplier(){
-    }
-
-    private void deleteSupplier(){}
 
     // endregion
 
@@ -182,47 +62,7 @@ public class Menu {
 
     private void manageAlbum(){
 
-        int option;
-
-        do{
-
-            System.out.println("\nBIENVENIDO A GESTIÓN DE ÁLBUMES");
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir Album");
-            System.out.println("2. Ver todos los Álbumes");
-            System.out.println("3. Ver un Album");
-            System.out.println("4. Actualizar un Album");
-            System.out.println("5. Eliminar un Album");
-            System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,5);
-
-            switch (option){
-
-                case 0 -> System.out.println("Volviendo");
-                case 1 -> addAlbum();
-                case 2 -> findAllAlbums();
-                case 3 -> findAlbumByID();
-                case 4 -> updateAlbum();
-                case 5 -> deleteAlbum();
-                default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
-            }
-        }while (option!= 0);
     }
-
-    private void addAlbum(){
-
-    }
-
-    private void findAllAlbums(){
-    }
-
-    private void findAlbumByID(){
-    }
-
-    private void updateAlbum(){
-    }
-
-    private void deleteAlbum(){}
 
     // endregion
 
@@ -230,47 +70,7 @@ public class Menu {
 
     private void manageOrder(){
 
-        int option;
-
-        do{
-
-            System.out.println("\nBIENVENIDO A GESTIÓN DE PEDIDOS");
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir Pedido");
-            System.out.println("2. Ver todos los Pedidos");
-            System.out.println("3. Ver un Pedido");
-            System.out.println("4. Actualizar un Pedido");
-            System.out.println("5. Eliminar un Pedido");
-            System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,5);
-
-            switch (option){
-
-                case 0 -> System.out.println("Volviendo");
-                case 1 -> addOrder();
-                case 2 -> findAllOrders();
-                case 3 -> findOrderByID();
-                case 4 -> updateOrder();
-                case 5 -> deleteOrder();
-                default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
-            }
-        }while (option!= 0);
     }
-
-    private void addOrder(){
-
-    }
-
-    private void findAllOrders(){
-    }
-
-    private void findOrderByID(){
-    }
-
-    private void updateOrder(){
-    }
-
-    private void deleteOrder(){}
 
     // endregion
 
