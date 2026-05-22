@@ -77,9 +77,9 @@ public class PedidoService {
         try (java.io.FileWriter fw = new java.io.FileWriter(archivo);
              java.io.BufferedWriter bw = new java.io.BufferedWriter(fw)) {
 
-            bw.write("============================================================== ");
-            bw.write("          SITUACIÓN ACTUAL DE LOS PEDIDOS - 74_MINUTES         ");
-            bw.write(" ============================================================= ");
+            bw.write("===================== ");
+            bw.write("          SITUACIÓN ACTUAL DE LOS PEDIDOS - 74_MINUTES        ");
+            bw.write(" =====================");
             bw.newLine();
 
             for (Pedido pedido : pedidos) {
@@ -123,9 +123,9 @@ public class PedidoService {
                 bw.newLine();
             }
 
-            bw.write("========================= ");
-            bw.write("  Total de pedidos: " + pedidos.size());
-            bw.write("======================== ");
+            bw.write("===================== ");
+            bw.write("Total de pedidos: " + pedidos.size());
+            bw.write(" =====================");
 
             System.out.println("Exportación en proceso. Archivo guardado en: " + archivo.getAbsolutePath());
 

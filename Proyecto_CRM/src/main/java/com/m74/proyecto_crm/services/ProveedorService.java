@@ -100,6 +100,7 @@ public class ProveedorService {
             System.out.println("¡Proveedor eliminado correctamente junto con todos sus contactos!");
 
         } catch (SQLException e) {
+            // Captura si intentan borrar un proveedor que tiene álbumes asociados (Restricción ON DELETE RESTRICT)
             System.err.println("No se puede eliminar el proveedor. Hay álbumes en la tienda que dependen de él. " +
                     "Error de integridad: " + e.getMessage());
         }

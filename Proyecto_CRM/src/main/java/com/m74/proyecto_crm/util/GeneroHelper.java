@@ -22,10 +22,10 @@ public class GeneroHelper {
                     return idGen;
                 }
 
-                System.out.println("\nEl ID de género '" + idGen + "' no existe en el sistema.");
+                System.out.println("\n[!] El ID de género '" + idGen + "' no existe en el sistema.");
                 String respuesta = InputHelper.readString("¿Deseas registrar un NUEVO género musical con otro nombre? (S/N): ").toUpperCase().trim();
                 if (respuesta.equals("S")) {
-                    nombreGenero = InputHelper.readString("Introduce el NOMBRE del nuevo género musical: ");
+                    nombreGenero = InputHelper.readString("-> Introduce el NOMBRE del nuevo género musical: ");
                 } else {
                     return -1;
                 }
@@ -36,26 +36,26 @@ public class GeneroHelper {
                     return idGen;
                 }
 
-                System.out.println("\nEl género '" + nombreGenero + "' no está registrado.");
+                System.out.println("\n[!] El género '" + nombreGenero + "' no está registrado.");
                 String respuesta = InputHelper.readString("¿Quieres registrar '" + nombreGenero + "' como un nuevo género musical? (S/N): ").toUpperCase().trim();
                 if (!respuesta.equals("S")) {
                     return -1;
                 }
             }
 
-            System.out.println("Registrando el nuevo género '" + nombreGenero + "' en la base de datos...");
+            System.out.println("[+] Registrando el nuevo género '" + nombreGenero + "' en la base de datos...");
             idGen = insertarGeneroNuevo(nombreGenero);
             return idGen;
 
         } catch (SQLException e) {
-            System.err.println("Error en el asistente de géneros: " + e.getMessage());
+            System.err.println("[-] Error en el asistente de géneros: " + e.getMessage());
             return -1;
         }
     }
 
     private static int buscarIdGeneroPorNombre(String nombre) throws SQLException {
         String sql = "SELECT id_genero FROM generos_musicales WHERE UPPER(genero) = ?";
-        Connection conn = DataBaseConnection.getConnection();
+        Connection conn = DataBaseConnection.getConnection(); // No lo cerramos en el try para no matar la app
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nombre.toUpperCase());
             try (ResultSet rs = ps.executeQuery()) {
@@ -80,7 +80,7 @@ public class GeneroHelper {
 
     public static void mostrarGenerosDisponibles() {
         String sql = "SELECT id_genero, genero FROM generos_musicales";
-        Connection conn = DataBaseConnection.getConnection();
+        Connection conn = DataBaseConnection.getConnection(); // Sacado del try() para evitar el autoclosing de JDBC
 
         try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
@@ -89,14 +89,14 @@ public class GeneroHelper {
             boolean tieneDatos = false;
             while (rs.next()) {
                 tieneDatos = true;
-                System.out.println("ID: " + rs.getInt("id_genero") + " | " + rs.getString("genero"));
+                System.out.println(" > ID: " + rs.getInt("id_genero") + " | " + rs.getString("genero"));
             }
             if (!tieneDatos) {
                 System.out.println("[No hay géneros musicales registrados aún]");
             }
             System.out.println("----------------------------------------");
         } catch (SQLException e) {
-            System.err.println("Error al listar los géneros: " + e.getMessage());
+            System.err.println("[-] Error al listar los géneros: " + e.getMessage());
         }
     }
 }

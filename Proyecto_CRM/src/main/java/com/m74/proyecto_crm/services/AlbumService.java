@@ -121,7 +121,7 @@ public class AlbumService {
         List<Album> listaAlbumes = obtenerTodosLosAlbumes();
 
         if (listaAlbumes.isEmpty()) {
-            System.out.println("\nNo hay datos en la base de datos para exportar.");
+            System.out.println("\n[!] No hay datos en la base de datos para exportar.");
             return;
         }
         java.io.File archivo = new java.io.File(rutaArchivo);
@@ -142,7 +142,7 @@ public class AlbumService {
             }
 
         } catch (java.io.IOException e) {
-            System.err.println("\nError al escribir el archivo de texto: " + e.getMessage());
+            System.err.println("\n[-] Error al escribir el archivo de texto: " + e.getMessage());
         }
     }
 
@@ -180,7 +180,7 @@ public class AlbumService {
 
         } catch (SQLException e) {
 
-            System.err.println("Error al validar las relaciones en la base de datos: " + e.getMessage());
+            System.err.println("Error al validar las relaciones en la BD: " + e.getMessage());
             return false;
         }
     }

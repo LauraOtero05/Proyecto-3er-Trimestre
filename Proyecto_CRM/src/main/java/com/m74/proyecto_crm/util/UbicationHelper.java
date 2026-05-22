@@ -13,29 +13,29 @@ public class UbicationHelper {
             return idCp;
         }
 
-        System.out.println("El código postal no está registrado. Se registrará con los siguientes datos: ");
+        System.out.println("[!] El código postal no está registrado");
 
-        String ciudad = InputHelper.readString("Ciudad: ");
-        String provincia = InputHelper.readString("Provincia: ");
+        String ciudad = InputHelper.readString("-> Ciudad: ");
+        String provincia = InputHelper.readString("-> Provincia: ");
         String pais = "";
 
         while (true) {
-            pais = InputHelper.readString("Código de País (Debe ser de 2 letras, ej: ES, US, GB): ").toUpperCase().trim();
+            pais = InputHelper.readString("-> Código de País (Debe ser de 2 letras, ej: ES, US, GB): ").toUpperCase().trim();
 
             if (pais.length() == 2) {
                 break;
             }
 
-            System.out.println("¡Error! El código de país debe tener EXACTAMENTE 2 caracteres");
+            System.out.println("[!] Error: El código de país debe tener EXACTAMENTE 2 caracteres");
         }
 
         if (!ubicationService.verificarExistePais(pais)) {
-            System.out.println("\nEl código de país no está registrado. Se registrará con los siguientes datos: ");
-            String nombrePais = InputHelper.readString("Introduce el nombre completo del País (Ej: España): ");
+            System.out.println("\n[!] El código de país no está registrado");
+            String nombrePais = InputHelper.readString("-> Introduce el nombre completo del País (Ej: España): ");
 
             boolean paisCreado = ubicationService.registrarPais(pais, nombrePais);
             if (!paisCreado) {
-                System.out.println("Error crítico al registrar el país. Proceso cancelado.\n");
+                System.out.println("[-] Error crítico al registrar el país. Proceso cancelado.\n");
                 return -1;
             }
         }

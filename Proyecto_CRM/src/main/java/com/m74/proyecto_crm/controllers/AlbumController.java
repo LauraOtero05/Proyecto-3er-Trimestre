@@ -21,37 +21,37 @@ public class AlbumController {
     }
 
     public void crearAlbum() {
-        System.out.println("\n----- REGISTRAR NUEVO ÁLBUM -----");
+        System.out.println("\n--- REGISTRAR NUEVO ÁLBUM ---");
 
         String titulo = InputHelper.readString("Título del álbum: ");
-        String artista = InputHelper.readString("Nombre del Artista o Banda: ");
+        String artista = InputHelper.readString("Artista / Banda: ");
 
         FormatoDisco formato = null;
         while (formato == null) {
             System.out.println("Formatos disponibles: VINILO, CD, CASSETTE, DIGITAL");
-            String formatoStr = InputHelper.readString("Introduce el formato: ").toUpperCase().trim();
+            String formatoStr = InputHelper.readString("-> Introduce el formato: ").toUpperCase().trim();
             try {
                 formato = FormatoDisco.valueOf(formatoStr);
             } catch (IllegalArgumentException e) {
-                System.out.println("¡Error! El formato '" + formatoStr + "' no es válido. Inténtalo de nuevo");
+                System.out.println("[!] Error: El formato '" + formatoStr + "' no es válido. Inténtalo de nuevo.");
             }
         }
 
         double precio = -1;
         while (precio < 0) {
             precio = InputHelper.readDouble("Precio (€): ");
-            if (precio < 0) System.out.println("El precio no puede ser negativo");
+            if (precio < 0) System.out.println("[!] El precio no puede ser negativo.");
         }
 
         int stock = -1;
         while (stock < 0) {
             stock = InputHelper.readInt("Unidades en Stock: ");
-            if (stock < 0) System.out.println("El stock no puede ser negativo");
+            if (stock < 0) System.out.println("[!] El stock no puede ser negativo.");
         }
 
         int idProveedor = -1;
         while (idProveedor == -1) {
-            System.out.println("\nConsultando empresas de distribución...");
+            System.out.println("\n[i] Consultando empresas de distribución...");
             mostrarProveedoresResumen();
 
             String critProv = InputHelper.readString("Introduce el ID o Nombre del Proveedor seleccionado: ");
@@ -60,8 +60,8 @@ public class AlbumController {
             if (p != null) {
                 idProveedor = p.getIdProveedor();
             } else {
-                System.out.println("\nEl proveedor '" + critProv + "' no existe en el sistema");
-                System.out.println("Por seguridad, debes registrar primero al proveedor desde su menú de Gestión de Proveedores.");
+                System.out.println("\n[!] El proveedor '" + critProv + "' no existe en el sistema.");
+                System.out.println("[i] Por seguridad, debes registrar primero al proveedor desde su menú de Gestión de Proveedores.");
                 System.out.println("-----------------------------------------------------------------------------------------");
                 return;
             }
@@ -69,8 +69,8 @@ public class AlbumController {
 
         int idGenero = -1;
         while (idGenero == -1) {
-            System.out.println("\nConsultando estilos musicales en la base de datos...");
-            GeneroHelper.mostrarGenerosDisponibles();
+            System.out.println("\n[i] Consultando estilos musicales en base de datos...");
+            GeneroHelper.mostrarGenerosDisponibles(); // Pintamos los géneros existentes
 
             String critGen = InputHelper.readString("Introduce el ID o Nombre del Género Musical: ");
             idGenero = GeneroHelper.solicitarORegistrarGenero(critGen);
@@ -121,13 +121,13 @@ public class AlbumController {
     }
 
     public void buscarAlbumPorId() {
-        System.out.println("\n----- BUSCAR ÁLBUM EN TIENDA -----");
+        System.out.println("\n--- BUSCAR ÁLBUM EN TIENDA ---");
 
         if (!mostrarResumen()) return;
 
-        int id = InputHelper.readInt("Introduce el ID del álbum que deseas consultar (o escribe '0' para salir): ");
+        int id = InputHelper.readInt("Introduce el ID del álbum que deseas consultar (o '0' para salir): ");
         if (id == 0) {
-            System.out.println("Búsqueda cancelada");
+            System.out.println("Búsqueda cancelada.");
             return;
         }
 
@@ -149,10 +149,10 @@ public class AlbumController {
     }
 
     public void modificarAlbum() {
-        System.out.println("\n----- ACTUALIZAR ÁLBUM -----");
+        System.out.println("\n--- ACTUALIZAR ÁLBUM ---");
         if (!mostrarResumen()) return;
 
-        int id = InputHelper.readInt("Introduce el ID del álbum que deseas editar (o escribe '0' para salir): ");
+        int id = InputHelper.readInt("Introduce el ID del álbum que deseas editar (o '0' para salir): ");
         if (id == 0) return;
 
         Album album = albumService.obtenerAlbumPorId(id);
@@ -160,7 +160,7 @@ public class AlbumController {
 
         int opcion;
         do {
-            System.out.println("\n----- DATOS ACTUALES DEL ÁLBUM -----");
+            System.out.println("\n--- DATOS ACTUALES DEL ÁLBUM ---");
             System.out.println("1. Título:    " + album.getTitulo());
             System.out.println("2. Artista:   " + album.getArtista());
             System.out.println("3. Formato:   " + album.getFormato());
@@ -174,79 +174,79 @@ public class AlbumController {
 
             switch (opcion) {
                 case 1 -> {
-                    String s = InputHelper.readString("Nuevo Título (o escribe '0' para cancelar): ");
+                    String s = InputHelper.readString("Nuevo Título (o marca '0' para cancelar): ");
                     if (!s.equals("0")) album.setTitulo(s);
                 }
                 case 2 -> {
-                    String s = InputHelper.readString("Nuevo Artista (o escribe '0' para cancelar): ");
+                    String s = InputHelper.readString("Nuevo Artista (o marca '0' para cancelar): ");
                     if (!s.equals("0")) album.setArtista(s);
                 }
                 case 3 -> {
                     while (true) {
                         System.out.println("Formatos: VINILO, CD, CASSETTE, DIGITAL");
-                        String s = InputHelper.readString("Nuevo Formato (o escribe '0' para cancelar): ").toUpperCase().trim();
+                        String s = InputHelper.readString("Nuevo Formato (o marca '0' para cancelar): ").toUpperCase().trim();
                         if (s.equals("0")) break;
                         try {
                             album.setFormato(FormatoDisco.valueOf(s));
                             break;
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Formato inválido. Inténtalo de nuevo");
+                            System.out.println("[!] Formato inválido. Inténtalo de nuevo.");
                         }
                     }
                 }
                 case 4 -> {
                     while (true) {
-                        double p = InputHelper.readDouble("Nuevo Precio (o escribe '0' para cancelar): ");
+                        double p = InputHelper.readDouble("Nuevo Precio (o marca '0' para cancelar): ");
                         if (p == 0) break;
                         try {
                             album.setPrecio(p);
                             break;
                         } catch (IllegalArgumentException e) {
-                            System.out.println("¡Error! " + e.getMessage());
+                            System.out.println("[!] Error: " + e.getMessage());
                         }
                     }
                 }
                 case 5 -> {
                     while (true) {
-                        int st = InputHelper.readInt("Nuevo Stock (o escribe '-1' para cancelar): ");
+                        int st = InputHelper.readInt("Nuevo Stock (o marca '-1' para cancelar): ");
                         if (st == -1) break;
                         try {
                             album.setStock(st);
                             break;
                         } catch (IllegalArgumentException e) {
-                            System.out.println("¡Error! " + e.getMessage());
+                            System.out.println("[!] Error: " + e.getMessage());
                         }
                     }
                 }
                 case 6 -> {
-
-                    System.out.println("\nProveedores disponibles en el sistema: ");
+                    // Muestra los proveedores en caliente antes de editar
+                    System.out.println("\nProveedores disponibles en el sistema:");
                     mostrarProveedoresResumen();
 
-                    String critProv = InputHelper.readString("Introduce el ID o Nombre del nuevo Proveedor (o escribe '0' para cancelar): ");
+                    String critProv = InputHelper.readString("Introduce el ID o Nombre del nuevo Proveedor (o '0' para cancelar): ");
                     if (!critProv.equals("0")) {
                         Proveedor p = proveedorService.obtenerProveedorPorIdONombre(critProv);
                         if (p != null) {
                             album.setIdProveedor(p.getIdProveedor());
                             album.setNombreProveedor(p.getNombre());
                         } else {
-                            System.out.println("¡Error! El proveedor introducido no existe. No se han guardado cambios.");
+                            System.out.println("[-] El proveedor introducido no existe. No se han guardado cambios.");
                         }
                     }
                 }
                 case 7 -> {
-
-                    System.out.println("\nGéneros musicales registrados actualmente: ");
+                    // Muestra los géneros en caliente antes de editar
+                    System.out.println("\nGéneros musicales registrados actualmente:");
                     GeneroHelper.mostrarGenerosDisponibles();
 
-                    String critGen = InputHelper.readString("Introduce el ID o Nombre del nuevo Género (o escribe '0' para cancelar): ");
+                    String critGen = InputHelper.readString("Introduce el ID o Nombre del nuevo Género (o '0' para cancelar): ");
                     if (!critGen.equals("0")) {
                         int idGen = GeneroHelper.solicitarORegistrarGenero(critGen);
                         if (idGen != -1) album.setIdGenero(idGen);
                     }
                 }
                 case 0 -> {
-                    System.out.println("Aplicando actualizaciones en la base de datos...");
+                    System.out.println("Impactando actualizaciones en la base de datos...");
                     albumService.actualizarAlbum(album);
                 }
             }
@@ -254,13 +254,13 @@ public class AlbumController {
     }
 
     public void eliminarAlbum() {
-        System.out.println("\n----- ELIMINAR ÁLBUM DEL SISTEMA -----");
+        System.out.println("\n--- ELIMINAR ÁLBUM DEL SISTEMA ---");
 
         if (!mostrarResumen()) return;
 
-        int id = InputHelper.readInt("Introduce el ID del álbum que vas a borrar PERMANENTEMENTE (o escribe '0' para cancelar): ");
+        int id = InputHelper.readInt("Introduce el ID del álbum que vas a borrar PERMANENTEMENTE (o '0' para cancelar): ");
         if (id == 0) {
-            System.out.println("Operación cancelada de forma segura. El disco sigue a salvo");
+            System.out.println("[-] Operación abortada de forma segura. El disco sigue a salvo.");
             return;
         }
 
@@ -268,11 +268,11 @@ public class AlbumController {
     }
 
     public void exportarTxt() {
-        System.out.println("\n----- EXPORTAR CATÁLOGO A TEXTO -----");
+        System.out.println("\n--- EXPORTAR CATÁLOGO A TEXTO ---");
         String nombreArchivo = InputHelper.readString("Introduce el nombre o ruta del archivo (Ej: albumes.txt): ");
 
         if (nombreArchivo.trim().equals("0") || nombreArchivo.trim().isEmpty()) {
-            System.out.println("Exportación cancelada");
+            System.out.println("Exportación cancelada.");
             return;
         }
 
@@ -280,7 +280,7 @@ public class AlbumController {
             nombreArchivo += ".txt";
         }
 
-        System.out.println("\nGenerando archivo... esto puede tardar un rato. No te preocupes, puedes seguir utilizando el CRM de forma normal.");
+        System.out.println("\n[i] Generando reporte... esto puede tardar un rato. Puedes seguir utilizando el CRM de forma normal.");
 
         albumService.exportarAlbumesATxt(nombreArchivo);
     }
@@ -288,7 +288,7 @@ public class AlbumController {
     private boolean mostrarResumen() {
         List<Album> lista = albumService.obtenerTodosLosAlbumes();
         if (lista.isEmpty()) {
-            System.out.println("No hay ningún álbum registrado en el sistema");
+            System.out.println("No hay ningún álbum registrado en el sistema.");
             return false;
         }
 
