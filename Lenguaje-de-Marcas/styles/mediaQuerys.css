@@ -402,6 +402,7 @@
     .c-table__row {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 10px;
         padding: 18px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, .06);
@@ -414,8 +415,10 @@
     .c-table__cell {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 4px;
         font-size: 14px;
+        width: 100%;
     }
 
     .c-table__cell::before {
@@ -442,6 +445,7 @@
         width: 100%;
         text-align: center;
     }
+
 
     /* #endregion */
 
@@ -470,6 +474,7 @@
     .w-table__row {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 10px;
         padding: 18px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, .06);
@@ -482,8 +487,10 @@
     .w-table__cell {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 4px;
         font-size: 14px;
+        width: 100%;
     }
 
     .w-table__cell::before {
@@ -790,8 +797,7 @@
         font-size: 24px;
     }
 
-    .w-stats__card h2,
-    .c-stats__card h2 {
+    .w-stats__card h2 {
         font-size: 30px;
     }
 
@@ -825,80 +831,66 @@
 
 @media (max-width: 350px) {
 
-    /* #region  ---------- CLIENTES AND WORKERS---------- */
-    .c-dashboard,
+    /* #region  ----------WORKERS---------- */
     .w-dashboard {
         padding: 10px;
     }
 
-    .c-header__title,
     .w-header__title {
         font-size: 20px;
     }
 
-    .c-header__subtitle,
+
     .w-header__subtitle {
         font-size: 11px;
     }
 
-    .button__items,
     .w-header__button {
         font-size: 13px;
         padding: 12px;
     }
 
-    .c-stats__card,
     .w-stats__card {
         padding: 16px;
     }
 
-    .c-stats__card h2,
     .w-stats__card h2 {
         font-size: 28px;
     }
 
-    .c-table__row,
     .w-table__row {
         padding: 14px 12px;
         gap: 8px;
     }
 
-    .c-table__cell,
     .w-table__cell {
         font-size: 13px;
     }
 
-    .c-table__cell::before,
     .w-table__cell::before {
         font-size: 10px;
     }
 
-    .c-table__cell:nth-child(5),
     .w-table__cell:nth-child(5) {
         justify-content: flex-start;
     }
 
     .table__edit,
-    .table__delete,
-    .w-table__edit,
-    .w-table__delete {
+    .table__delete {
         flex: 1;
         text-align: center;
         padding: 8px 10px;
         font-size: 12px;
     }
 
-    .c-table-box,
     .w-table-box {
         border-radius: 12px;
     }
 
-    .c-table-box__top,
     .w-table-box__top {
         padding: 14px 12px;
     }
 
-    .c-table-box__top h2,
     .w-table-box__top h2 {
         font-size: 15px;
     }
@@ -921,7 +913,5 @@
 
     /* #endregion */
 }
-
-
 
 

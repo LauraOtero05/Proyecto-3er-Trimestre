@@ -121,45 +121,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
             fila.classList.add("w-table__row");
 
-            fila.innerHTML = `
+            
+fila.innerHTML = `
 
-                <div>${worker.nombre}</div>
+    <div class="w-table__cell">${worker.nombre}</div>
 
-                <div>${worker.email}</div>
+    <div class="w-table__cell">${worker.email}</div>
 
-                <div>${worker.cargo}</div>
+    <div class="w-table__cell">${worker.cargo}</div>
 
-                <div>
+    <div class="w-table__cell">
+        <span class="
+            w-table__estado
+            ${worker.estado.toLowerCase()}
+        ">
+            ${worker.estado}
+        </span>
+    </div>
 
-                    <span class="
-                        w-table__estado
-                        ${worker.estado.toLowerCase()}
-                    ">
-
-                        ${worker.estado}
-
-                    </span>
-
-                </div>
-
-                <div style="display:flex; gap:8px;">
-
-                    <button
-                        class="table__edit"
-                        data-index="${index}"
-                    >
-                        Editar
-                    </button>
-
-                    <button
-                        class="table__delete"
-                        data-index="${index}"
-                    >
-                        Borrar
-                    </button>
-
-                </div>
-
+    <div class="w-table__cell" style="display:flex; gap:8px;">
+        <button
+            class="table__edit"
+            data-index="${index}"
+        >
+            Editar
+        </button>
+        <button
+            class="table__delete"
+            data-index="${index}"
+        >
+            Borrar
+        </button>
+    </div>
             `;
 
             tablaWorkers.appendChild(fila);
