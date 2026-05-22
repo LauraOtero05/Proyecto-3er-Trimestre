@@ -1,7 +1,6 @@
 @media (max-width: 1150px) {
 
-    /* #region MEDIA QUERIES DASHBOARD */
-
+    /* #region ----------DASHBOARD---------- */
     .d-grid {
         flex-direction: row;
     }
@@ -9,6 +8,109 @@
     .d-grid__main,
     .d-grid__sidebar {
         flex: 1;
+    }
+
+    /* #endregion */
+
+    /* #region ----------SUPPLIERS---------- */
+
+    .s-table__header {
+        display: none !important;
+    }
+
+    .s-table__body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .s-tableBox {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        backdrop-filter: blur(5px);
+    }
+
+    .s-table__item {
+        padding: 4px 0;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        width: 100%;
+    }
+
+    .s-item__actions {
+    border-bottom: none;
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.s-item__actions::before {
+    margin-right: auto;
+    content: "Acciones:";
+}
+
+    .s-table__item::before {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--tertiary-color);
+        opacity: 0.6;
+        letter-spacing: 0.5px;
+    }
+
+    .s-item__id::before {
+        content: "ID:";
+    }
+
+    .s-item__name::before {
+        content: "Nombre:";
+    }
+
+    .s-item__mvl::before {
+        content: "Teléfono:";
+    }
+
+    .s-item__email::before {
+        content: "Email:";
+    }
+
+    .s-item__city::before {
+        content: "Ciudad:";
+    }
+
+    .s-item__pais::before {
+        content: "País:";
+    }
+
+    .s-item__status::before {
+        content: "Estado:";
+    }
+
+    .s-item__actions::before {
+        content: "Acciones:";
+    }
+
+    .s-table__item>* {
+        text-align: right;
+    }
+
+    .s-item__email {
+        word-break: break-all;
+    }
+
+    .s-item__actions {
+        border-bottom: none;
+        padding-top: 10px;
+        justify-content: space-between;
     }
 
     /* #endregion */
@@ -22,7 +124,11 @@
         margin-left: 0;
     }
 
-    /* #region MEDIA QUERIES DASHBOARD */
+    .modal__content {
+        width: 90%;
+    }
+
+    /* #region ----------DASHBOARD---------- */
 
     .d-kpi__container {
         flex-wrap: wrap;
@@ -41,71 +147,8 @@
 
     /* #endregion */
 
-    /* #region MEDIA QUERIES CLIENTES */
 
-    /* .c-dashboard {
-        padding: 20px;
-    }
-
-    .c-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .c-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .c-table {
-        overflow-x: auto;
-    }
-
-    .c-table__head,
-    .c-table__row {
-        grid-template-columns: repeat(5, minmax(120px, 1fr));
-        min-width: 700px;
-    } */
-
-    .modal__content {
-        width: 90%;
-    }
-
-    /* #endregion */
-
-    /* #region MEDIA QUERIES WORKERS */
-
-    /* .w-dashboard {
-        padding: 20px;
-    }
-
-    .w-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .w-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .w-table {
-        overflow-x: auto;
-    }
-
-    .w-table__head,
-    .w-table__row {
-        grid-template-columns: repeat(5, minmax(120px, 1fr));
-        min-width: 700px;
-    } */
-
-    .modal__content {
-        width: 90%;
-    }
-
-    /* #endregion */
-
-    /* #region MEDIA QUERIES ORDERS */
+    /* #region ----------ORDERS---------- */
 
     .o-table__header {
         display: none;
@@ -214,7 +257,7 @@
 
     /* #endregion */
 
-    /* #region ----PRODUCTS---- */
+    /* #region ----------PRODUCTS---------- */
 
     .p-header {
         flex-direction: column;
@@ -233,12 +276,11 @@
 
     /* #endregion */
 
-
 }
 
 @media (max-width: 820px) {
 
-    /* #region ----PROFILE---- */
+    /* #region ----------PROFILE---------- */
 
     .prof-outerbox {
         grid-template-columns: 1fr;
@@ -262,23 +304,72 @@
 
     /* #endregion */
 
-    /* #region ---- PRODUCTOS ----*/
+    /* #region ----------SUPPLIERS---------- */
 
+    .s-table__body {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 
+    .s-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
 
+    .s-header__actions {
+        margin-right: 0;
+        width: 100%;
+    }
 
+    .s-header__actions button {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
 
+    .s-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
 
+    .s-stats__card {
+        padding: 16px;
+        border-radius: 14px;
+    }
 
+    .s-stats__card h2 {
+        font-size: 28px;
+        margin-top: 5px;
+    }
+
+    .s-filter {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .s-filter p {
+        padding: 0;
+        width: 100%;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .s-filter__box {
+        flex: 1 1 140px;
+        width: 100%;
+    }
 
     /* #endregion */
 
 }
 
-
 @media (max-width: 768px) {
 
-    /* #region MEDIA QUERIES DASHBOARD */
+    /* #region ----------DASHBOARD---------- */
 
     .content {
         margin: 15px;
@@ -291,42 +382,153 @@
 
     /* #endregion */
 
+    /* #region ----------CLIENTES---------- */
+    .c-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .c-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .c-table__head {
+        display: none;
+    }
+
+    .c-table__row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .c-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .c-table__cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .c-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .c-table__cell:nth-child(1)::before { content: "Cliente"; }
+    .c-table__cell:nth-child(2)::before { content: "Email"; }
+    .c-table__cell:nth-child(3)::before { content: "Empresa"; }
+    .c-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .c-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
+
+    .button__items {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    /* #endregion */
+
+    /* #region ----------WORKERS---------- */
+    .w-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 60px;
+    }
+
+    .w-header__button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .w-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .w-table__head {
+        display: none;
+    }
+
+    .w-table__row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .w-table__row:last-child {
+        border-bottom: none;
+    }
+
+    .w-table__cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .w-table__cell::before {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .45);
+    }
+
+    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
+    .w-table__cell:nth-child(2)::before { content: "Email"; }
+    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
+    .w-table__cell:nth-child(4)::before { content: "Estado"; }
+
+    .w-table__cell:nth-child(5) {
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+        margin-top: 4px;
+    }
+
+    /* #endregion */
+
 }
 
 @media (max-width: 600px) {
 
-    /* #region MEDIA QUERIES CLIENTES */
-
-    /* .c-header__title {
-        font-size: 24px;
-    }
-
-    .c-stats__card h2 {
-        font-size: 28px;
-    } */
-
-    /* #endregion */
-
-    /* #region MEDIA QUERIES WORKERS */
-/* 
-    .w-header__title {
-        font-size: 24px;
-    }
-
-    .w-stats__card h2 {
-        font-size: 28px;
-    } */
-
-    /* #endregion */
-
-    /* #region MEDIA QUERIES ORDERS */
+    /* #region ----------ORDERS---------- */
 
     .o-header__search-container {
         width: 100% !important;
         margin: 0;
     }
 
-    /* #region MEDIA QUERIES SIDEBAR*/
+    /* #endregion */
+
+    /* #region ----------SIDEBAR----------*/
 
     .layout {
         padding-left: 10px;
@@ -414,20 +616,6 @@
 
     /* #endregion */
 
-
-    /* #region -----PRODUCTS-----*/
-
-    .p-filter p {
-        padding: 8px;
-    }
-
-    .p-filter__box {
-        padding: 8px;
-        width: 140px;
-    }
-
-    /* #endregion */
-
 }
 
 @media (max-width: 500px) {
@@ -436,7 +624,7 @@
         padding: 8px 8px;
     }
 
-    /* #region -----PRODUCTS-----*/
+    /* #region ----------PRODUCTS---------- */
 
     .p-filter {
         flex-direction: column;
@@ -473,9 +661,7 @@
 
 @media (max-width: 480px) {
 
-
-
-    /* #region MEDIA QUERIES DASHBOARD */
+    /* #region ----------DASHBOARD---------- */
 
     .d-kpi__card {
         flex: 1 1 100%;
@@ -570,8 +756,7 @@
 
     /* #endregion */
 
-
-    /* #region MEDIA QUERIES ORDERS*/
+    /* #region ----------ORDERS---------- */
 
     .o-header h1 {
         font-size: 20px;
@@ -590,14 +775,39 @@
 
     /* #endregion */
 
+    /* #region ----------CLIENTES---------- */
+
+    .c-dashboard {
+        padding: 16px;
+    }
+
+    .c-header__title {
+        font-size: 24px;
+    }
+
+    /* #endregion */
+
+    /* #region ----------WORKERS---------- */
+
+    .w-dashboard {
+        padding: 16px;
+    }
+
+    .w-header__title {
+        font-size: 24px;
+    }
+
+    .w-stats__card h2 {
+        font-size: 30px;
+    }
+
+    /* #endregion */
+
 }
-
-
-
 
 @media (max-width: 420px) {
 
-    /* #region ----PROFILE---- */
+    /* #region ----------PROFILE---------- */
     .p-disc__image {
         display: none;
     }
@@ -619,472 +829,89 @@
 
 }
 
-/* ── 768px ────────────────────────────────────────── */
-@media (max-width: 768px) {
-
-    /* CLIENTES */
-    .c-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding-top: 60px;
-    }
-
-    .c-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .c-table__head {
-        display: none;
-    }
-
-    .c-table__row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 18px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .c-table__row:last-child {
-        border-bottom: none;
-    }
-
-    .c-table__cell {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-    }
-
-    .c-table__cell::before {
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .c-table__cell:nth-child(1)::before { content: "Cliente"; }
-    .c-table__cell:nth-child(2)::before { content: "Email"; }
-    .c-table__cell:nth-child(3)::before { content: "Empresa"; }
-    .c-table__cell:nth-child(4)::before { content: "Estado"; }
-
-    .c-table__cell:nth-child(5) {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, .06);
-        margin-top: 4px;
-    }
-
-    .button__items {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* WORKERS */
-    .w-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding-top: 60px;
-    }
-
-    .w-header__button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .w-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .w-table__head {
-        display: none;
-    }
-
-    .w-table__row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 18px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .w-table__row:last-child {
-        border-bottom: none;
-    }
-
-    .w-table__cell {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-    }
-
-    .w-table__cell::before {
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
-    .w-table__cell:nth-child(2)::before { content: "Email"; }
-    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
-    .w-table__cell:nth-child(4)::before { content: "Estado"; }
-
-    .w-table__cell:nth-child(5) {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, .06);
-        margin-top: 4px;
-    }
-
-}
-
-/* ── 480px ────────────────────────────────────────── */
-@media (max-width: 480px) {
-
-    .c-dashboard {
-        padding: 16px;
-    }
-
-    .c-header__title {
-        font-size: 24px;
-    }
-
-    .w-dashboard {
-        padding: 16px;
-    }
-
-    .w-header__title {
-        font-size: 24px;
-    }
-
-    .w-stats__card h2,
-    .c-stats__card h2 {
-        font-size: 30px;
-    }
-
-}
-
-/* ── 350px ────────────────────────────────────────── */
 @media (max-width: 350px) {
 
-    .c-dashboard,
+    /* #region  ----------WORKERS---------- */
     .w-dashboard {
         padding: 10px;
     }
 
-    .c-header__title,
     .w-header__title {
         font-size: 20px;
     }
 
-    .c-header__subtitle,
+
     .w-header__subtitle {
         font-size: 11px;
     }
 
-    .button__items,
     .w-header__button {
         font-size: 13px;
         padding: 12px;
     }
 
-    .c-stats__card,
     .w-stats__card {
         padding: 16px;
     }
 
-    .c-stats__card h2,
     .w-stats__card h2 {
         font-size: 28px;
     }
 
-    .c-table__row,
     .w-table__row {
         padding: 14px 12px;
         gap: 8px;
     }
 
-    .c-table__cell,
     .w-table__cell {
         font-size: 13px;
     }
 
-    .c-table__cell::before,
     .w-table__cell::before {
         font-size: 10px;
     }
 
-    .c-table__cell:nth-child(5),
     .w-table__cell:nth-child(5) {
         justify-content: flex-start;
     }
 
     .table__edit,
-    .table__delete,
-    .w-table__edit,
-    .w-table__delete {
+    .table__delete {
         flex: 1;
         text-align: center;
         padding: 8px 10px;
         font-size: 12px;
     }
 
-    .c-table-box,
     .w-table-box {
         border-radius: 12px;
     }
 
-    .c-table-box__top,
     .w-table-box__top {
         padding: 14px 12px;
     }
 
-    .c-table-box__top h2,
     .w-table-box__top h2 {
         font-size: 15px;
     }
 
-}
-
-/* ── 768px ────────────────────────────────────────── */
-@media (max-width: 768px) {
-
-    /* CLIENTES */
-    .c-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding-top: 60px;
-    }
-
-    .c-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .c-table__head {
-        display: none;
-    }
-
-    .c-table__row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 18px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .c-table__row:last-child {
-        border-bottom: none;
-    }
-
-    .c-table__cell {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-    }
-
-    .c-table__cell::before {
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .c-table__cell:nth-child(1)::before { content: "Cliente"; }
-    .c-table__cell:nth-child(2)::before { content: "Email"; }
-    .c-table__cell:nth-child(3)::before { content: "Empresa"; }
-    .c-table__cell:nth-child(4)::before { content: "Estado"; }
-
-    .c-table__cell:nth-child(5) {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, .06);
-        margin-top: 4px;
-    }
-
-    .button__items {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* WORKERS */
-    .w-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-        padding-top: 60px;
-    }
-
-    .w-header__button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .w-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .w-table__head {
-        display: none;
-    }
-
-    .w-table__row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 18px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .w-table__row:last-child {
-        border-bottom: none;
-    }
-
-    .w-table__cell {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 14px;
-    }
-
-    .w-table__cell::before {
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, .45);
-    }
-
-    .w-table__cell:nth-child(1)::before { content: "Trabajador"; }
-    .w-table__cell:nth-child(2)::before { content: "Email"; }
-    .w-table__cell:nth-child(3)::before { content: "Cargo"; }
-    .w-table__cell:nth-child(4)::before { content: "Estado"; }
-
-    .w-table__cell:nth-child(5) {
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, .06);
-        margin-top: 4px;
-    }
+    /* #endregion */
 
 }
 
-/* ── 480px ────────────────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 380px) {
 
-    .c-dashboard {
-        padding: 16px;
+    /* #region ----------SUPPLIERS---------- */
+
+    .s-tableBox {
+        padding: 14px;
     }
 
-    .c-header__title {
-        font-size: 24px;
-    }
-
-    .w-dashboard {
-        padding: 16px;
-    }
-
-    .w-header__title {
-        font-size: 24px;
-    }
-
-    .w-stats__card h2,
-    .c-stats__card h2 {
-        font-size: 30px;
-    }
-
-}
-
-/* ── 350px ────────────────────────────────────────── */
-@media (max-width: 350px) {
-
-    .c-dashboard,
-    .w-dashboard {
-        padding: 10px;
-    }
-
-    .c-header__title,
-    .w-header__title {
-        font-size: 20px;
-    }
-
-    .c-header__subtitle,
-    .w-header__subtitle {
-        font-size: 11px;
-    }
-
-    .button__items,
-    .w-header__button {
-        font-size: 13px;
-        padding: 12px;
-    }
-
-    .c-stats__card,
-    .w-stats__card {
-        padding: 16px;
-    }
-
-    .c-stats__card h2,
-    .w-stats__card h2 {
-        font-size: 28px;
-    }
-
-    .c-table__row,
-    .w-table__row {
-        padding: 14px 12px;
-        gap: 8px;
-    }
-
-    .c-table__cell,
-    .w-table__cell {
+    .s-table__item {
         font-size: 13px;
     }
 
-    .c-table__cell::before,
-    .w-table__cell::before {
-        font-size: 10px;
-    }
-
-    .c-table__cell:nth-child(5),
-    .w-table__cell:nth-child(5) {
-        justify-content: flex-start;
-    }
-
-    .table__edit,
-    .table__delete,
-    .w-table__edit,
-    .w-table__delete {
-        flex: 1;
-        text-align: center;
-        padding: 8px 10px;
-        font-size: 12px;
-    }
-
-    .c-table-box,
-    .w-table-box {
-        border-radius: 12px;
-    }
-
-    .c-table-box__top,
-    .w-table-box__top {
-        padding: 14px 12px;
-    }
-
-    .c-table-box__top h2,
-    .w-table-box__top h2 {
-        font-size: 15px;
-    }
-
+    /* #endregion */
 }
+
+

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
     <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/mediaQuerys.css">
+
 </head>
 
 <body>
@@ -19,9 +21,9 @@
             </button>
             <div class="sidebar__logo">
                 <div class="logo">
-                    <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
+                    <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="logo 74">
                 </div>
-                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
+                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="logo minutes" class="logo__text">
             </div>
             <div class="nav__section">
                 <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
@@ -61,7 +63,7 @@
                 </div>
                 <div class="nav__item" data-page="profile" data-href="index.html">
                     <span class="material-symbols-rounded">logout</span>
-                    <span class="nav__label" >Cerrar Sesión</span>
+                    <span class="nav__label">Cerrar Sesión</span>
                 </div>
             </div>
         </nav>
@@ -71,7 +73,7 @@
             <header class="s-header">
 
                 <div>
-                    <p class="tag">GESTIÓN DE PROVEEDORES</p>
+                    <p class="tag">PROVEEDORES</p>
                     <h1>Gestión de los proveedores</h1>
                 </div>
 
@@ -204,9 +206,26 @@
         </div>
     </div>
 
+    <div class="modal" id="deleteConfirmModal" style="display: none;">
+        <div class="modal__content" style="max-width: 400px; text-align: center;">
+            <div class="modal__top">
+                <h2>¿Eliminar proveedor?</h2>
+                <button id="CloseDeleteModal" class="modal__close">X</button>
+            </div>
+            <p style="color: var(--tertiary-color); margin: 20px 0; font-size: 15px;">
+                Esta acción no se puede deshacer. ¿Estás seguro de que deseas eliminar este proveedor?
+            </p>
+            <div class="p-card__actions" style="justify-content: center; gap: 15px;">
+                <button id="btnCancelDelete" class="p-card__cancel" style="padding: 10px 20px;">Cancelar</button>
+                <button id="btnConfirmDelete" class="p-card__delete"
+                    style="padding: 10px 20px; background-color: rgb(246, 52, 52); color: white;">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="/Lenguaje-de-Marcas/script/script.js"></script>
     <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
-    <script src="/Lenguaje-de-Marcas/script/entities/Proveedor.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/suppliers.js"></script>
 
 </body>
 
