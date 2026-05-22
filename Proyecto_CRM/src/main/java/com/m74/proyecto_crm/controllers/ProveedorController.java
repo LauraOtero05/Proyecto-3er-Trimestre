@@ -4,7 +4,6 @@ import com.m74.proyecto_crm.entities.Proveedor;
 import com.m74.proyecto_crm.services.ProveedorService;
 import com.m74.proyecto_crm.services.UbicationService;
 import com.m74.proyecto_crm.util.InputHelper;
-import com.m74.proyecto_crm.util.UbicationHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class ProveedorController {
         String direccion = InputHelper.readString("Dirección física: ");
         String cpInput = InputHelper.readString("Código Postal (Texto/Números): ");
 
-        int idCp = UbicationHelper.solicitarORegistrarUbicacion(cpInput);
+        int idCp = com.m74.proyecto_crm.util.UbicationHelper.solicitarORegistrarUbicacion(cpInput);
         if (idCp == -1) {
             System.out.println("No se pudo procesar la dirección. Cancelando registro del proveedor.");
             return;
@@ -160,7 +159,7 @@ public class ProveedorController {
                     if (!nuevoCp.trim().equals("0")) {
                         int idCp = ubicationService.buscarIdCP(nuevoCp);
                         if (idCp == -1) {
-                            idCp = UbicationHelper.solicitarORegistrarUbicacion(nuevoCp);
+                            idCp = com.m74.proyecto_crm.util.UbicationHelper.solicitarORegistrarUbicacion(nuevoCp);
                         }
                         if (idCp != -1) {
                             proveedor.setIdCodigoPostal(idCp);

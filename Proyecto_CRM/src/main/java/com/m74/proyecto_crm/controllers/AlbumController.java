@@ -49,6 +49,7 @@ public class AlbumController {
             if (stock < 0) System.out.println("[!] El stock no puede ser negativo.");
         }
 
+        // CONTROL DE PROVEEDOR (Ahora muestra la chuleta antes de pedir)
         int idProveedor = -1;
         while (idProveedor == -1) {
             System.out.println("\n[i] Consultando empresas de distribución...");
