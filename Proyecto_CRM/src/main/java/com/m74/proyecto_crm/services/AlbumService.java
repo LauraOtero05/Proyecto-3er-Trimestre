@@ -151,29 +151,4 @@ public class AlbumService {
             System.err.println("Error al escribir el archivo de texto: " + e.getMessage());
         }
     }
-
-    public boolean verificarRelaciones(int idProveedor, int idGenero) {
-
-        try {
-
-            AlbumRepositoryImpl repoImpl = (AlbumRepositoryImpl) this.albumRepository;
-
-            if (!repoImpl.existeProveedor(idProveedor)) {
-                System.out.println("Error: El ID de proveedor (" + idProveedor + ") no existe en el sistema.");
-                return false;
-            }
-
-            if (!repoImpl.existeGenero(idGenero)) {
-                System.out.println("Error: El ID de género musical (" + idGenero + ") no existe en el sistema.");
-                return false;
-            }
-
-            return true;
-
-        } catch (SQLException e) {
-
-            System.err.println("Error al validar las relaciones en la BD: " + e.getMessage());
-            return false;
-        }
-    }
 }
