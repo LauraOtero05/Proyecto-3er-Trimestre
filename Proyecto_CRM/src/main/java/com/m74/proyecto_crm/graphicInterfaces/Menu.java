@@ -1,6 +1,5 @@
 package com.m74.proyecto_crm.graphicInterfaces;
 
-import com.m74.proyecto_crm.controllers.AlbumController;
 import com.m74.proyecto_crm.controllers.DetallePedidoController;
 import com.m74.proyecto_crm.controllers.PedidoController;
 import com.m74.proyecto_crm.entities.DetallePedido;
@@ -33,8 +32,8 @@ public class Menu {
                 case 0 -> System.out.println("Saliendo");
                 case 1 -> manageClient();
                 case 2 -> manageWorker();
-                case 3 -> manageSupplier();
-                case 4 -> manageAlbum();
+                case 3 -> manageAlbum();
+                case 4 -> manageSupplier();
                 case 5 -> manageOrder();
                 default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
             }
@@ -188,8 +187,6 @@ public class Menu {
 
     // region ALBUM
 
-    private final AlbumController albumController = new AlbumController();
-
     private void manageAlbum(){
 
         int option;
@@ -203,9 +200,8 @@ public class Menu {
             System.out.println("3. Ver un Album");
             System.out.println("4. Actualizar un Album");
             System.out.println("5. Eliminar un Album");
-            System.out.println("6. Exportar Álbumes a un documento .txt");
             System.out.println("0. Volver al menú anterior");
-            option = InputHelper.readIntInRange("",0,6);
+            option = InputHelper.readIntInRange("",0,5);
 
             switch (option){
 
@@ -215,37 +211,25 @@ public class Menu {
                 case 3 -> findAlbumByID();
                 case 4 -> updateAlbum();
                 case 5 -> deleteAlbum();
-                case 6 -> generateTxtAlbum();
                 default -> System.out.println("La opción seleccionada no es válida, inténtelo de nuevo. \n ");
             }
-
         }while (option!= 0);
-
     }
 
     private void addAlbum(){
-        albumController.crearAlbum();
+
     }
 
     private void findAllAlbums(){
-        albumController.listarAlbumes();
     }
 
     private void findAlbumByID(){
-        albumController.buscarAlbumPorId();
     }
 
     private void updateAlbum(){
-        albumController.modificarAlbum();
     }
 
-    private void deleteAlbum(){
-        albumController.eliminarAlbum();
-    }
-
-    private void generateTxtAlbum(){
-        albumController.exportarTxt();
-    }
+    private void deleteAlbum(){}
 
     // endregion
 

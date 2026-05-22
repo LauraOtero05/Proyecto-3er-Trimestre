@@ -10,7 +10,7 @@ public enum EstadoPedido {
 
     private final String value;
 
-    EstadoPedido(String value) {
+    private EstadoPedido(String value) {
         this.value = value;
     }
 
