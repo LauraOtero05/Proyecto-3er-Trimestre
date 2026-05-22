@@ -15,6 +15,33 @@ public class ProveedorService {
         this.proveedorRepository = new ProveedorRepositoryImpl();
     }
 
+    public int verificarCodigoPostal(String cp) {
+
+        try {
+            return proveedorRepository.obtenerIdPorCodigoPostal(cp);
+
+        } catch (SQLException e) {
+            System.err.println("Error al verificar el código postal: " + e.getMessage());
+            return -1;
+        }
+
+    }
+
+    public int darDeAltaCodigoPostal(String cp, String ciudad, String provincia, String pais) {
+
+        try {
+            int nuevoId = proveedorRepository.crearCodigoPostal(cp, ciudad, provincia, pais);
+
+            System.out.println("¡Código postal [" + cp + "] registrado correctamente en el sistema!");
+
+            return nuevoId;
+
+        } catch (SQLException e) {
+            System.err.println("Error crítico al registrar el nuevo código postal: " + e.getMessage());
+            return -1;
+        }
+    }
+
     public void crearProveedor(Proveedor proveedor) {
         try {
 
