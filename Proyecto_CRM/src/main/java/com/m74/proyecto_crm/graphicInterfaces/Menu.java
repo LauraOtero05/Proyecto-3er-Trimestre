@@ -162,10 +162,10 @@ public class Menu {
             System.out.println("\nBIENVENIDO A GESTIÓN DE PROVEEDORES");
             System.out.println("¿Qué quieres hacer?");
             System.out.println("1. Añadir Proveedor");
-            System.out.println("2. Ver todos los Proveedores");
+            System.out.println("2. Ver todos los Proveedor");
             System.out.println("3. Ver un Proveedor");
             System.out.println("4. Actualizar un Proveedor");
-            System.out.println("5. Eliminar un Proveedor por su ID");
+            System.out.println("5. Eliminar un Proveedor");
             System.out.println("0. Volver al menú anterior");
             option = InputHelper.readIntInRange("",0,5);
 

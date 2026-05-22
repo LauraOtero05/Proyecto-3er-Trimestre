@@ -94,32 +94,6 @@ public class ProveedorRepositoryImpl implements  ProveedorRepository {
         return null;
     }
 
-    public Proveedor findByNombre(String nombre) throws SQLException {
-        String sql = "SELECT p.*, cp.codigo_postal " +
-                "FROM proveedores p " +
-                "INNER JOIN codigos_postales cp ON p.id_codigo_postal = cp.id_codigo_postal " +
-                "WHERE p.nombre = ?";
-
-        Connection conn = DataBaseConnection.getConnection();
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nombre);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int id = rs.getInt("id_proveedor");
-                    String direccion = rs.getString("direccion");
-                    int idCp = rs.getInt("id_codigo_postal");
-                    String cpTexto = rs.getString("codigo_postal");
-
-                    Proveedor prov = new Proveedor(id, nombre, direccion, idCp, cpTexto);
-                    cargarContactos(prov);
-                    return prov;
-                }
-            }
-        }
-        return null;
-    }
-
     @Override
     public List<Proveedor> findAll() throws SQLException {
         List<Proveedor> proveedores = new ArrayList<>();
