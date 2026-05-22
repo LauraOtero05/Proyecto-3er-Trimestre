@@ -1,13 +1,6 @@
 package com.m74.proyecto_crm.graphicInterfaces;
 
-import com.m74.proyecto_crm.controllers.DetallePedidoController;
-import com.m74.proyecto_crm.controllers.PedidoController;
-import com.m74.proyecto_crm.entities.DetallePedido;
-import com.m74.proyecto_crm.entities.Pedido;
 import com.m74.proyecto_crm.util.InputHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Menu {
 
@@ -235,9 +228,6 @@ public class Menu {
 
     // region ORDER
 
-    private final PedidoController pedidoController = new PedidoController();
-    private final DetallePedidoController detallePedidoController = new DetallePedidoController();
-
     private void manageOrder(){
 
         int option;
@@ -272,39 +262,6 @@ public class Menu {
     }
 
     private void findAllOrders(){
-
-        List<Pedido> pedidos = pedidoController.findAll();
-
-        if (pedidos.isEmpty()) {
-            System.out.println("No hay pedidos registrados.");
-            return;
-        }
-
-        System.out.println("\n========== PEDIDOS ==========");
-        for (Pedido pedido : pedidos) {
-
-            System.out.println("--------------------------------");
-            System.out.println("ID:           " + pedido.getIdPedido());
-            System.out.println("Fecha:        " + pedido.getFecha());
-            System.out.println("Estado:       " + pedido.getEstado().getValue());
-            System.out.println("Importe:      " + pedido.getImporteTotal() + " €");
-            System.out.println("ID Cliente:   " + pedido.getIdCliente());
-            System.out.println("Trabajador:   " + (pedido.getDniTrabajador() != null ? pedido.getDniTrabajador() : "Sin asignar"));
-
-            List<DetallePedido> detalles = detallePedidoController.findByIdPedido(pedido.getIdPedido());
-
-            if (detalles.isEmpty()) {
-                System.out.println("Detalles:     Sin detalles");
-            } else {
-                System.out.println("Detalles:");
-                for (DetallePedido detalle : detalles) {
-                    System.out.println("  - ID Álbum: " + detalle.getIdAlbum() +
-                            " | Cantidad: " + detalle.getCantidad());
-                }
-            }
-        }
-        System.out.println("================================\n");
-
     }
 
     private void findOrderByID(){
