@@ -17,8 +17,7 @@ public class ClienteRepositoryImpl implements  ClienteRepository {
         String sqlCliente = "INSERT INTO clientes (nombre, apellido, direccion, id_codigo_postal, email, password_hash) VALUES (?, ?, ?, ?, ?, ?)";
         String sqlTlf = "INSERT INTO telefonos_cliente (id_cliente, telefono) VALUES (?, ?)";
 
-        try (PreparedStatement psCliente = conn.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement psTlf = conn.prepareStatement(sqlTlf)) {
+        try (PreparedStatement psCliente = conn.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS); PreparedStatement psTlf = conn.prepareStatement(sqlTlf)) {
 
             psCliente.setString(1, cliente.getNombre());
             psCliente.setString(2, cliente.getApellido());
@@ -128,9 +127,7 @@ public class ClienteRepositoryImpl implements  ClienteRepository {
         String sqlDelTlfs = "DELETE FROM telefonos_cliente WHERE id_cliente = ?";
         String sqlInsTlf = "INSERT INTO telefonos_cliente (id_cliente, telefono) VALUES (?, ?)";
 
-        try (PreparedStatement psCliente = conn.prepareStatement(sqlCliente);
-             PreparedStatement psDelTlfs = conn.prepareStatement(sqlDelTlfs);
-             PreparedStatement psInsTlf = conn.prepareStatement(sqlInsTlf)) {
+        try (PreparedStatement psCliente = conn.prepareStatement(sqlCliente); PreparedStatement psDelTlfs = conn.prepareStatement(sqlDelTlfs); PreparedStatement psInsTlf = conn.prepareStatement(sqlInsTlf)) {
 
             psCliente.setString(1, cliente.getNombre());
             psCliente.setString(2, cliente.getApellido());
