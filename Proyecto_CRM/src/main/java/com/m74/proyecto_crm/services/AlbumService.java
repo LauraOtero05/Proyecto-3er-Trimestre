@@ -118,15 +118,17 @@ public class AlbumService {
     }
 
     public void exportarAlbumesATxt(String rutaArchivo) {
+
         List<Album> listaAlbumes = obtenerTodosLosAlbumes();
 
         if (listaAlbumes.isEmpty()) {
-            System.out.println("\n[!] No hay datos en la base de datos para exportar.");
+
+            System.out.println("No hay datos en la base de datos para exportar.");
+
             return;
         }
-        java.io.File archivo = new java.io.File(rutaArchivo);
 
-        try (java.io.FileWriter fw = new java.io.FileWriter(archivo); java.io.BufferedWriter bw = new java.io.BufferedWriter(fw)) {
+        try (java.io.FileWriter fw = new java.io.FileWriter(rutaArchivo); java.io.BufferedWriter bw = new java.io.BufferedWriter(fw)) {
 
             bw.write("=========================================================");
             bw.newLine();
@@ -137,12 +139,16 @@ public class AlbumService {
             bw.newLine();
 
             for (Album album : listaAlbumes) {
+
                 bw.write(album.toString());
                 bw.newLine();
             }
 
+            System.out.println("¡Datos exportados con éxito! Archivo creado en: " + rutaArchivo);
+
         } catch (java.io.IOException e) {
-            System.err.println("\n[-] Error al escribir el archivo de texto: " + e.getMessage());
+
+            System.err.println("Error al escribir el archivo de texto: " + e.getMessage());
         }
     }
 

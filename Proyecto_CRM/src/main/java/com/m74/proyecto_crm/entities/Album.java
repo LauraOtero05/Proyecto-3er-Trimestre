@@ -13,13 +13,11 @@ public class Album {
     private double precio;
     private int stock;
     private int idProveedor;
-    private String nombreProveedor;
     private int idGenero;
-    private String nombreGenero;
 
     public Album() {}
 
-    public Album(int idProducto, String titulo, String artista, FormatoDisco formato, double precio, int stock, int idProveedor, String nombreProveedor, int idGenero, String nombreGenero) {
+    public Album(int idProducto, String titulo, String artista, FormatoDisco formato, double precio, int stock,  int idProveedor, int idGenero) {
         this.idProducto = idProducto;
         this.titulo = titulo;
         this.artista = artista;
@@ -27,9 +25,7 @@ public class Album {
         this.precio = precio;
         this.stock = stock;
         this.idProveedor = idProveedor;
-        this.nombreProveedor = nombreProveedor;
         this.idGenero = idGenero;
-        this.nombreGenero = nombreGenero;
     }
 
     public int getIdProducto() {
@@ -98,32 +94,17 @@ public class Album {
         this.idGenero = idGenero;
     }
 
-    public String getNombreProveedor() {
-        return nombreProveedor;
-    }
-
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
-    }
-
-    public String getNombreGenero() {
-        return nombreGenero;
-    }
-
-    public void setNombreGenero(String nombreGenero) {
-        this.nombreGenero = nombreGenero;
-    }
-
     @Override
     public String toString() {
-        return  "Id Album: " + idProducto +
-                ", Titulo: " + titulo +
-                ", Artista: " + artista +
-                ", Formato: " + formato +
-                ", Precio: " + precio + " €" +
-                ", Stock: " + stock +
-                ", Proveedor: " + nombreProveedor +
-                ", Género: " + nombreGenero;
+        return "Album: " +
+                "Id: " + idProducto +
+                ", titulo: " + titulo +
+                ", artista: " + artista +
+                ", formato: " + formato +
+                ", precio: " + precio + " €" +
+                ", stock: " + stock +
+                ", idProveedor: " + idProveedor +
+                ", idGenero: " + idGenero;
     }
 
     @Override
