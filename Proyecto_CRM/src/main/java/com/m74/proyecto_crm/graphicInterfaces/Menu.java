@@ -3,7 +3,6 @@ package com.m74.proyecto_crm.graphicInterfaces;
 import com.m74.proyecto_crm.controllers.AlbumController;
 import com.m74.proyecto_crm.controllers.DetallePedidoController;
 import com.m74.proyecto_crm.controllers.PedidoController;
-import com.m74.proyecto_crm.controllers.ProveedorController;
 import com.m74.proyecto_crm.entities.DetallePedido;
 import com.m74.proyecto_crm.entities.Pedido;
 import com.m74.proyecto_crm.util.InputHelper;
@@ -141,8 +140,6 @@ public class Menu {
 
     // region SUPPLIER
 
-    private final ProveedorController proveedorController = new ProveedorController();
-
     private void manageSupplier(){
 
         int option;
@@ -173,24 +170,19 @@ public class Menu {
     }
 
     private void addSupplier(){
-        proveedorController.crearProveedor();
+
     }
 
     private void findAllSuppliers(){
-        proveedorController.listarProveedores();
     }
 
     private void findSupplierByID(){
-        proveedorController.buscarProveedorPorId();
     }
 
     private void updateSupplier(){
-        proveedorController.modificarProveedor();
     }
 
-    private void deleteSupplier(){
-        proveedorController.eliminarProveedor();
-    }
+    private void deleteSupplier(){}
 
     // endregion
 
