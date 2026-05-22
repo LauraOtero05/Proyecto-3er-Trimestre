@@ -102,19 +102,6 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         }
     }
 
-    @Override
-    public void updateStock(int idAlbum, int cantidad) throws SQLException {
-        String sql = "UPDATE albumes SET stock = stock + ? WHERE id_album = ?";
-        Connection conn = DataBaseConnection.getConnection();
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, cantidad);
-            ps.setInt(2, idAlbum);
-            ps.executeUpdate();
-        }
-    }
-
-
     private Album mapearAlbum(ResultSet rs) throws SQLException {
         int id = rs.getInt("id_album");
         String titulo = rs.getString("titulo");

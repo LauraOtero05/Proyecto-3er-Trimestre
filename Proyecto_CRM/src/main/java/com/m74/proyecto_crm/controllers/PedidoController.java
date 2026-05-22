@@ -29,8 +29,4 @@ public class PedidoController {
     public void deleteById(int id) {
         pedidoService.deleteById(id);
     }
-
-    public void generateTxtOrder(String rutaArchivo) {
-        pedidoService.generateTxtOrder(rutaArchivo);
-    }
 }

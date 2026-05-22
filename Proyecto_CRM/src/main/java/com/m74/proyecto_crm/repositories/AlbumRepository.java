@@ -16,6 +16,4 @@ public interface AlbumRepository {
     void update(Album album) throws SQLException;
 
     void delete(int id) throws SQLException;
-
-    void updateStock(int idAlbum, int cantidad) throws SQLException;
 }

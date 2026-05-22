@@ -177,8 +177,4 @@ public class ClienteController {
             System.err.println("Error al exportar el archivo CSV: " + e.getMessage());
         }
     }
-
-    public List<Cliente> obtenerTodosLosClientes() {
-        return clienteService.obtenerTodosLosClientes();
-    }
 }

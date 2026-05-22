@@ -310,13 +310,5 @@ public class AlbumController {
         System.out.println("----------------------------------------");
     }
 
-    public List<Album> listarAlbumesParaPedido() {
-        return albumService.obtenerTodosLosAlbumes();
-    }
-
-    public Album obtenerAlbumPorId(int id) {
-        return albumService.obtenerAlbumPorId(id);
-    }
-
 
 }

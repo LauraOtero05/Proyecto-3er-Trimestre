@@ -146,20 +146,6 @@ public class AlbumService {
         }
     }
 
-    public void updateStock(int idAlbum, int cantidad) throws SQLException {
-        Album album = albumRepository.findById(idAlbum);
-
-        if (album == null) {
-            throw new SQLException("Álbum con ID " + idAlbum + " no encontrado.");
-        }
-
-        if (album.getStock() + cantidad < 0) {
-            throw new SQLException("Stock insuficiente para el álbum '" + album.getTitulo() + "'. Stock actual: " + album.getStock());
-        }
-
-        albumRepository.updateStock(idAlbum, cantidad);
-    }
-
     public boolean verificarRelaciones(int idProveedor, int idGenero) {
 
         try {

@@ -25,7 +25,6 @@ public class Pedido {
         this.importeTotal = importeTotal;
         this.idCliente = idCliente;
         this.dniTrabajador = dniTrabajador;
-        this.detalles = new ArrayList<>();
     }
 
     public Pedido(LocalDate fecha, EstadoPedido estado, double importeTotal, int idCliente, String dniTrabajador) {
@@ -93,11 +92,6 @@ public class Pedido {
 
     public void setDetalles(List<DetallePedido> detalles) {
         this.detalles = detalles;
-    }
-
-    public void addDetalle(DetallePedido detalle) {
-        if (this.detalles == null) this.detalles = new ArrayList<>();
-        this.detalles.add(detalle);
     }
 
     // endregion

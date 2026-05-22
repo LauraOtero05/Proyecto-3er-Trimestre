@@ -145,8 +145,4 @@ public class TrabajadorController {
         String dni = InputHelper.readString("Introduce el DNI del trabajador a eliminar: ");
         trabajadorService.eliminarTrabajador(dni);
     }
-
-    public List<Trabajador> obtenerTodosLosTrabajadores() {
-        return trabajadorService.obtenerTodosLosTrabajadores();
-    }
 }
