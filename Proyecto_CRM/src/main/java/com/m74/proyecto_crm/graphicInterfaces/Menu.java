@@ -8,6 +8,16 @@ import com.m74.proyecto_crm.util.InputHelper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.m74.proyecto_crm.entities.Cliente;
+import com.m74.proyecto_crm.entities.Trabajador;
+import com.m74.proyecto_crm.enums.RolTrabajador;
+import com.m74.proyecto_crm.util.UbicationHelper;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 public class Menu {
 
@@ -76,28 +86,112 @@ public class Menu {
         }while (option!= 0);
     }
 
-    private void addClient(){
-        clienteController.crearCliente();
+    private void addClient() {
+        System.out.println("\n--- REGISTRAR NUEVO CLIENTE ---");
+        String nombre = InputHelper.readString("Nombre: ");
+        String apellido = InputHelper.readString("Apellido: ");
+        String direccion = InputHelper.readString("Dirección: ");
+        String cpInput = InputHelper.readString("Código Postal (Texto/Números): ");
+        int idCp = UbicationHelper.solicitarORegistrarUbicacion(cpInput);
+        if (idCp == -1) {
+            System.out.println("No se pudo procesar la dirección. Cancelando registro del cliente.");
+            return;
+        }
+        String email = InputHelper.readString("Email: ");
+        String password = InputHelper.readString("Contraseña: ");
+        Cliente nuevoCliente = new Cliente(0, nombre, apellido, direccion, idCp, cpInput, email, password);
+        System.out.println("\n--- Introducción de Teléfonos (Escribe 'fin' para terminar) ---");
+        while (true) {
+            String tlf = InputHelper.readString("Teléfono: ");
+            if (tlf.equalsIgnoreCase("fin")) break;
+            nuevoCliente.addTelefono(tlf);
+        }
+        clienteController.crearCliente(nuevoCliente);
     }
 
-    private void findAllClients(){
-        clienteController.listarClientes();
+    private void findAllClients() {
+        System.out.println("\n--- LISTADO GENERAL DE CLIENTES ---");
+        List<Cliente> clientes = clienteController.obtenerTodosLosClientes();
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados en el sistema.");
+            return;
+        }
+        for (Cliente c : clientes) {
+            System.out.println(c);
+        }
     }
 
-    private void findClientByID(){
-        clienteController.buscarClientePorId();
+    private void findClientByID() {
+        System.out.println("\n--- BUSCAR CLIENTE POR ID ---");
+        int id = InputHelper.readInt("Introduce el ID del cliente: ");
+        Cliente c = clienteController.obtenerClientePorId(id);
+        if (c != null) {
+            System.out.println("\n[Cliente Encontrado]");
+            System.out.println(c);
+        }
     }
 
-    private void updateClient(){
-        clienteController.modificarCliente();
+    private void updateClient() {
+        System.out.println("\n--- ACTUALIZAR CLIENTE ---");
+        int id = InputHelper.readInt("Introduce el ID del cliente que deseas modificar: ");
+        Cliente cliente = clienteController.obtenerClientePorId(id);
+        if (cliente == null) return;
+        int opcionModificar;
+        do {
+            System.out.println("\n--- DATOS ACTUALES DEL CLIENTE ---");
+            System.out.println("1. Nombre:    " + cliente.getNombre());
+            System.out.println("2. Apellido:  " + cliente.getApellido());
+            System.out.println("3. Dirección: " + cliente.getDireccion());
+            System.out.println("4. CP Actual: " + cliente.getCodigoPostal());
+            System.out.println("5. Email:     " + cliente.getEmail());
+            System.out.println("6. Contraseña: ********");
+            System.out.println("7. Teléfonos: " + cliente.getTelefonos());
+            System.out.println("0. GUARDAR CAMBIOS Y SALIR");
+            opcionModificar = InputHelper.readIntInRange("¿Qué campo deseas modificar? (0-7): ", 0, 7);
+            switch (opcionModificar) {
+                case 1 -> { String nuevoNombre = InputHelper.readString("Introduce el nuevo Nombre: "); cliente.setNombre(nuevoNombre); }
+                case 2 -> { String nuevoApellido = InputHelper.readString("Introduce el nuevo Apellido: "); cliente.setApellido(nuevoApellido); }
+                case 3 -> { String nuevaDir = InputHelper.readString("Introduce la nueva Dirección: "); cliente.setDireccion(nuevaDir); }
+                case 4 -> { String nuevoCp = InputHelper.readString("Introduce el nuevo Código Postal: ");
+                    int idCp = UbicationHelper.solicitarORegistrarUbicacion(nuevoCp);
+                    if (idCp != -1) { cliente.setIdCodigoPostal(idCp); cliente.setCodigoPostal(nuevoCp); } }
+                case 5 -> { String nuevoEmail = InputHelper.readString("Introduce el nuevo Email: "); cliente.setEmail(nuevoEmail); }
+                case 6 -> { String nuevaPassword = InputHelper.readString("Introduce la nueva Contraseña: "); cliente.setPasswordHash(nuevaPassword); }
+                case 7 -> { System.out.println("\nReemplazando lista de teléfonos. Escribe 'fin' para terminar:");
+                    List<String> nuevosTlfs = new ArrayList<>();
+                    while (true) { String tlf = InputHelper.readString("Teléfono: "); if (tlf.equalsIgnoreCase("fin")) break; nuevosTlfs.add(tlf); }
+                    cliente.setTelefonos(nuevosTlfs); }
+                case 0 -> { System.out.println("Guardando actualizaciones en la base de datos..."); clienteController.actualizarCliente(cliente); }
+            }
+        } while (opcionModificar != 0);
     }
 
-    private void deleteClient(){
-        clienteController.eliminarCliente();
+    private void deleteClient() {
+        System.out.println("\n--- ELIMINAR CLIENTE ---");
+        int id = InputHelper.readInt("Introduce el ID del cliente a eliminar: ");
+        clienteController.eliminarCliente(id);
     }
 
-    private void generateCsvClient(){
-        clienteController.exportarCsv();
+    private void generateCsvClient() {
+        System.out.println("\n--- EXPORTAR CLIENTES A CSV ---");
+        List<Cliente> clientes = clienteController.obtenerTodosLosClientes();
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes para exportar.");
+            return;
+        }
+        System.out.println("Generando archivo CSV, esto puede tardar un momento...");
+        File archivo = new File("clientes_export.csv");
+        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(archivo), StandardCharsets.UTF_8))) {
+            writer.println("ID,Nombre,Apellido,Dirección,Código Postal,Email,Teléfonos");
+            for (Cliente c : clientes) {
+                writer.println(c.getIdCliente() + "," + c.getNombre() + "," + c.getApellido() + "," +
+                        c.getDireccion() + "," + c.getCodigoPostal() + "," + c.getEmail() + "," +
+                        String.join("|", c.getTelefonos()));
+            }
+            System.out.println("¡Exportación completada! Archivo guardado en: " + archivo.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Error al exportar el archivo CSV: " + e.getMessage());
+        }
     }
 
     private int selectClient() {
@@ -167,27 +261,91 @@ public class Menu {
         }while (option!= 0);
     }
 
-    private void addWorker(){
-        trabajadorController.crearTrabajador();
-
+    private void addWorker() {
+        System.out.println("\n--- REGISTRAR NUEVO TRABAJADOR ---");
+        String dni = InputHelper.readString("DNI: ");
+        String nombre = InputHelper.readString("Nombre: ");
+        String apellido = InputHelper.readString("Apellido: ");
+        RolTrabajador rol = null;
+        while (rol == null) {
+            try {
+                String rolTexto = InputHelper.readString("Rol (Administrador, Ventas, Almacen, Gerente): ");
+                rol = RolTrabajador.fromString(rolTexto);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage() + " Inténtalo de nuevo.");
+            }
+        }
+        String email = InputHelper.readString("Email: ");
+        String password = InputHelper.readString("Contraseña: ");
+        Trabajador nuevoTrabajador = new Trabajador(dni, nombre, apellido, rol, email, password);
+        System.out.println("\n--- Introducción de Teléfonos (Escribe 'fin' para terminar) ---");
+        while (true) {
+            String tlf = InputHelper.readString("Teléfono: ");
+            if (tlf.equalsIgnoreCase("fin")) break;
+            nuevoTrabajador.addTelefono(tlf);
+        }
+        trabajadorController.crearTrabajador(nuevoTrabajador);
     }
 
-    private void findAllWorkers(){
-        trabajadorController.listarTrabajadores();
-
+    private void findAllWorkers() {
+        System.out.println("\n--- LISTADO GENERAL DE TRABAJADORES ---");
+        List<Trabajador> trabajadores = trabajadorController.obtenerTodosLosTrabajadores();
+        if (trabajadores.isEmpty()) {
+            System.out.println("No hay trabajadores registrados en el sistema.");
+            return;
+        }
+        for (Trabajador t : trabajadores) {
+            System.out.println(t);
+        }
     }
 
-    private void findWorkerByID(){
-        trabajadorController.buscarTrabajadorPorDni();
-
+    private void findWorkerByID() {
+        System.out.println("\n--- BUSCAR TRABAJADOR POR DNI ---");
+        String dni = InputHelper.readString("Introduce el DNI del trabajador: ");
+        Trabajador t = trabajadorController.obtenerTrabajadorPorDni(dni);
+        if (t != null) {
+            System.out.println("\n[Trabajador Encontrado]");
+            System.out.println(t);
+        }
     }
 
-    private void updateWorker(){
-        trabajadorController.modificarTrabajador();
+    private void updateWorker() {
+        System.out.println("\n--- ACTUALIZAR TRABAJADOR ---");
+        String dni = InputHelper.readString("Introduce el DNI del trabajador que deseas modificar: ");
+        Trabajador trabajador = trabajadorController.obtenerTrabajadorPorDni(dni);
+        if (trabajador == null) return;
+        int opcionModificar;
+        do {
+            System.out.println("\n--- DATOS ACTUALES DEL TRABAJADOR ---");
+            System.out.println("1. Nombre:   " + trabajador.getNombre());
+            System.out.println("2. Apellido: " + trabajador.getApellido());
+            System.out.println("3. Rol:      " + trabajador.getRol().getValue());
+            System.out.println("4. Email:    " + trabajador.getEmail());
+            System.out.println("5. Contraseña: ********");
+            System.out.println("6. Teléfonos: " + trabajador.getTelefonos());
+            System.out.println("0. GUARDAR CAMBIOS Y SALIR");
+            opcionModificar = InputHelper.readIntInRange("¿Qué campo deseas modificar? (0-6): ", 0, 6);
+            switch (opcionModificar) {
+                case 1 -> { String nuevoNombre = InputHelper.readString("Introduce el nuevo Nombre: "); trabajador.setNombre(nuevoNombre); }
+                case 2 -> { String nuevoApellido = InputHelper.readString("Introduce el nuevo Apellido: "); trabajador.setApellido(nuevoApellido); }
+                case 3 -> { RolTrabajador nuevoRol = null;
+                    while (nuevoRol == null) { try { String rolTexto = InputHelper.readString("Introduce el nuevo Rol (Administrador, Ventas, Almacen, Gerente): "); nuevoRol = RolTrabajador.fromString(rolTexto); } catch (IllegalArgumentException e) { System.out.println("Error: " + e.getMessage() + " Inténtalo de nuevo."); } }
+                    trabajador.setRol(nuevoRol); }
+                case 4 -> { String nuevoEmail = InputHelper.readString("Introduce el nuevo Email: "); trabajador.setEmail(nuevoEmail); }
+                case 5 -> { String nuevaPassword = InputHelper.readString("Introduce la nueva Contraseña: "); trabajador.setPasswordHash(nuevaPassword); }
+                case 6 -> { System.out.println("\nReemplazando lista de teléfonos. Escribe 'fin' para terminar:");
+                    List<String> nuevosTlfs = new ArrayList<>();
+                    while (true) { String tlf = InputHelper.readString("Teléfono: "); if (tlf.equalsIgnoreCase("fin")) break; nuevosTlfs.add(tlf); }
+                    trabajador.setTelefonos(nuevosTlfs); }
+                case 0 -> { System.out.println("Guardando actualizaciones en la base de datos..."); trabajadorController.actualizarTrabajador(trabajador); }
+            }
+        } while (opcionModificar != 0);
     }
 
-    private void deleteWorker(){
-        trabajadorController.eliminarTrabajador();
+    private void deleteWorker() {
+        System.out.println("\n--- ELIMINAR TRABAJADOR ---");
+        String dni = InputHelper.readString("Introduce el DNI del trabajador a eliminar: ");
+        trabajadorController.eliminarTrabajador(dni);
     }
 
     private String selectWorker() {
