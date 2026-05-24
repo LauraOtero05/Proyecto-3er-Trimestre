@@ -122,7 +122,12 @@ public class Menu {
 
     private void findClientByID() {
         System.out.println("\n--- BUSCAR CLIENTE POR ID ---");
+        for (Cliente c : clienteController.obtenerTodosLosClientes()) {
+            System.out.println("ID: " + c.getIdCliente() + " | " + c.getNombre() + " " + c.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         int id = InputHelper.readInt("Introduce el ID del cliente: ");
+        if (id == 0) { System.out.println("Operación cancelada."); return; }
         Cliente c = clienteController.obtenerClientePorId(id);
         if (c != null) {
             System.out.println("\n[Cliente Encontrado]");
@@ -132,7 +137,12 @@ public class Menu {
 
     private void updateClient() {
         System.out.println("\n--- ACTUALIZAR CLIENTE ---");
+        for (Cliente c : clienteController.obtenerTodosLosClientes()) {
+            System.out.println("ID: " + c.getIdCliente() + " | " + c.getNombre() + " " + c.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         int id = InputHelper.readInt("Introduce el ID del cliente que deseas modificar: ");
+        if (id == 0) { System.out.println("Operación cancelada."); return; }
         Cliente cliente = clienteController.obtenerClientePorId(id);
         if (cliente == null) return;
         int opcionModificar;
@@ -167,7 +177,12 @@ public class Menu {
 
     private void deleteClient() {
         System.out.println("\n--- ELIMINAR CLIENTE ---");
+        for (Cliente c : clienteController.obtenerTodosLosClientes()) {
+            System.out.println("ID: " + c.getIdCliente() + " | " + c.getNombre() + " " + c.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         int id = InputHelper.readInt("Introduce el ID del cliente a eliminar: ");
+        if (id == 0) { System.out.println("Operación cancelada."); return; }
         clienteController.eliminarCliente(id);
     }
 
@@ -268,7 +283,12 @@ public class Menu {
 
     private void findWorkerByID() {
         System.out.println("\n--- BUSCAR TRABAJADOR POR DNI ---");
+        for (Trabajador t : trabajadorController.obtenerTodosLosTrabajadores()) {
+            System.out.println("DNI: " + t.getDni() + " | " + t.getNombre() + " " + t.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         String dni = InputHelper.readString("Introduce el DNI del trabajador: ");
+        if (dni.equals("0")) { System.out.println("Operación cancelada."); return; }
         Trabajador t = trabajadorController.obtenerTrabajadorPorDni(dni);
         if (t != null) {
             System.out.println("\n[Trabajador Encontrado]");
@@ -278,7 +298,12 @@ public class Menu {
 
     private void updateWorker() {
         System.out.println("\n--- ACTUALIZAR TRABAJADOR ---");
+        for (Trabajador t : trabajadorController.obtenerTodosLosTrabajadores()) {
+            System.out.println("DNI: " + t.getDni() + " | " + t.getNombre() + " " + t.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         String dni = InputHelper.readString("Introduce el DNI del trabajador que deseas modificar: ");
+        if (dni.equals("0")) { System.out.println("Operación cancelada."); return; }
         Trabajador trabajador = trabajadorController.obtenerTrabajadorPorDni(dni);
         if (trabajador == null) return;
         int opcionModificar;
@@ -311,10 +336,14 @@ public class Menu {
 
     private void deleteWorker() {
         System.out.println("\n--- ELIMINAR TRABAJADOR ---");
+        for (Trabajador t : trabajadorController.obtenerTodosLosTrabajadores()) {
+            System.out.println("DNI: " + t.getDni() + " | " + t.getNombre() + " " + t.getApellido());
+        }
+        System.out.println("(Escribe 0 para cancelar)");
         String dni = InputHelper.readString("Introduce el DNI del trabajador a eliminar: ");
+        if (dni.equals("0")) { System.out.println("Operación cancelada."); return; }
         trabajadorController.eliminarTrabajador(dni);
     }
-
     // endregion
 
     // region SUPPLIER
