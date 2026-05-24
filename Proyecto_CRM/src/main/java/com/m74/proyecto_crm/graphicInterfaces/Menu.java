@@ -3,6 +3,8 @@ package com.m74.proyecto_crm.graphicInterfaces;
 import com.m74.proyecto_crm.controllers.*;
 import com.m74.proyecto_crm.entities.*;
 import com.m74.proyecto_crm.enums.EstadoPedido;
+import com.m74.proyecto_crm.enums.FormatoDisco;
+import com.m74.proyecto_crm.util.GeneroHelper;
 import com.m74.proyecto_crm.util.InputHelper;
 
 import java.time.LocalDate;
@@ -409,24 +411,241 @@ public class Menu {
     }
 
     private void addSupplier(){
-        proveedorController.crearProveedor();
+        System.out.println("\n--- REGISTRAR NUEVO PROVEEDOR ---");
+
+        String nombre = InputHelper.readString("Nombre de la empresa: ");
+        String direccion = InputHelper.readString("Dirección física: ");
+        String cpInput = InputHelper.readString("Código Postal (Texto/Números): ");
+
+        int idCp = UbicationHelper.solicitarORegistrarUbicacion(cpInput);
+        if (idCp == -1) {
+            System.out.println("No se pudo procesar la dirección. Cancelando registro del proveedor.");
+            return;
+        }
+
+        Proveedor nuevoProveedor = new Proveedor(0, nombre, direccion, idCp, cpInput);
+
+        System.out.println("\n--- Introducción de Teléfonos (Escribe 'fin' para terminar) ---");
+        while (true) {
+            String tlf = InputHelper.readString("Teléfono: ");
+            if (tlf.equalsIgnoreCase("fin")) break;
+            nuevoProveedor.addTelefono(tlf);
+        }
+
+        System.out.println("\n--- Introducción de Correos Electrónicos (Escribe 'fin' para terminar) ---");
+        while (true) {
+            String email = InputHelper.readString("Email: ");
+            if (email.equalsIgnoreCase("fin")) break;
+            nuevoProveedor.addEmail(email);
+        }
+
+        proveedorController.crearProveedor(nuevoProveedor);
     }
 
     private void findAllSuppliers(){
-        proveedorController.listarProveedores();
+        System.out.println("\n--- LISTADO GENERAL DE PROVEEDORES ---");
+        List<Proveedor> proveedores = proveedorController.obtenerTodosLosProveedores();
+
+        if (proveedores.isEmpty()) {
+            System.out.println("No hay proveedores registrados en el sistema");
+            return;
+        }
+
+        for (Proveedor p : proveedores) {
+            System.out.println(p);
+        }
     }
 
     private void findSupplierByID(){
-        proveedorController.buscarProveedorPorId();
+        System.out.println("\n--- BUSCAR PROVEEDOR ---");
+
+        List<Proveedor> listaCompleta = proveedorController.obtenerTodosLosProveedores();
+        if (listaCompleta.isEmpty()) {
+            System.out.println("No hay proveedores registrados en el sistema para buscar");
+            return;
+        }
+
+        System.out.println("Proveedores disponibles en el sistema:");
+        System.out.println("----------------------------------------");
+        for (Proveedor p : listaCompleta) {
+            System.out.println(" ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+        }
+        System.out.println("----------------------------------------");
+
+        String criterio = InputHelper.readString("Introduce el ID o el Nombre exacto de la empresa a buscar: ");
+        Proveedor proveedorEncontrado = proveedorController.obtenerProveedorPorIdONombre(criterio);
+
+        if (proveedorEncontrado != null) {
+            System.out.println("\n==================================================");
+            System.out.println(" ID Proveedor:  " + proveedorEncontrado.getIdProveedor());
+            System.out.println(" Empresa:       " + proveedorEncontrado.getNombre());
+            System.out.println(" Dirección:     " + proveedorEncontrado.getDireccion());
+            System.out.println(" Cód. Postal:   " + proveedorEncontrado.getCodigoPostal());
+            System.out.println(" Teléfonos:     " + proveedorEncontrado.getTelefonos());
+            System.out.println(" Emails:        " + proveedorEncontrado.getEmails());
+            System.out.println("==================================================\n");
+        }
     }
 
     private void updateSupplier(){
-        proveedorController.modificarProveedor();
+        System.out.println("\n--- ACTUALIZAR PROVEEDOR ---");
+
+        List<Proveedor> listaCompleta = proveedorController.obtenerTodosLosProveedores();
+        if (listaCompleta.isEmpty()) {
+            System.out.println("No hay proveedores registrados en el sistema para modificar");
+            return;
+        }
+
+        System.out.println("Proveedores disponibles en el sistema:");
+        System.out.println("----------------------------------------");
+        for (Proveedor p : listaCompleta) {
+            System.out.println(" ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+        }
+        System.out.println("----------------------------------------");
+
+        String criterio = InputHelper.readString("Introduce el ID o Nombre del proveedor (o escribe '0' para salir): ");
+        if (criterio.trim().equals("0")) {
+            System.out.println("Actualización cancelada de forma segura");
+            return;
+        }
+
+        Proveedor proveedor = proveedorController.obtenerProveedorPorIdONombre(criterio);
+        if (proveedor == null) return;
+
+        int opcionModificar;
+        do {
+            System.out.println("\n--- DATOS ACTUALES DEL PROVEEDOR ---");
+            System.out.println("1. Nombre:    " + proveedor.getNombre());
+            System.out.println("2. Dirección: " + proveedor.getDireccion());
+            System.out.println("3. CP Actual: " + proveedor.getCodigoPostal());
+            System.out.println("4. Gestionar Teléfonos " + proveedor.getTelefonos());
+            System.out.println("5. Gestionar Emails    " + proveedor.getEmails());
+            System.out.println("0. GUARDAR CAMBIOS Y SALIR");
+
+            opcionModificar = InputHelper.readIntInRange("¿Qué campo deseas modificar? (0-5): ", 0, 5);
+
+            switch (opcionModificar) {
+                case 1 -> {
+                    System.out.println("[Modificando Nombre | Valor actual: " + proveedor.getNombre() + "]");
+                    String nuevoNombre = InputHelper.readString("Introduce el nuevo Nombre (o escribe '0' para cancelar): ");
+                    if (!nuevoNombre.trim().equals("0")) {
+                        proveedor.setNombre(nuevoNombre);
+                    } else {
+                        System.out.println("Edición de campo cancelada");
+                    }
+                }
+                case 2 -> {
+                    System.out.println("[Modificando Dirección | Valor actual: " + proveedor.getDireccion() + "]");
+                    String nuevaDir = InputHelper.readString("Introduce la nueva Dirección (o escribe '0' para cancelar): ");
+                    if (!nuevaDir.trim().equals("0")) {
+                        proveedor.setDireccion(nuevaDir);
+                    } else {
+                        System.out.println("Edición de campo cancelada.");
+                    }
+                }
+                case 3 -> {
+                    System.out.println("[Modificando CP | Valor actual: " + proveedor.getCodigoPostal() + "]");
+                    String nuevoCp = InputHelper.readString("Introduce el nuevo Código Postal (o escribe '0' para cancelar): ");
+                    if (!nuevoCp.trim().equals("0")) {
+                        int idCp = proveedorController.buscarIdCP(nuevoCp);
+                        if (idCp == -1) {
+                            idCp = UbicationHelper.solicitarORegistrarUbicacion(nuevoCp);
+                        }
+                        if (idCp != -1) {
+                            proveedor.setIdCodigoPostal(idCp);
+                            proveedor.setCodigoPostal(nuevoCp);
+                        }
+                    } else {
+                        System.out.println("Edición de campo cancelada");
+                    }
+                }
+                case 4 -> gestionarListaContactos(proveedor.getTelefonos(), "Teléfono");
+                case 5 -> gestionarListaContactos(proveedor.getEmails(), "Email");
+                case 0 -> {
+                    System.out.println("Guardando actualizaciones en la base de datos...");
+                    proveedorController.actualizarProveedor(proveedor);
+                }
+            }
+        } while (opcionModificar != 0);
     }
 
     private void deleteSupplier(){
-        proveedorController.eliminarProveedor();
+        System.out.println("\n--- ELIMINAR PROVEEDOR ---");
+
+        List<Proveedor> listaCompleta = proveedorController.obtenerTodosLosProveedores();
+        if (listaCompleta.isEmpty()) {
+            System.out.println("No hay proveedores en la tienda para eliminar.");
+            return;
+        }
+
+        System.out.println("Proveedores en el sistema:");
+        System.out.println("----------------------------------------");
+        for (Proveedor p : listaCompleta) {
+            System.out.println(" > ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+        }
+        System.out.println("----------------------------------------");
+
+        System.out.println("Introduce el ID del proveedor que deseas eliminar de forma PERMANENTE.");
+        int id = InputHelper.readInt("ID del proveedor (o escribe '0' para cancelar la operación): ");
+
+        if (id == 0) {
+            System.out.println("Operación cancelada de forma segura. El proveedor no ha sufrido cambios.");
+            return;
+        }
+
+        proveedorController.eliminarProveedor(id);
     }
+
+    private void gestionarListaContactos(List<String> lista, String tipoContacto) {
+        do {
+            System.out.println("\n--- GESTIONAR " + tipoContacto.toUpperCase() + "S ---");
+            if (lista.isEmpty()) {
+                System.out.println("[No hay " + tipoContacto.toLowerCase() + "s registrados]");
+            } else {
+                for (int i = 0; i < lista.size(); i++) {
+                    System.out.println((i + 1) + ". " + lista.get(i));
+                }
+            }
+            System.out.println("A. Añadir nuevo " + tipoContacto.toLowerCase());
+            System.out.println("M. Modificar uno existente");
+            System.out.println("B. Borrar uno existente");
+            System.out.println("0. Volver atrás");
+
+            String entrada = InputHelper.readString("Elige una opción (A/M/B/0): ").toUpperCase().trim();
+
+            switch (entrada) {
+                case "A" -> {
+                    String nuevo = InputHelper.readString("Introduce el nuevo " + tipoContacto.toLowerCase() + " (o escribe '0' para cancelar): ");
+                    if (!nuevo.trim().equals("0")) lista.add(nuevo);
+                }
+                case "M" -> {
+                    if (lista.isEmpty()) {
+                        System.out.println("No hay nada que modificar");
+                        break;
+                    }
+                    int indice = InputHelper.readIntInRange("Número del " + tipoContacto.toLowerCase() + " a modificar (1-" + lista.size() + "): ", 1, lista.size()) - 1;
+                    String modificado = InputHelper.readString("Introduce el nuevo valor (Actual: " + lista.get(indice) + " | o escribe '0' para cancelar): ");
+                    if (!modificado.trim().equals("0")) lista.set(indice, modificado);
+                }
+                case "B" -> {
+                    if (lista.isEmpty()) {
+                        System.out.println("No hay nada que borrar");
+                        break;
+                    }
+                    int indice = InputHelper.readIntInRange("Número del " + tipoContacto.toLowerCase() + " a borrar (1-" + lista.size() + "): ", 1, lista.size()) - 1;
+                    lista.remove(indice);
+                    System.out.println(tipoContacto + " eliminado de la lista temporal.");
+                }
+                case "0" -> {}
+                default -> System.out.println("Opción no válida.");
+            }
+
+            if (entrada.equals("0")) {
+                break;
+            }
+        } while (true);
+    }
+
 
     // endregion
 
@@ -468,28 +687,292 @@ public class Menu {
     }
 
     private void addAlbum(){
-        albumController.crearAlbum();
+
+        System.out.println("\n----- REGISTRAR NUEVO ÁLBUM -----");
+        String titulo = InputHelper.readString("Título del álbum: ");
+        String artista = InputHelper.readString("Nombre del Artista o Banda: ");
+
+        FormatoDisco formato = null;
+
+        while (formato == null) {
+            System.out.println("Formatos disponibles: VINILO, CD, CASSETTE, DIGITAL");
+            String formatoStr = InputHelper.readString("Introduce el formato: ").toUpperCase().trim();
+            try {
+                formato = FormatoDisco.valueOf(formatoStr);
+            } catch (IllegalArgumentException e) {
+                System.out.println("¡Error! El formato '" + formatoStr + "' no es válido. Inténtalo de nuevo");
+            }
+        }
+
+        double precio = -1;
+        while (precio < 0) {
+            precio = InputHelper.readDouble("Precio (€): ");
+            if (precio < 0) System.out.println("El precio no puede ser negativo");
+        }
+
+        int stock = -1;
+        while (stock < 0) {
+            stock = InputHelper.readInt("Unidades en Stock: ");
+            if (stock < 0) System.out.println("El stock no puede ser negativo");
+        }
+
+        int idProveedor = -1;
+        while (idProveedor == -1) {
+            System.out.println("\nConsultando empresas de distribución...");
+            mostrarProveedoresResumen(albumController.obtenerTodosLosProveedores());
+
+            String critProv = InputHelper.readString("Introduce el ID o Nombre del Proveedor seleccionado: ");
+            Proveedor p = albumController.obtenerProveedorPorIdONombre(critProv);
+
+            if (p != null) {
+                idProveedor = p.getIdProveedor();
+            } else {
+                System.out.println("\nEl proveedor '" + critProv + "' no existe en el sistema");
+                System.out.println("Por seguridad, debes registrar primero al proveedor desde su menú de Gestión de Proveedores.");
+                System.out.println("-----------------------------------------------------------------------------------------");
+                return;
+            }
+        }
+
+        int idGenero = -1;
+        while (idGenero == -1) {
+            System.out.println("\nConsultando estilos musicales en la base de datos...");
+            GeneroHelper.mostrarGenerosDisponibles();
+
+            String critGen = InputHelper.readString("Introduce el ID o Nombre del Género Musical: ");
+            idGenero = GeneroHelper.solicitarORegistrarGenero(critGen);
+        }
+
+        Album nuevo = new Album(0, titulo, artista, formato, precio, stock, idProveedor, "", idGenero, "");
+        albumController.crearAlbum(nuevo);
+
     }
 
     private void findAllAlbums(){
-        albumController.listarAlbumes();
+        System.out.println("\n===============================================================================================================================================");
+        System.out.println("                                                       CATÁLOGO GENERAL DE ÁLBUMES");
+        System.out.println("===============================================================================================================================================");
+
+        List<Album> lista = albumController.listarAlbumes();
+
+        if (lista.isEmpty()) {
+            System.out.println("   El catálogo está vacío actualmente.");
+            System.out.println("===============================================================================================================================================");
+            return;
+        }
+
+        System.out.format("| %-7s | %-25s | %-20s | %-10s | %-9s | %-7s | %-22s | %-15s |\n",
+                "ID PROD", "TÍTULO DEL ÁLBUM", "ARTISTA / BANDA", "FORMATO", "PRECIO", "STOCK", "DISTRIBUIDOR", "GÉNERO");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+
+        for (Album a : lista) {
+            imprimirFilaAlbum(a);
+        }
+        System.out.println("===============================================================================================================================================\n");
+
     }
 
     private void findAlbumByID(){
-        albumController.buscarAlbumPorId();
+        System.out.println("\n----- BUSCAR ÁLBUM EN TIENDA -----");
+        if (!mostrarResumen(albumController.listarAlbumesParaPedido())) return;
+
+        int id = InputHelper.readInt("Introduce el ID del álbum que deseas consultar (o escribe '0' para salir): ");
+        if (id == 0) {
+            System.out.println("Búsqueda cancelada");
+            return;
+        }
+
+        Album album = albumController.obtenerAlbumPorId(id);
+        if (album != null) {
+            System.out.println("\n==================================================");
+            System.out.println("              ¡ÁLBUM LOCALIZADO!");
+            System.out.println("==================================================");
+            System.out.println("• ID Producto: " + album.getIdProducto());
+            System.out.println("• Título:      " + album.getTitulo());
+            System.out.println("• Artista:     " + album.getArtista());
+            System.out.println("• Formato:     " + album.getFormato());
+            System.out.println("• Precio:      " + album.getPrecio() + " €");
+            System.out.println("• Stock:       " + album.getStock() + " uds.");
+            System.out.println("• Distribuye:  " + album.getNombreProveedor());
+            System.out.println("• Género:      " + album.getNombreGenero());
+            System.out.println("==================================================");
+        }
     }
 
     private void updateAlbum(){
-        albumController.modificarAlbum();
+        System.out.println("\n----- ACTUALIZAR ÁLBUM -----");
+        if (!mostrarResumen(albumController.listarAlbumesParaPedido())) return;
+
+        int id = InputHelper.readInt("Introduce el ID del álbum que deseas editar (o escribe '0' para salir): ");
+        if (id == 0) return;
+
+        Album album = albumController.obtenerAlbumPorId(id);
+        if (album == null) {
+            System.out.println("No se encontró ningún álbum con ese ID.");
+            return;
+        }
+
+        int opcion;
+        do {
+            System.out.println("\n----- DATOS ACTUALES DEL ÁLBUM -----");
+            System.out.println("1. Título:    " + album.getTitulo());
+            System.out.println("2. Artista:   " + album.getArtista());
+            System.out.println("3. Formato:   " + album.getFormato());
+            System.out.println("4. Precio:    " + album.getPrecio() + " €");
+            System.out.println("5. Stock:     " + album.getStock() + " uds.");
+            System.out.println("6. Distrib.:  " + album.getNombreProveedor() + " (ID: " + album.getIdProveedor() + ")");
+            System.out.println("7. Género:    " + album.getNombreGenero() + " (ID: " + album.getIdGenero() + ")");
+            System.out.println("0. GUARDAR CAMBIOS Y REGRESAR");
+
+            opcion = InputHelper.readIntInRange("¿Qué campo quieres editar? (0-7): ", 0, 7);
+
+            switch (opcion) {
+                case 1 -> {
+                    String s = InputHelper.readString("Nuevo Título (o escribe '0' para cancelar): ");
+                    if (!s.equals("0")) album.setTitulo(s);
+                }
+                case 2 -> {
+                    String s = InputHelper.readString("Nuevo Artista (o escribe '0' para cancelar): ");
+                    if (!s.equals("0")) album.setArtista(s);
+                }
+                case 3 -> {
+                    while (true) {
+                        System.out.println("Formatos: VINILO, CD, CASSETTE, DIGITAL");
+                        String s = InputHelper.readString("Nuevo Formato (o escribe '0' para cancelar): ").toUpperCase().trim();
+                        if (s.equals("0")) break;
+                        try {
+                            album.setFormato(FormatoDisco.valueOf(s));
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Formato inválido. Inténtalo de nuevo");
+                        }
+                    }
+                }
+                case 4 -> {
+                    while (true) {
+                        double p = InputHelper.readDouble("Nuevo Precio (o escribe '0' para cancelar): ");
+                        if (p == 0) break;
+                        try {
+                            album.setPrecio(p);
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("¡Error! " + e.getMessage());
+                        }
+                    }
+                }
+                case 5 -> {
+                    while (true) {
+                        int st = InputHelper.readInt("Nuevo Stock (o escribe '-1' para cancelar): ");
+                        if (st == -1) break;
+                        try {
+                            album.setStock(st);
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("¡Error! " + e.getMessage());
+                        }
+                    }
+                }
+                case 6 -> {
+                    System.out.println("\nProveedores disponibles en el sistema: ");
+                    mostrarProveedoresResumen(albumController.obtenerTodosLosProveedores());
+
+                    String critProv = InputHelper.readString("Introduce el ID o Nombre del nuevo Proveedor (o escribe '0' para cancelar): ");
+                    if (!critProv.equals("0")) {
+                        Proveedor p = albumController.obtenerProveedorPorIdONombre(critProv);
+                        if (p != null) {
+                            album.setIdProveedor(p.getIdProveedor());
+                            album.setNombreProveedor(p.getNombre());
+                        } else {
+                            System.out.println("¡Error! El proveedor introducido no existe. No se han guardado cambios.");
+                        }
+                    }
+                }
+                case 7 -> {
+                    System.out.println("\nGéneros musicales registrados actualmente: ");
+                    GeneroHelper.mostrarGenerosDisponibles();
+
+                    String critGen = InputHelper.readString("Introduce el ID o Nombre del nuevo Género (o escribe '0' para cancelar): ");
+                    if (!critGen.equals("0")) {
+                        int idGen = GeneroHelper.solicitarORegistrarGenero(critGen);
+                        if (idGen != -1) album.setIdGenero(idGen);
+                    }
+                }
+                case 0 -> {
+                    System.out.println("Aplicando actualizaciones en la base de datos...");
+                    albumController.actualizarAlbum(album);
+                }
+            }
+        } while (opcion != 0);
     }
 
     private void deleteAlbum(){
-        albumController.eliminarAlbum();
+        System.out.println("\n----- ELIMINAR ÁLBUM DEL SISTEMA -----");
+        if (!mostrarResumen(albumController.listarAlbumesParaPedido())) return;
+
+        int id = InputHelper.readInt("Introduce el ID del álbum que vas a borrar PERMANENTEMENTE (o escribe '0' para cancelar): ");
+        if (id == 0) {
+            System.out.println("Operación cancelada de forma segura. El disco sigue a salvo");
+            return;
+        }
+        albumController.eliminarAlbum(id);
     }
 
     private void generateTxtAlbum(){
-        albumController.exportarTxt();
+        System.out.println("\n----- EXPORTAR CATÁLOGO A TEXTO -----");
+        String nombreArchivo = InputHelper.readString("Introduce el nombre o ruta del archivo (Ej: albumes.txt): ");
+
+        if (nombreArchivo.trim().equals("0") || nombreArchivo.trim().isEmpty()) {
+            System.out.println("Exportación cancelada");
+            return;
+        }
+
+        if (!nombreArchivo.toLowerCase().endsWith(".txt")) {
+            nombreArchivo += ".txt";
+        }
+
+        System.out.println("\nGenerando archivo... esto puede tardar un rato. No te preocupes, puedes seguir utilizando el CRM de forma normal.");
+
+        String nombreFinal = nombreArchivo;
+
+        new Thread(() -> albumController.exportarTxt(nombreFinal)).start();
     }
+
+    private void imprimirFilaAlbum(Album album) {
+        String t = album.getTitulo().length() > 24 ? album.getTitulo().substring(0, 21) + "..." : album.getTitulo();
+        String art = album.getArtista().length() > 19 ? album.getArtista().substring(0, 16) + "..." : album.getArtista();
+        String prov = album.getNombreProveedor() != null ? album.getNombreProveedor() : "";
+        if (prov.length() > 21) prov = prov.substring(0, 18) + "...";
+        String gen = album.getNombreGenero() != null ? album.getNombreGenero() : "";
+        if (gen.length() > 14) gen = gen.substring(0, 11) + "...";
+
+        System.out.format("| %-7d | %-25s | %-20s | %-10s | %6.2f € | %5d | %-22s | %-15s |\n",
+                album.getIdProducto(), t, art, album.getFormato(), album.getPrecio(), album.getStock(), prov, gen
+        );
+    }
+
+    private boolean mostrarResumen(List<Album> lista) {
+        if (lista.isEmpty()) {
+            System.out.println("No hay ningún álbum registrado en el sistema");
+            return false;
+        }
+        System.out.println("Álbumes disponibles en tienda:");
+        System.out.println("----------------------------------------");
+        for (Album a : lista) {
+            System.out.println(" > ID: " + a.getIdProducto() + " | '" + a.getTitulo() + "' de " + a.getArtista());
+        }
+        System.out.println("----------------------------------------");
+        return true;
+    }
+
+    private void mostrarProveedoresResumen(List<Proveedor> provs) {
+        System.out.println("----------------------------------------");
+        for (Proveedor p : provs) {
+            System.out.println(" > ID: " + p.getIdProveedor() + " | Empresa: " + p.getNombre());
+        }
+        System.out.println("----------------------------------------");
+    }
+
+
 
     // endregion
 
