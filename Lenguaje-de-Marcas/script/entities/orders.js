@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelDeleteOrder = document.getElementById('cancelDeleteOrder');
     const confirmDeleteOrder = document.getElementById('confirmDeleteOrder');
 
+    const modalAlertError = document.getElementById('modalAlertError');
+    const modalAlertMessage = document.getElementById('modalAlertMessage');
+    const closeAlertBtn = document.getElementById('closeAlertBtn');
+
     let orderInProgressId = null;
     let idToDelete = null;
     let currentLines = [];
@@ -150,6 +154,16 @@ document.addEventListener('DOMContentLoaded', () => {
     closeOrdersModalBtn.addEventListener('click', () => addOrderModal.style.display = 'none');
     cancelDeleteOrder.addEventListener('click', () => modalDeleteOrder.style.display = 'none');
 
+    closeAlertBtn.addEventListener('click', () => {
+        modalAlertError.style.display = 'none';
+    });
+
+    modalAlertError.addEventListener('click', (e) => {
+        if (e.target === modalAlertError) {
+            modalAlertError.style.display = 'none';
+        }
+    });
+
     addLineBtn.addEventListener('click', () => {
         currentLines.push({ productId: '', quantity: 1 });
         createDetailLines();
@@ -159,11 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         if (!orderClient.value) {
-            alert('Por favor, selecciona un cliente antes de continuar.');
+            modalAlertMessage.textContent = 'Por favor, selecciona un cliente antes de continuar.';
+            modalAlertError.style.display = 'flex';
             return;
         }
         if (currentLines.length === 0 || currentLines.some(l => !l.productId)) {
-            alert('Añade al menos un producto válido al pedido.');
+            modalAlertMessage.textContent = 'Por favor, completa la información del apartado de detalles.';
+            modalAlertError.style.display = 'flex';
             return;
         }
 
@@ -352,6 +368,13 @@ document.addEventListener('DOMContentLoaded', () => {
     addOrderModal.addEventListener('click', (e) => {
         if (e.target === addOrderModal) {
             addOrderModal.style.display = 'none';
+        }
+    });
+
+    modalDeleteOrder.addEventListener('click', (e) => {
+        if (e.target === modalDeleteOrder) {
+            modalDeleteOrder.style.display = 'none';
+            idToDelete = null;
         }
     });
 

@@ -1381,6 +1381,10 @@ button{
     margin-left: auto; 
 }
 
+#modalAlertError .modal__content {
+    max-width: 360px;
+}
+
 .o-table__pagination {
     display: flex;
     justify-content: center;
