@@ -36,7 +36,15 @@ body{
 
 /* #region ---- COMMON ELEMENTS ---- */
 
-.button__items{ /*He cogido el elemento de Alvaro de: c-header__button*/
+.content{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.button__items{
     border:none;
     background:var(--secondary-color);
     color:var(--bg-color);
@@ -44,19 +52,10 @@ body{
     border-radius: 12px;
     font-weight:600;
     cursor:pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-}
-
-.content{ /* Estructura del secction general de la web para tener todos el mismo estilo ?????*/
-    display: flex;
-    flex-direction: column;
-    margin: 30px;
-    padding: 20px;
-    width: 100%;
 }
 
 .outerbox{
@@ -80,7 +79,7 @@ body{
 
 /* Elementos comunes MODAL */
 
-.modal { /* He cogido el elemento de Alvaro de: c-modal*/
+.modal {
     display: none;
     position: fixed;
     top: 0;
@@ -94,7 +93,7 @@ body{
     align-items: center;
 }
 
-.modal__content{ /* He cogido el elemento de Alvaro de: c-modal__content*/
+.modal__content{
     width:450px;
     background:#111827;
     border:1px solid rgba(255,255,255,.08);
@@ -157,7 +156,7 @@ body{
     margin-left: 18px;
 }
 
-.modal__top{ /* He cogido el elemento de Alvaro de: c-modal__top*/
+.modal__top{
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -170,38 +169,39 @@ body{
     background-color: transparent;
 }
 
-.modal__form{ /* He cogido el elemento de Alvaro de: c-form*/
+.modal__form{
     display:flex;
     flex-direction:column;
     gap:18px;
 }
 
 .modal__form input,
-.modal__form select{ /* He cogido el elemento de Alvaro de: c-form input y c-form select*/
+.modal__form select{
     background:rgba(255,255,255,.06);
     border:1px solid rgba(255,255,255,.08);
     padding: 8px;
     border-radius: 4px;
     color:white;
 }
+
 .modal__form select option{
     background:#1F2634;
     color:var(--white);
 }
 
-.form__group{ /* He cogido el elemento de Alvaro de: c-form__group*/
+.form__group{
     display:flex;
     flex-direction:column;
     gap:8px;
 }
 
-.form__group-line{
+.form__group--line{
     flex-direction: row;
     gap: 16px;
     width: 100%;
 }
 
-.form__group-line > .form__group {
+.form__group--line > .form__group {
     flex: 1;
 }
 
@@ -210,7 +210,7 @@ body{
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* 🌟 Convierte el icono negro en blanco */
+    filter: invert(1);
     cursor: pointer;
 }
 
@@ -219,15 +219,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: flex-end;
     gap: 12px;
     margin-top: 20px;
-}
-
-/* Ejemplo rápido por si no tienes clases de botones */
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .button__secondary{
@@ -522,7 +513,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1;
 }
 
-
 /* #endregion*/
 
 /* #region ----------------- DASHBOARD ----------------- */
@@ -668,7 +658,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 600;
 }
 
-
 /* #endregion*/
 
 /* #region ------------ CLIENTS ------------  */
@@ -698,16 +687,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight:600;
 }
 
-.c-header__button{ /*Lo convierto en estilo comun*/
-    border:none;
-    background:var(--secondary-color);
-    color:var(--bg-color);
-    padding:14px 20px;
-    border-radius:14px;
-    font-weight:600;
-    cursor:pointer;
-}
-
 .c-stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -733,6 +712,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top:10px;
     font-weight:600;
 }
+
 .c-table-box{
     background:rgba(255,255,255,.08);
     border-radius:24px;
@@ -804,64 +784,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 10px 14px;
     border-radius: 10px;
     cursor: pointer;
-}
-/* .c-modal{ 
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-} */
-
-/* .c-modal__content{ 
-    width:450px;
-    background:#111827;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:24px;
-    padding:28px;
-} */
-
-/* .c-modal__top{ 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-} */
-
-.c-modal__top button{
-    background:none;
-    border:none;
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-}
-
-/* .c-form{ 
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-} */
-
-.c-form__group{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.c-form__group label{
-    font-size:13px;
-    color:var(--tertiary-color);
-}
-
-.c-form input,
-.c-form select{
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);
-    padding:14px;
-    border-radius:14px;
-    color:white;
 }
 
 .c-form__button{
@@ -1016,36 +938,7 @@ button{
     border: 1px solid rgb(242, 166, 74);
     background-color: transparent;
     color: rgb(242, 166, 74);
-
-    /* background-color: rgba(231, 165, 60, 0.15);
-    color: #e7b43c; */
     font-weight: 400;
-
-}
-
-.p-card__cancel{
-    flex: 1;
-    padding: 6px;
-    border-radius: 8px;
-    border: 1px solid var(--white);
-    background-color: transparent;
-    color: var(--white);
-    font-weight: 400;
-
-}
-
-.p-card__delete{
-    flex: 1;
-    padding: 6px;
-    border-radius: 8px;
-    border: 1px solid rgb(246, 52, 52);
-    background-color: transparent;
-    color: rgb(246, 52, 52);
-
-    /* background-color: rgba(231, 76, 60, 0.15);
-    color: #e74c3c; */
-    font-weight: 600;
-
 }
 
 /* #endregion */
@@ -1181,6 +1074,7 @@ button{
     font-weight:600;
     cursor:pointer;
 }
+
 .w-stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -1251,8 +1145,6 @@ button{
     font-weight:600;
 }
 
-
-
 .w-table__delete{
     border:none;
     background:#dc2626;
@@ -1261,30 +1153,6 @@ button{
     border-radius:10px;
     cursor:pointer;
 }
-/* .w-modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-} */
-
-/* .w-modal__content{
-    width:450px;
-    background:#111827;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:24px;
-    padding:28px;
-} */
-
-/* .w-modal__top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-} */
 
 .w-modal__top button{
     background:none;
@@ -1293,12 +1161,6 @@ button{
     font-size:20px;
     cursor:pointer;
 }
-
-/* .w-form{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-} */
 
 .w-form__group{
     display:flex;

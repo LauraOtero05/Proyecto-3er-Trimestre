@@ -807,7 +807,7 @@
 
 @media (max-width: 420px) {
 
-    /* #region ----------PROFILE---------- */
+    /* #region ----------PRODUCTS---------- */
     .p-disc__image {
         display: none;
     }
@@ -827,6 +827,21 @@
 
     /* #endregion */
 
+}
+
+@media (max-width: 380px) {
+
+    /* #region ----------SUPPLIERS---------- */
+
+    .s-tableBox {
+        padding: 14px;
+    }
+
+    .s-table__item {
+        font-size: 13px;
+    }
+
+    /* #endregion */
 }
 
 @media (max-width: 350px) {
@@ -899,19 +914,6 @@
 
 }
 
-@media (max-width: 380px) {
 
-    /* #region ----------SUPPLIERS---------- */
-
-    .s-tableBox {
-        padding: 14px;
-    }
-
-    .s-table__item {
-        font-size: 13px;
-    }
-
-    /* #endregion */
-}
 
 

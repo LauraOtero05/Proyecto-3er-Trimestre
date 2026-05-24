@@ -26,8 +26,8 @@ class Producto {
                         <span class="p-card__price">${this.precio.toFixed(2)} €</span>
                     </div>
                     <div class="p-card__actions">
-                        <button class="p-card__edit" data-id="${this.id}">Editar</button>
-                        <button class="p-card__delete" data-id="${this.id}">Eliminar</button>
+                        <button class="button__secondary button__secondary--orange" data-id="${this.id}">Editar</button>
+                        <button class="button__secondary button__secondary--red" data-id="${this.id}">Eliminar</button>
                     </div>
                 </div>
             </article>
