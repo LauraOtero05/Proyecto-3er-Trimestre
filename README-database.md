@@ -2,7 +2,7 @@
 
 ### Descripción
 
-Este módulo contiene todo el trabajo realizado para la asignatura de Base de Datos dentro del proyecto intermodular CRM de la tienda de música en línea 74 Minutes.
+Este módulo contiene todo el trabajo realizado para la asignatura de Base de Datos dentro del proyecto intermodular CRM de la tienda de música _74 Minutes_.
 
 Se ha diseñado e implementado una base de datos relacional completa partiendo del modelo conceptual hasta el modelo físico, incluyendo la lógica de negocio en PL/SQL y la migración del esquema a MySQL para su uso en el módulo de Programación.
 
@@ -10,7 +10,7 @@ El trabajo cubre:
 
 - Diseño del modelo Entidad–Relación (E-R)
 - Modelo lógico relacional y normalización hasta 3FN
-- Modelo físico implementado en Oracle Database
+- Modelo físico implementado en Oracle Database y MySQL
 - Scripts DDL y DML para Oracle y MySQL
 - 120 consultas PL/SQL (24 por tabla): CRUD, cursores, procedimientos y funciones
 
@@ -40,8 +40,8 @@ El modelo E-R define las siguientes entidades y relaciones.
 
 **Atributos especiales:**
 
-- Los atributos teléfono de Clientes y Trabajadores son multivalorados → tablas débiles independientes
-- Los atributos teléfono y e-mail de Proveedores son multivalorados → tablas débiles independientes
+- Los atributos teléfono de Clientes y Trabajadores son multivaluados → tablas débiles independientes
+- Los atributos teléfono y e-mail de Proveedores son multivaluados → tablas débiles independientes
 - La información geográfica (dirección, código postal, ciudad, provincia, país) se normaliza en tablas `Codigos_Postales` y `Paises` compartidas por Clientes y Proveedores
 
 ---
@@ -50,7 +50,7 @@ El modelo E-R define las siguientes entidades y relaciones.
 
 El modelo E-R se transformó a tablas relacionales aplicando:
 
-- **1FN:** separación de atributos multivalorados (teléfonos y emails) en tablas independientes con clave primaria compuesta
+- **1FN:** separación de atributos multivaluados (teléfonos y emails) en tablas independientes con clave primaria compuesta
 - **2FN:** eliminación de dependencias parciales en la tabla Detalle_Venta
 - **3FN:** separación de la información geográfica en `Codigos_Postales` y `Paises` para eliminar dependencias transitivas compartidas entre Clientes y Proveedores
 
@@ -93,17 +93,14 @@ Abre una terminal (CMD o PowerShell) y ejecuta:
 lsnrctl status
 ```
 
-Debes ver que el listener está activo y escuchando en el puerto **1521** (puerto por defecto). Si el tuyo es distinto, anótalo porque lo necesitarás después.
-
-> Si el comando no se reconoce, busca la ruta de instalación de Oracle (normalmente `C:\app\<tuusuario>\product\21c\dbhomeXE\bin`) y ejecútalo desde ahí, o añade esa ruta al PATH del sistema.
+Debes ver que el listener está activo y escuchando en el puerto **1521** (puerto por defecto). Si el tuyo es distinto, más adelante deberás modificarlo en el script de ejecución de la base de datos.
 
 ---
 
-#### 2. Ejecutar el script DDL + DML en SQL Developer
+#### 2. Ejecutar el script `SCHEMA ORACLE.sql` en SQL Developer
 
-1. Abre **SQL Developer**. Aparecerá una ventana para seleccionar la conexión; elige **SYSTEM**.
-2. Ve a **File > Open** y abre el archivo `SCHEMA Oracle.sql`
-3. Pulsa **Run Script (F5)** para ejecutarlo completo de una vez
+1. Abre **SQL Developer**.
+2. Ve a **Archivo > Abrir** y abre el archivo `SCHEMA Oracle.sql`.
 
 > **Importante:** dentro del script hay una línea de conexión que apunta a la URL de la base de datos:
 > ```sql
@@ -114,13 +111,15 @@ Debes ver que el listener está activo y escuchando en el puerto **1521** (puert
 > SELECT value FROM v$parameter WHERE name = 'service_names';
 > ```
 
+3. Pulsa **Ejecutar Script (F5)** para ejecutarlo completo de una vez.
+4. Aparecerá una ventana para seleccionar la conexión; elige **SYSTEM**.
 ---
 
 #### 3. Crear la conexión en SQL Developer con el usuario del proyecto
 
 Una vez ejecutado el script, crea una nueva conexión en SQL Developer:
 
-1. En el panel izquierdo, haz clic en el **icono verde `+`** (o ve a **Connections > New Connection...**)
+1. En el panel izquierdo, haz clic en el **icono verde `+`** (o ve a **Conexiones > Nueva Conexión...**)
 2. Se abrirá la ventana *Nueva / Seleccionar Conexión a Base de Datos*
 3. Rellena los campos con los siguientes datos:
 
@@ -133,7 +132,8 @@ Una vez ejecutado el script, crea una nueva conexión en SQL Developer:
 | **Port** | `1521` (o el tuyo si es distinto) |
 | **Service name** | `XEPDB1` (o el tuyo si es distinto) |
 
-4. Pulsa **Test** para verificar que la conexión funciona antes de guardarla.
+4. Pulsa **Probar** para verificar que la conexión funciona antes de guardarla.
+5. Si el estado de la conexión te aparece **Correcto**, pulsa en **Conectar**. En caso contrario comprueba que has introducido correctamente los datos anteriores.
 
 ---
 
@@ -183,8 +183,8 @@ SET SERVEROUTPUT ON;
 
 > Esta línea ya está incluida al inicio de cada archivo, pero si no ves ninguna salida en la pestaña *Script Output*, ejecútala manualmente antes de nada.
 
-3. Abre el archivo que quieras desde **File > Open**
-4. Pulsa **Run Script (F5)** para ejecutar el archivo completo, o selecciona el bloque concreto que quieras probar y pulsa F5 sobre la selección
+3. Abre el archivo que quieras desde **Archivo > Abrir**
+4. Pulsa **Ejecutar Script (F5)** para ejecutar el archivo completo, o selecciona el bloque concreto que quieras probar y pulsa F5 sobre la selección
 
 > Algunos bloques tienen el `COMMIT;` comentado (`-- COMMIT;`) para que puedas revisar los cambios antes de confirmarlos. Si quieres que los cambios sean permanentes, descoméntalo o ejecuta `COMMIT;` manualmente después.
 
@@ -196,12 +196,16 @@ SET SERVEROUTPUT ON;
 database/
 │
 ├── Base-de-Datos/
-│   └── CONSULTAS/
-│       ├── CONSULTAS PLSQL ALBUMES.sql
-│       ├── CONSULTAS PLSQL CLIENTES.sql
-│       ├── CONSULTAS PLSQL PEDIDOS.sql
-│       ├── CONSULTAS PLSQL PROVEEDORES.sql
-│       └── CONSULTAS PLSQL TRABAJADORES.sql
+│   ├── CONSULTAS/
+│   │    ├── CONSULTAS PLSQL ALBUMES.sql
+│   │    ├── CONSULTAS PLSQL CLIENTES.sql
+│   │    ├── CONSULTAS PLSQL PEDIDOS.sql
+│   │    ├── CONSULTAS PLSQL PROVEEDORES.sql
+│   │    └── CONSULTAS PLSQL TRABAJADORES.sql
+│   ├── MODELO CREACION BDD.drawio
+│   ├── MODELO FISICO.png
+│   ├── SCHEMA MYSQL.sql
+│   └── SCHEMA ORACLE.sql
 │
 └── README.md
 ```
@@ -231,7 +235,7 @@ El script `SCHEMA MYSQL.sql` incluye tanto el DDL (creación de tablas) como el 
 
 MySQL usa por defecto el puerto **3306**. Para verificar que el servicio está activo:
 
-- **Windows:** abre el Administrador de servicios (busca "Servicios" en el menú inicio), localiza `MySQL80` y comprueba que está en estado **En ejecución**. Si no lo está, haz clic derecho e inícialo.
+- **Windows:** abre el Administrador de servicios (busca "Servicios" en el menú inicio), localiza `MySQL80` o superior y comprueba que está en estado **En ejecución**. Si no lo está, haz clic derecho e inícialo.
 - **Mac/Linux:** ejecuta en terminal `sudo systemctl status mysql`
 
 > Para saber qué puerto tiene configurado tu instalación, abre MySQL Workbench, haz doble clic en tu conexión y mira el campo **Port**. También puedes ejecutar `SHOW VARIABLES LIKE 'port';` desde cualquier cliente conectado.
@@ -242,7 +246,7 @@ MySQL usa por defecto el puerto **3306**. Para verificar que el servicio está a
 
 1. Abre **MySQL Workbench** y conéctate con tu usuario (por defecto `root`)
 2. Ve a **File > Open SQL Script** y abre el archivo `SCHEMA MYSQL.sql`
-3. Pulsa el botón **Execute All** (el rayo ⚡ con fondo amarillo) o usa el atajo `Ctrl+Shift+Enter` para ejecutar el script completo
+3. Pulsa el botón **Execute All** o usa el atajo `Ctrl+Shift+Enter` para ejecutar el script completo
 
 ---
 
