@@ -35,7 +35,7 @@ El repositorio se organiza mediante un sistema de ramas por módulo y por integr
     ├── frontend
     │   ├── frontend-alvaro
     │   ├── frontend-laura
-    │   └── frontend
+    │   └── frontend-noemi
     │
     └── readme
 ```
@@ -53,7 +53,9 @@ El proyecto utiliza tags de Git para marcar los hitos principales del desarrollo
 |-------|------------|
 | `db-v1.0` | Primera versión estable del proyecto de Base de Datos  |
 | `db-v2.0` |Segunda versión estable del proyecto completo de Base de Datos |
+| `db-v2.1` |Segunda versión corregida y estable del proyecto completo de Base de Datos |
 | `backend-v1.0` | Primera versión estable del proyecto completo de JAVA |
+| `backend-v2.0` | Segunda versión estable del proyecto completo de JAVA |
 | `frontend-v1.0` | Primera versión estable del proyecto completo de Lenguaje de Marcas |
 
 Para consultar todos los tags disponibles:
