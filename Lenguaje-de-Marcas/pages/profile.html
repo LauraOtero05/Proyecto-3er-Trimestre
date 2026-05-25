@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/mediaQuerys.css">
+</head>
+
+<body>
+
+    <div class="scene" aria-hidden="true">
+        <div class="scene__aurora"></div>
+    </div>
+    <main class="layout">
+        <nav class="sidebar">
+            <button class="sidebar__toggle" id="sidebarToggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+            <div class="sidebar__logo">
+                <div class="logo">
+                    <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
+                </div>
+                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
+            </div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
+                    <span class="material-symbols-rounded">dashboard</span>
+                    <span class="nav__label">Dashboard</span>
+                </div>
+                <div class="nav__item" data-page="clients" data-href="clients.html">
+                    <span class="material-symbols-rounded">headphones</span>
+                    <span class="nav__label">Clientes</span>
+                </div>
+                <div class="nav__item" data-page="workers" data-href="workers.html">
+                    <span class="material-symbols-rounded">support_agent</span>
+                    <span class="nav__label">Trabajadores</span>
+                </div>
+                <div class="nav__item" data-page="orders" data-href="orders.html">
+                    <span class="material-symbols-rounded">shopping_bag</span>
+                    <span class="nav__label">Pedidos</span>
+                </div>
+                <div class="nav__item" data-page="products" data-href="products.html">
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
+                    <span class="nav__label">Productos</span>
+                </div>
+                <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
+                    <span class="material-symbols-rounded">adaptive_audio_mic</span>
+                    <span class="nav__label">Proveedores</span>
+                </div>
+            </div>
+            <div class="nav__divider"></div>
+            <div class="nav__spacer"></div>
+            <div class="nav__divider"></div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="settings" data-href="profile.html">
+                    <span class="material-symbols-rounded">account_circle</span>
+                    <span class="nav__label">Perfil</span>
+                </div>
+                <div class="nav__item" data-page="profile" data-href="/Lenguaje-de-Marcas/index.html">
+                    <span class="material-symbols-rounded">logout</span>
+                    <span class="nav__label" >Cerrar Sesión</span>
+                </div>
+            </div>
+        </nav>
+
+        <section class="content">
+            <header class="p-header">
+
+                <div>
+                    <p class="tag">ÁREA PERSONAL</p>
+                    <h1>Bienvenido a tu área personal</h1>
+                </div>
+
+            </header>
+
+            <section class="prof-outerbox">
+
+                <div class="prof-data outerbox">
+                    <img class="prof-img" src="/Lenguaje-de-Marcas/resources/images/Thor.jpeg"
+                        alt="imagen del trabajador">
+                    <h2>Noemí Cano</h2>
+
+                    <div class="prof-inf">
+                        <div class="prof-badge">Administradora de Sistemas</div>
+
+                        <div class="prof-inf__list">
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">corporate_fare</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Sede: </span>
+                                    <span class="prof-inf__value">Alcorcón, Madrid</span>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">mail</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Email </span>
+                                    <a href="mailto:noemi@74minutes.com"
+                                        class="prof-inf__value prof-inf__link">noemi@74minutes.com</a>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">call</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Teléfono</span>
+                                    <span class="prof-inf__value">+34 912 34 56 78 (Ext. 104)</span>
+                                </div>
+                            </div>
+
+                            <div class="prof-inf__item">
+                                <span class="material-symbols-rounded">badge</span>
+                                <div class="prof-inf__text">
+                                    <span class="prof-inf__label">Identificador</span>
+                                    <span class="prof-inf__value">EMP-2026-042</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <form id="profileForm" class="modal__form outerbox">
+
+                    <h3>Información personal</h3>
+
+                    <div class="form__group form__group--line">
+
+                        <label class="form__radio">
+                            <input type="radio" name="gender" value="Femenino" checked>
+                            Femenino
+                        </label>
+
+                        <label class="form__radio">
+                            <input type="radio" name="gender" value="Masculino">
+                            Masculino
+                        </label>
+                    </div>
+
+                    <div class="form__group form__group--line">
+                        <div class="form__group">
+                            <label>Nombre</label>
+                            <input type="text" id="formName" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label>Apellido</label>
+                            <input type="text" id="formLastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label>Email</label>
+                        <input type="email" id="formEmail" required>
+                    </div>
+
+                    <div class="form__group">
+                        <label>Dirección</label>
+                        <input type="text" id="formAdress" placeholder=" Calle nombre, numero" required>
+                    </div>
+
+                    <div class="form__group form__group--line">
+                        <div class="form__group">
+                            <label>Número de movil</label>
+                            <input type="text" id="formNumber" placeholder="+34 600 00 00 00" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label>Fecha de nacimiento</label>
+                            <input type="date" id="formDate" placeholder="dd/mm/yyyy">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="SubmitInformation" class="button__items">
+                        Actualizar Datos
+                    </button>
+                </form>
+            </section>
+        </section>
+
+    </main>
+
+    <div id="successProfileModal" class="modal" style="display: none;">
+        <div class="modal__content" style="text-align: center; padding: 30px;">
+            <div class="modal__top" style="justify-content: center; border: none; margin-bottom: 15px;">
+                <h2>¡Cambios Guardados!</h2>
+            </div>
+            <p style="color: var(--tertiary-color); margin-bottom: 20px;">
+                Tu información personal ha sido actualizada con éxito.
+            </p>
+            <button id="btnSuccessAccept" class="button__items" style="margin: 0 auto; min-width: 120px;">
+                Entendido
+            </button>
+        </div>
+    </div>
+
+    <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/profile.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/script.js"></script>
+
+</body>
+
+</html>

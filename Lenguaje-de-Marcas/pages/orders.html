@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/style.css">
+    <link rel="stylesheet" href="/Lenguaje-de-Marcas/styles/mediaQuerys.css">
+</head>
+
+<body>
+    <div class="scene" aria-hidden="true">
+        <div class="scene__aurora"></div>
+    </div>
+    <main class="layout">
+        <nav class="sidebar">
+            <button class="sidebar__toggle" id="sidebarToggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+            <div class="sidebar__logo">
+                <div class="logo">
+                    <img src="/Lenguaje-de-Marcas/resources/logo/74-dark.png" alt="">
+                </div>
+                <img src="/Lenguaje-de-Marcas/resources/logo/Minutes-white.png" alt="" class="logo__text">
+            </div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="dashboard" data-href="dashboard.html">
+                    <span class="material-symbols-rounded">dashboard</span>
+                    <span class="nav__label">Dashboard</span>
+                </div>
+                <div class="nav__item" data-page="clients" data-href="clients.html">
+                    <span class="material-symbols-rounded">headphones</span>
+                    <span class="nav__label">Clientes</span>
+                </div>
+                <div class="nav__item" data-page="workers" data-href="workers.html">
+                    <span class="material-symbols-rounded">support_agent</span>
+                    <span class="nav__label">Trabajadores</span>
+                </div>
+                <div class="nav__item" data-page="orders" data-href="orders.html">
+                    <span class="material-symbols-rounded">shopping_bag</span>
+                    <span class="nav__label">Pedidos</span>
+                </div>
+                <div class="nav__item" data-page="products" data-href="products.html">
+                    <img src="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-default="/Lenguaje-de-Marcas/resources/icons/cd-white.svg"
+                        data-active="/Lenguaje-de-Marcas/resources/icons/cd-dark.svg" alt="Products">
+                    <span class="nav__label">Productos</span>
+                </div>
+                <div class="nav__item" data-page="suppliers" data-href="suppliers.html">
+                    <span class="material-symbols-rounded">adaptive_audio_mic</span>
+                    <span class="nav__label">Proveedores</span>
+                </div>
+            </div>
+            <div class="nav__divider"></div>
+            <div class="nav__spacer"></div>
+            <div class="nav__divider"></div>
+            <div class="nav__section">
+                <div class="nav__item" data-page="settings" data-href="profile.html">
+                    <span class="material-symbols-rounded">account_circle</span>
+                    <span class="nav__label">Perfil</span>
+                </div>
+                <div class="nav__item" data-page="profile" data-href="/Lenguaje-de-Marcas/index.html">
+                    <span class="material-symbols-rounded">logout</span>
+                    <span class="nav__label">Cerrar Sesión</span>
+                </div>
+            </div>
+        </nav>
+        <section id="ordersContentSection" class="content">
+            <header class="o-header">
+                <div>
+                    <p class="tag">PEDIDOS</p>
+                    <h1 class="title">Gestión de Pedidos</h1>
+                </div>
+                <div class="outerbox o-header__filter">
+                    <button id="openOrdersModal" class="button__items o-header__btn">
+                        Añadir Pedido <span class="material-symbols-rounded">add</span>
+                    </button>
+                    <div class="o-header__search-container">
+                        <span class="material-symbols-rounded search-container__icon">search</span>
+                        <input type="text" id="searchOrderId" placeholder="Buscar por ID..."
+                            class="o-header__search-input">
+                    </div>
+                </div>
+            </header>
+            <section class="outerbox o-table">
+                <div class="outerbox o-table__header">
+                    <div class="o-table__item o-cell__id">ID</div>
+                    <div class="o-table__item o-cell__date">Fecha</div>
+                    <div class="o-table__item o-cell__status">Estado</div>
+                    <div class="o-table__item o-cell__client">Cliente</div>
+                    <div class="o-table__item o-cell__worker">Trabajador</div>
+                    <div class="o-table__item o-cell__amount">Importe Total</div>
+                    <div class="o-table__item o-cell__actions"></div>
+                </div>
+                <div id="ordersTableBody" class="o-table__body">
+                </div>
+                <div class="o-table__pagination">
+                    <button id="prevPageBtn" class="o-pagination__arrow"><span
+                            class="material-symbols-rounded">chevron_left</span></button>
+                    <div id="paginationNumbers" class="o-pagination__pages"></div>
+                    <button id="nextPageBtn" class="o-pagination__arrow"><span
+                            class="material-symbols-rounded">chevron_right</span></button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="addOrderModal" class="modal">
+        <div class="modal__content modal__content--scroll">
+            <div class="modal__top o-form__header">
+                <h2>Añadir Nuevo Pedido</h2>
+                <button id="closeOrdersModal" class="modal__close">X</button>
+            </div>
+            <form id="productForm" class="modal__form">
+                <div class="form__group">
+                    <label>Date</label>
+                    <input type="date" id="orderDate" class="o-form__input">
+                </div>
+
+                <div class="form__group">
+                    <label>Estado</label>
+                    <select id="orderStatus">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label>Cliente</label>
+                    <select id="orderClient" class="o-form__select"></select>
+                </div>
+
+                <div class="form__group">
+                    <label>Trabajador</label>
+                    <select id="orderWorker" class="o-form__select"></select>
+                </div>
+
+                <div class="form__group">
+                    <label>Detalles del Pedido</label>
+                    <div id="detailLinesContainer"></div>
+                </div>
+                <button type="button" id="addLineBtn" class="button__items o-btn--secondary">+ Añadir detalles</button>
+
+                <div class="o-form__total">
+                    <span>Importe Total:</span>
+                    <strong id="calculatedOrderTotal">0.00 €</strong>
+                </div>
+
+                <button type="submit" id="btnSubmitOrder" class="button__items"> Guardar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalDeleteOrder" class="modal">
+        <div class="modal__content">
+            <h3 class="modal__top modal--center">¿Seguro que quieres eliminar este pedido?</h3>
+            <div class="modal__actions">
+                <button id="cancelDeleteOrder" class="button__secondary">Cancelar</button>
+                <button id="confirmDeleteOrder" class="button__secondary button__secondary--red">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertError" class="modal">
+        <div class="modal__content">
+            <h3 id="modalAlertMessage" class="modal__top modal--center">Por favor, rellena los campos obligatorios.</h3>
+            <div class="modal__actions">
+                <button id="closeAlertBtn" class="button__secondary">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Lenguaje-de-Marcas/script/script.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/orders.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/clients.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/entities/workers.js"></script>
+    <script src="/Lenguaje-de-Marcas/script/storage.js"></script>
+</body>
+
+</html>
