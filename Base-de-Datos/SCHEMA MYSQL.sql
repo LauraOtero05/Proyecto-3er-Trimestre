@@ -12,8 +12,8 @@ DROP TABLE IF EXISTS telefonos_trabajador;
 DROP TABLE IF EXISTS telefonos_proveedor;
 DROP TABLE IF EXISTS emails_proveedor;
 
-DROP TABLE IF EXISTS generos_musicales;
 DROP TABLE IF EXISTS albumes;
+DROP TABLE IF EXISTS generos_musicales;
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS trabajadores;
 DROP TABLE IF EXISTS proveedores;
