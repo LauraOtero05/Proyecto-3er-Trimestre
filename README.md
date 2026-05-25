@@ -70,6 +70,7 @@ Para acceder al estado del proyecto en una versión concreta:
 git checkout db-v1.0
 ```
 
+---
 # Base de Datos
 
 ### Descripción
@@ -85,8 +86,6 @@ El trabajo cubre:
 - Modelo físico implementado en Oracle Database y MySQL
 - Scripts DDL y DML para Oracle y MySQL
 - 120 consultas PL/SQL (24 por tabla): CRUD, cursores, procedimientos y funciones
-
----
 
 ## Diseño de la Base de Datos
 
@@ -116,8 +115,6 @@ El modelo E-R define las siguientes entidades y relaciones.
 - Los atributos teléfono y e-mail de Proveedores son multivaluados → tablas débiles independientes
 - La información geográfica (dirección, código postal, ciudad, provincia, país) se normaliza en tablas `Codigos_Postales` y `Paises` compartidas por Clientes y Proveedores
 
----
-
 ### Modelo Lógico y Normalización
 
 El modelo E-R se transformó a tablas relacionales aplicando:
@@ -126,15 +123,11 @@ El modelo E-R se transformó a tablas relacionales aplicando:
 - **2FN:** eliminación de dependencias parciales en la tabla Detalle_Venta
 - **3FN:** separación de la información geográfica en `Codigos_Postales` y `Paises` para eliminar dependencias transitivas compartidas entre Clientes y Proveedores
 
----
-
 ### Modelo Físico
 
 El modelo físico cuenta con **13 tablas**:
 
 `paises` · `codigos_postales` · `clientes` · `telefonos_cliente` · `trabajadores` · `telefonos_trabajador` · `proveedores` · `telefonos_proveedor` · `emails_proveedor` · `generos_musicales` · `albumes` · `pedidos` · `detalles_pedido`
-
----
 
 ## Oracle SQL Developer
 
@@ -142,8 +135,6 @@ En Oracle se ha implementado el modelo físico completo con todas sus restriccio
 
 - **`SCHEMA Oracle.sql`** — DDL + DML: crea el usuario, las tablas, las restricciones y carga los datos de prueba
 - **`CONSULTAS/`** — 120 bloques PL/SQL organizados por tabla
-
----
 
 ### Requisitos
 
@@ -153,7 +144,6 @@ En Oracle se ha implementado el modelo físico completo con todas sus restriccio
 
 > Si usas Windows, comprueba que el servicio `OracleServiceXEPDB1` está iniciado. Puedes verlo buscando **Servicios** en el menú inicio y buscando cualquier servicio que empiece por `Oracle`.
 
----
 
 ### Instrucciones de Configuración
 
@@ -167,7 +157,6 @@ lsnrctl status
 
 Debes ver que el listener está activo y escuchando en el puerto **1521** (puerto por defecto). Si el tuyo es distinto, más adelante deberás modificarlo en el script de ejecución de la base de datos.
 
----
 
 #### 2. Ejecutar el script `SCHEMA ORACLE.sql` en SQL Developer
 
@@ -185,7 +174,6 @@ Debes ver que el listener está activo y escuchando en el puerto **1521** (puert
 
 3. Pulsa **Ejecutar Script (F5)** para ejecutarlo completo de una vez.
 4. Aparecerá una ventana para seleccionar la conexión; elige **SYSTEM**.
----
 
 #### 3. Crear la conexión en SQL Developer con el usuario del proyecto
 
@@ -207,7 +195,6 @@ Una vez ejecutado el script, crea una nueva conexión en SQL Developer:
 4. Pulsa **Probar** para verificar que la conexión funciona antes de guardarla.
 5. Si el estado de la conexión te aparece **Correcto**, pulsa en **Conectar**. En caso contrario comprueba que has introducido correctamente los datos anteriores.
 
----
 
 #### 4. Verificar que los datos se han cargado
 
@@ -221,7 +208,6 @@ SELECT COUNT(*) FROM pedidos;
 
 Cada consulta debe devolver **10 registros**. Si devuelve 0, el DML no se ejecutó correctamente; vuelve a abrir el script y ejecútalo de nuevo con F5.
 
----
 
 ### Consultas PL/SQL
 
@@ -260,7 +246,6 @@ SET SERVEROUTPUT ON;
 
 > Algunos bloques tienen el `COMMIT;` comentado (`-- COMMIT;`) para que puedas revisar los cambios antes de confirmarlos. Si quieres que los cambios sean permanentes, descoméntalo o ejecuta `COMMIT;` manualmente después.
 
----
 
 ### Estructura de archivos
 
@@ -282,8 +267,6 @@ database/
 └── README.md
 ```
 
----
-
 ## MySQL
 
 ### Descripción
@@ -292,14 +275,11 @@ El esquema Oracle se ha migrado íntegramente a MySQL para su uso en el módulo 
 
 El script `SCHEMA MYSQL.sql` incluye tanto el DDL (creación de tablas) como el DML (inserción de datos).
 
----
-
 ### Requisitos
 
 - MySQL Server 8.x instalado y en ejecución
 - MySQL Workbench instalado
 
----
 
 ### Instrucciones de Configuración
 
@@ -312,15 +292,12 @@ MySQL usa por defecto el puerto **3306**. Para verificar que el servicio está a
 
 > Para saber qué puerto tiene configurado tu instalación, abre MySQL Workbench, haz doble clic en tu conexión y mira el campo **Port**. También puedes ejecutar `SHOW VARIABLES LIKE 'port';` desde cualquier cliente conectado.
 
----
 
 #### 2. Ejecutar el script DDL + DML en MySQL Workbench
 
 1. Abre **MySQL Workbench** y conéctate con tu usuario (por defecto `root`)
 2. Ve a **File > Open SQL Script** y abre el archivo `SCHEMA MYSQL.sql`
 3. Pulsa el botón **Execute All** o usa el atajo `Ctrl+Shift+Enter` para ejecutar el script completo
-
----
 
 #### 3. Verificar que la base de datos se ha creado
 
@@ -341,8 +318,10 @@ SELECT COUNT(*) FROM pedidos;
 
 Cada una debe devolver **10 registros**.
 
+---
 # Lenguaje de Marcas
 
+---
 # Programación
 
 
