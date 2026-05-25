@@ -1,13 +1,13 @@
 # Programación
 
-Este módulo del proyecto contiene la aplicación de escritorio del **CRM en Java** diseñada para gestionar el sistema de discos y clientes de la tienda **74 Minutes**. La aplicación se conecta mediante JDBC a una base de datos MySQL local para persistir toda la información en tiempo real.
+Este módulo del proyecto contiene la aplicación de escritorio del **CRM en Java** diseñada para gestionar la tienda **74 Minutes**. La aplicación se conecta mediante JDBC a una base de datos MySQL local para persistir toda la información en tiempo real.
 
 ## Tecnologías utilizadas 
 
 * **Java 21**: Versión base del lenguaje de programación utilizado para el desarrollo del núcleo del CRM.
 * **MySQL Server**: Motor de base de datos relacional para el almacenamiento de datos.
 * **JDBC (Java DataBase Connectivity)**: API estándar para conectar la aplicación Java con la base de datos.
-* **MAven**: Gestor de dependencias utilizado para automatizar la inclusión del driver de base de datos sin neceisdad de descargas manuales.
+* **Maven**: Gestor de dependencias utilizado para automatizar la inclusión del driver de base de datos sin necesidad de descargas manuales.
 *   *Dependencia clave (`pom.xml`):* `mysql-connector-j` (versión 8.4.0) de MySQL.
 
 ## Arquitectura del Proyecto 
@@ -40,30 +40,31 @@ El sistema está estructurado siguiendo una **arquitectura limpia y desacoplada 
 Para poder ejecutar este proyecto sin inconvenientes, asegúrate de tener instalado y configurado:
 * **JDK 21** (Java Development Kit) instalado en el sistema.
 * **MySQL Server** instalado y activo en tu equipo local.
-* **Los scripts de Base de Datos ejecutados previamente** (asegúrate de haber ejecutado los scripts DDL y DML de creación de tablas e inserción de datos iniciales).
+* **Los scripts de Base de Datos ejecutados previamente** (asegúrate de haber ejecutado los scripts DDL y DML de creación de tablas e inserción de datos iniciales **de MySQL**).
 * Un **IDE de desarrollo Java** (recomendamos **IntelliJ IDEA**, compatible con la importación automática de proyectos Maven).
 
 ## Instrucciones para Configuración
 Sigue estos sencillos pasos para dejar listo el entorno de ejecución:
 1. Clonar el repositorio
-   Descarga el proyecto a tu máquina local mediante Git o descargando el archivo .ZIP
+
+Descarga el proyecto a tu máquina local mediante Git o descargando el archivo .ZIP
    ```bash
        git clone https://github.com/LauraOtero05/Proyecto-3er-Trimestre.git
    ```
 
-3. Abrir el proyecto como proyecto Maven
+2. Abrir el proyecto como proyecto Maven
     * Abre tu IDE (ej. **IntelliJ IDEA**).
-    * Selecciona la opción **Open (Abrir)** y busca la carpeta raíz Proyecto_CRM.
-    * Asegúrate de que el IDE detecte el archivo pom.xml e **importa el proyecto como un Proyecto Maven.**
-          **Nota importante:** Al importarlo como proyecto Maven, el IDE descargará y configurará automáticamente el Driver JDBC (mysql-connector-j.jar) por             ti de forma automática. ¡No necesitas añadir ningún archivo .jar de forma manual!
+    * Selecciona la opción **Open (Abrir)** y busca la carpeta raíz `Proyecto_CRM`.
+    * Asegúrate de que el IDE detecte el archivo pom.xml y haya **importado el proyecto como un Proyecto Maven.**
+> **Nota importante:** Al importarlo como proyecto Maven, el IDE descargará y configurará automáticamente el Driver JDBC (mysql-connector-j.jar) por ti de forma automática.
 
-4. Verificar las dependencias de Maven
+3. Verificar las dependencias de Maven
 Si por algún motivo el IDE no resuelve automáticamente las librerías:
     * En IntelliJ, haz clic derecho sobre el proyecto en la barra lateral.
     * Selecciona Maven > Reload Project (o haz clic en el icono del "refresco" en la pestaña lateral de Maven).
 
-5. Personalizar el Nombre de la Base de Datos (Opcional)
-Por defecto, el código busca conectarse a una base de datos llamada **74_minutes**. Si en tu sistema local has creado la base de datos con otro nombre, puedes modificarlo fácilmente:
+4. Personalizar el Nombre de la Base de Datos (Opcional)
+Por defecto, el código busca conectarse a una base de datos llamada **74_minutes**. Si en tu sistema local has creado la base de datos con otro nombre, puedes modificarlo:
     1. Dirígete a la clase DataBaseConnection.java ubicada en src/main/java/com/m74/proyecto_crm/util/.
     2. En la **línea 14**, modifica la cadena de conexión sustituyendo 74_minutes por el nombre de tu base de datos:
         ```bash
