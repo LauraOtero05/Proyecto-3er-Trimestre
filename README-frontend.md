@@ -65,7 +65,7 @@ Si se desea evaluar la aplicación de manera inmediata sin descargar archivos ni
 
 **La página aparece sin estilos o con el layout roto:**
 
- Asegúrate de que estás abriendo el archivo index.html de la raíz del proyecto, no el que está dentro de la carpeta pages/. Las rutas de los recursos CSS y JS son relativas a la raíz.
+ Asegúrate de que estás abriendo el archivo index.html de la raíz del proyecto, es decir, la carpeta Proyecto-3er-Trimestre, no el que está dentro de la carpeta pages/. Las rutas de los recursos CSS y JS son relativas a la raíz.
 
  **El menú lateral no navega correctamente entre secciones:**
 
