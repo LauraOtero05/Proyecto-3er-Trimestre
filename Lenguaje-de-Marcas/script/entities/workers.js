@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class Worker {
 
-        constructor(nombre, email, cargo, estado) {
-
+        constructor(id, nombre, email, cargo, estado) {
+            this.id = id;
             this.nombre = nombre;
             this.email = email;
             this.cargo = cargo;
@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!workers || workers.length === 0) {
         workers = [
-            new Worker("Marcus Vance", "marcus@74minutes.com", "Manager", "Activo"),
-            new Worker("Sarah Connor", "sarah@74minutes.com", "Dependienta", "Activo"),
-            new Worker("John Doe", "john@74minutes.com", "Mozo de almacén", "Inactivo")
+            new Worker("T001", "Marcus Vance", "marcus@74minutes.com", "Manager", "Activo"),
+            new Worker("T002", "Sarah Connor", "sarah@74minutes.com", "Dependienta", "Activo"),
+            new Worker("T003", "John Doe", "john@74minutes.com", "Mozo de almacén", "Inactivo")
         ];
         sessionStorage.setItem("workers", JSON.stringify(workers));
     }

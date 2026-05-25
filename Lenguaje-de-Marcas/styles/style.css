@@ -246,15 +246,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* #region TEXTS*/
 
-/*deberíamos ponerle estilo permanente aunq nos guste como queda ahora, por si cambia entre dispositivos???*/
-
 .title{
+    font-size: 32px;
     color: var(--white);
     margin: 0 0 8px 0;
     letter-spacing: -0.5px;
 }
 
 .text{
+    font-size: 16px;
     color: var(--tertiary-color);
     line-height: 1.5;
     margin: 0;
@@ -578,11 +578,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 20px;
     width: 100%;
     margin-top: 30px;
-}
-
-.d´grid__main{
-    flex: 3; 
-    margin-bottom: 0;
 }
 
 .d-grid__sidebar{

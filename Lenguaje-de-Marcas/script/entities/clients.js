@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class Cliente {
 
-        constructor(nombre, email, empresa, estado) {
-
+        constructor(id, nombre, email, empresa, estado) {
+            this.id = id;
             this.nombre = nombre;
             this.email = email;
             this.empresa = empresa;
@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!clientes || clientes.length === 0) {
     clientes = [
-        new Cliente("Josiah Starline", "josiah@amazon.com", "amazon", "Activo"),
-        new Cliente("Isabel Bravo", "isabel.bravo@vinted.com", "vinted", "Activo"),
-        new Cliente("Amelia Pond", "amelia.pond@wallapop.com", "wallapop", "Activo")
+        new Cliente("C001", "Josiah Starline", "josiah@amazon.com", "Amazon", "Activo"),
+        new Cliente("C002", "Isabel Bravo", "isabel.bravo@vinted.com", "Vinted", "Activo"),
+        new Cliente("C003", "Amelia Pond", "amelia.pond@wallapop.com", "Wallapop", "Activo")
     ];
     sessionStorage.setItem("clientes", JSON.stringify(clientes));}
 

@@ -120,11 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
         container.addEventListener("click", (e) => {
             const idProducto = e.target.getAttribute("data-id");
 
-            if (e.target.classList.contains("p-card__delete")) {
+            if (e.target.classList.contains("button__secondary--red")) {
                 eliminarProducto(idProducto);
             }
 
-            if (e.target.classList.contains("p-card__edit")) {
+            if (e.target.classList.contains("button__secondary--orange")) {
                 abrirModalEditar(idProducto, modal, modalTitulo, inputTitulo, inputArtista, inputFormato, inputPrecio, inputStock, inputPortada);
             }
         });
