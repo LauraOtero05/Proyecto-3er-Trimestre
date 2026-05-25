@@ -8,7 +8,7 @@ La aplicación funciona en su totalidad en el lado del cliente (client-side), si
 ## Tecnologías utilizadas 
 
 - **HTML5:** Estructuración semántica de las vistas, formularios interactivos y tablas del panel de gestión.
-- **CSS3:** Maquetación visual responsiva, diseño unificado bajo la metodología BEM, transiciones y animaciones.
+- **CSS3:** Maquetación visual responsive, diseño unificado bajo la metodología BEM, transiciones y animaciones.
 - **JavaScript (ES6+):** Motor lógico del CRM. Gestiona la persistencia temporal en SessionStorage, la manipulación dinámica del DOM, la arquitectura de clases orientada a objetos y el control reactivo del viewport mediante el objeto global Window.
 
 ## Requisitos previos
@@ -53,7 +53,7 @@ Si se desea evaluar la aplicación de manera inmediata sin descargar archivos ni
 - URL del CRM desplegado: https://minutes-74.web.app
 - Simplemente accede al enlace desde cualquier dispositivo con navegador. La aplicación se ejecutará de forma instantánea.
 
-**Nota:** La versión desplegada en Firebase Hosting es la versión de producción del proyecto. El código fuente completo y editable se encuentra en este repositorio de GitHub.
+> **Nota:** La versión desplegada en Firebase Hosting es la versión de producción del proyecto. El código fuente completo y editable se encuentra en este repositorio de GitHub.
 
 ## Notas importantes
 
@@ -65,7 +65,7 @@ Si se desea evaluar la aplicación de manera inmediata sin descargar archivos ni
 
 **La página aparece sin estilos o con el layout roto:**
 
- Asegúrate de que estás abriendo el archivo index.html de la raíz del proyecto, es decir, la carpeta Proyecto-3er-Trimestre, no el que está dentro de la carpeta pages/. Las rutas de los recursos CSS y JS son relativas a la raíz.
+ Asegúrate de que estás abriendo el archivo index.html de la raíz del proyecto, es decir, la carpeta `Proyecto-3er-Trimestre`. Las rutas de los recursos CSS y JS son relativas a la raíz.
 
  **El menú lateral no navega correctamente entre secciones:**
 
@@ -83,11 +83,12 @@ Si abres el archivo directamente con el protocolo file://, algunos navegadores p
     frontend/
     │
     ├── Lenguaje-de-Marcas/
-    │   ├── pages/ # Vistas HTML
-    │   ├── resources/ # Recursos estáticos
-    │   ├── script/  # Lógica de programación JavaScript
-    │   └── styles/ # Hojas de estilo CSS
-    │
+    │   ├── pages/               # Vistas HTML
+    │   ├── resources/           # Recursos estáticos
+    │   ├── script/              # Lógica de programación JavaScript
+    │   ├── styles/              # Hojas de estilo CSS
+    │   └── index.html           # Archivo raiz del proyecto
+    │   
     └── README.md
 ```
 
